@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import "./App.css";
+import "./User.css";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
+import Homepage from "./Pages/Homepage";
+
+
+// User 
+import SendPackage from "./Pages/UserArea/SendPackage";
+import UserDashboard from './Pages/UserArea/UserDashboard';
+import UserLogin from './Components/User/UserLogin';
+import UserRegister from './Components/User/UserRegister';
+
+
+// User 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <ScrollToTop />
+
+        <Switch>
+          <Route exact path="/" component={withRouter(Homepage)} />
+
+          <Route exact path="/home" component={Homepage} />
+        
+        {/* User Area  */}
+        <Route exact path="/send-package" component={SendPackage} />
+         
+        <Route exact path="/login" component={UserLogin} />
+        
+        <Route exact path="/register" component={UserRegister} />
+
+        <Route exact path="/dashboard" component={UserDashboard} />
+        
+
+
+        {/* User Area  */}
+        
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 }
 

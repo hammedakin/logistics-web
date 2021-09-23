@@ -1,0 +1,156 @@
+ /* Navbar */
+
+ nav {
+  background-color: #fafafa!important;
+  transition: 0.5s ease!important;
+  padding: .5rem 1rem !important;
+  z-index: 2001 !important;
+
+  /* height: 7rem ; */
+}
+
+
+.active1 {
+  border-right: #096b00 5px solid;
+  color: #b4f3ae !important;
+transition: 0.1s ease!important;
+}
+
+nav button.navbar-toggler {
+  background-color: none!important;
+  }
+
+  
+.navbar-toggler-icon {
+  background: none !important;
+}
+
+nav .nav-item a {
+  color: #000;
+  font-size: 1rem;
+  display: block;
+  padding: .5rem 1rem;
+  margin: 0 1rem ;
+}
+
+nav .nav-item a:hover {
+  border-right: #fff 5px solid;
+  color: #fff !important;
+transition: 0.1s ease!important;
+background: #096b0059;
+
+}
+
+nav .btn {
+ 
+  text-transform: uppercase!important;
+  padding: 0.8rem 1.3rem !important;
+  border: #000 solid 2px !important;
+  border-radius: 5px;
+  color: #000;
+}
+nav .btn:hover {
+  background-color: #000 !important;
+  transition: 0.55s ease!important;
+  color: #fafafa !important;
+
+
+}
+/* Navbar */
+.sidenav {
+    height: 100%;
+    width: 200px ;
+    position: fixed;
+    top: 3rem;
+    padding-top: 3rem;
+    left: 0;
+    background-color: #000000;
+    overflow-x: hidden;
+    transition: 0.3s ease;
+    /* padding-top: 60px; */
+    z-index: 2000 !important;
+  }
+  
+  .sidenav ul li {
+    margin-bottom: 1rem;
+  }
+
+  .sidenav .nav-item a {
+    color: #fafafa;
+    font-size: 1rem;
+    display: block;
+    padding: .5rem 1rem;
+    margin: 0 0rem ;
+  }
+  
+ .sidenav .btn {
+       
+    text-transform: uppercase!important;
+    padding: 0.8rem 1.3rem !important;
+    border: #fafafa solid 2px !important;
+    border-radius: 5px;
+    color: #fafafa;
+  }
+ .sidenav .btn:hover {
+    background-color: #fafafa !important;
+    transition: 0.55s ease!important;
+    color: #000000 !important;
+
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    display: none;
+  }
+
+  .sidenav h5 {
+    font-weight: 100 !important;
+    color: aliceblue;
+    
+}
+.sidenav button.btn1 {
+    background-color:  #096b00 !important;
+    border-radius: 50px !important;
+    padding: 1rem 3rem !important;
+    border: none !important;
+}
+
+.sidenav button.btn1:hover {
+  background-color:  #fff !important;
+  color: #096b00 !important;
+}
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .navbar ul {
+        display: none !important;
+    }
+   }
+
+
+@media screen and (max-width: 580px) {
+  /* Navbar */
+.sidenav {
+  width: 0 ;
+  padding-top: 3rem;
+}
+
+.sidenav .closebtn {
+display: block !important;
+}
+
+}
+     
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }

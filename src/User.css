@@ -1,0 +1,164 @@
+
+/* Dashboard  */
+/* Dashboard  */
+.dashboard {
+  margin-left: 200px !important;
+  margin-top: 4rem !important;
+}
+
+
+/* Dashboard Header  */
+
+.dash-header .first {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(#c0c0c0cc, #c0c0c0cc),
+    url(./Components/User/Dashboard/img/pattern2.jpg) no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+}
+
+.dash-header .first h5{
+font-weight: 100 !important;
+}
+
+.dash-header .first h3{
+  font-weight: 800 !important;
+  font-family: "Righteous", cursive !important;
+  font-size: xx-large;
+
+  }
+
+  .dash-header .second {
+    margin-top: 1rem;
+    background: linear-gradient(#c0c0c0cc, #c0c0c0cc),
+      url(./Components/User/Dashboard/img/pattern2.jpg) no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    padding: 1rem 1rem;
+    border-radius: 1rem;
+  }
+  
+  .dash-header .second h6{
+  font-weight: 100 !important;
+  text-transform: uppercase !important;
+  }
+
+/* Dashboard Header  */
+
+/* Transaction History  */
+.history .first {
+background: #15e40217;
+margin-bottom: 1rem !important;
+padding: .5rem .5rem 0 .5rem !important;
+border-radius: 1rem;
+
+}
+
+.history .first .bold-text{
+font-weight: 900 !important;
+}
+
+/* Transaction History  */
+
+/* Dashboard  */
+/* Dashboard  */
+
+
+/* Send Package Form  */
+.send {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  color: #000 !important;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.send .form {
+  margin-top: 2rem;
+}
+
+* {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.send .input-style {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #828282;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 18px;
+  line-height: 24px;
+  color: #000;
+  box-shadow: none;
+  height: 55px;
+  margin-bottom: 1.5rem !important;
+  /* -webkit-appearance: textfield !important; */
+}
+
+.send select {
+  background: url(./Components/User/img/dropdown.svg) no-repeat right #ddd0;
+  -webkit-appearance: none;
+  background-position-x: 96%;
+  background-color: white;
+  background-position-y: 52%;
+  color: #828282 !important;
+}
+
+.send .textarea-style {
+  height: 100px;
+}
+
+.send .input-style:hover,
+.send .input-style:active {
+  border: 1px solid #096b00;
+}
+
+.send .btn {
+  background-color: #096b00;
+  border-radius: 50px;
+  color: #ffffff !important;
+  text-align: center !important;
+}
+/* Send Package Form  */
+
+
+/* Media Query for Mobile device */
+/* Media Query for Mobile device */
+
+@media screen and (max-width: 780px) {
+
+/* Login  */
+.login {
+  height: max-content !important;
+  overflow-y:visible;
+}
+
+.login h6, .login h5 {
+  text-align: center !important;
+}
+
+.hide-on-small {
+  display:none !important;
+}
+}
+
+@media screen and (max-width: 580px) {
+  /* Dashboard  */
+.dashboard {
+  margin-left: 0 !important;
+}
+/* Dashboard  */
+
+}
+
+
+/* Media Query for Mobile device */
+/* Media Query for Mobile device */

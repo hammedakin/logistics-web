@@ -1,38 +1,318 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+/* Global */
+
+body {
+  background-color: #f5f3f371 !important;
+  margin: 0 auto;
+  color: #000 !important;
+  line-height: 1.6;
+  /* font: 400 15px/28px "Poppins", sans-serif!important; */
+  /* font-family: 400 15px/28px "Montserrat", sans-serif !important; */
+  font-family: "Poppins", sans-serif !important;
+
+  overflow-x: hidden !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 600 !important;
+}
+
+/* Scrollbar  */
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  border: none;
+  background-color: whitesmoke;
+}
+::-webkit-scrollbar-thumb {
+  background: #096b00;
+  height: 10px;
+  border-radius: 100px;
+}
+
+/* Scrollbar  */
+
+section {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+/* Global */
+
+/* Homepage  */
+/* Homepage  */
+
+/* Showcase */
+.showcase {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(#0000008c, #0000008c),
+    url(./Components/HomePage/img/showcase.png) no-repeat;
+  background-size: cover;
+
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.showcase .showcase-content {
+  margin-top: 30vh;
+  color: #ffffff;
+  text-align: justify;
+}
+
+.showcase .showcase-content h1 {
+  font-weight: 100 !important;
+  font-family: "Righteous", cursive !important;
+}
+
+/* Showcase */
+
+/* Tracking  */
+  
+.tracking .form-control {
+  border: #fff !important;
+  color: #000 !important;
+}
+
+.tracking .form-control:focus {
+  color: #fff;
+  background-color: #fff !important;
+  border-color: #fff !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgb(1 1 1 / 0%) !important;
+
+
+}
+
+.tracking .button {
+  border-radius: 0 5rem 5rem 0 !important;
+
+}
+
+
+
+.tracking a {
+  background-color: #fff;
+  border-left: 4px solid #096b00 !important;
+  border-radius: 0 5rem 5rem 0 !important;
+
+  margin: 0 !important;
+
+}
+
+.tracking span {
+  background-color: transparent;
+  margin: 0 !important;
+
+}
+
+.tracking box-icon {
+
+  padding: 0 1rem !important;
+
+}
+
+/* Tracking  */
+
+
+/* What We Do  */
+
+.whatwedo {
+  color: #096b00;
+  font-family: "Poppins", sans-serif;
+}
+.whatwedo .img {
+  border-radius: 1rem !important;
+  padding: 2rem;
+}
+
+.whatwedo .content {
+  margin-top: 2rem;
+}
+
+.whatwedo .view-btn button {
+  background-color: #096b00;
+  border-radius: 50px;
+  color: #fff;
+  padding: 1.2rem 5rem !important;
+  margin-top: 2rem !important;
+}
+/* What We Do  */
+
+/* How To Send  */
+.howtosend {
+  color: #096b00;
+  font-family: "Poppins", sans-serif;
+  background: #94ff8a33;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.howtosend .content {
+  margin-top: 2rem;
+}
+
+.howtosend .view-btn button {
+  background-color: #096b00;
+  border-radius: 50px;
+  color: #fff;
+  padding: 1.2rem 5rem !important;
+  margin-top: 2rem !important;
+}
+/* How To Send  */
+
+/* How It Works  */
+.howitworks {
+  padding: 5rem 0;
+  /* background-color: #fff; */
+}
+
+
+.howitworks .card1 {
+  margin: 5rem 0;
+}
+
+.howitworks .card2 {
+  margin: 5rem 0;
+}
+
+.howitworks h6 {
+  max-width: 560px !important;
   text-align: center;
+  font-weight: 500 !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* How It Works  */
+
+/* Homepage  */
+/* Homepage  */
+
+
+/* Login and SignUp  */
+/* Login and SignUp  */
+/* Login  */
+.login {
+  /* height: 100vh !important; */
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-style: normal;
+  font-weight: normal;
+  animation:ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.login h6, .login label {
+  font-size: smaller !important;
+
+}
+
+.login img {
+  height: 100vh !important;
+  object-fit: cover;
+}
+
+.login .input-style {
+  width: 100%;
+  padding: 12px 20px;
+  /* margin: 8px 0; */
+  display: inline-block;
+  border: 1px solid #828282;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 24px;
+  color: #000;
+  box-shadow: none;
+  height: 45px;
+  margin-bottom: 1rem !important;
+  /* -webkit-appearance: textfield !important; */
+}
+
+.login .input-style:focus,
+.login .input-style:hover {
+  border: 1px solid #096b00 !important;
+}
+
+.login .btn {
+  background-color: #096b00;
+  border-radius: 10px;
+  color: #ffffff !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* Login  */
+/* Login and SignUp  */
+/* Login and SignUp  */
+
+
+/* Footer */
+.footer {
+  background-color: #111;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.footer h5 {
+  font-weight: 100 !important;
+}
+.footer button {
+  background-color: #096b00;
+  border-radius: 50px;
+}
+
+.footer h6 {
+  color: #096b00;
+}
+
+.footer-admin {
+  background-color: #111;
+}
+
+footer .boxicons .box-icon {
+  margin-left: 1rem;
+  padding: 0.4rem;
+  text-align: center !important;
+  background-color: #096b00;
+  border-radius: 50%;
+
+  transition: 0.15s ease;
+}
+
+footer .boxicons .box-icon:hover {
+  background-color: #111;
+  border: #096b00 solid 1.5px !important;
+
+}
+
+/* Footer */
+
+/* Media Query for Mobile device */
+/* Media Query for Mobile device */
+
+@media screen and (max-width: 580px) {
+  /* Showcase  */
+
+  .showcase .showcase-content {
+    margin-top: 35vh;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  /* Showcase  */
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  /* How It Works  */
+  .howitworks .card2 .row {
+    flex-direction: column-reverse !important;
   }
-  to {
-    transform: rotate(360deg);
-  }
+  /* How It Works  */
 }
