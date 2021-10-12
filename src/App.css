@@ -50,6 +50,86 @@ section {
 
 /* Global */
 
+
+ /* Navbar */
+ nav {
+  background-color: #f5f3f3f6!important;
+}
+
+/* nav .navbar-brand {
+  width: 15%!important;
+} */
+
+.active1 {
+  background-color: #096b00 !important;
+  /* border-radius: 2rem; */
+  padding: .5rem 2rem  !important;
+transition: 0.1s ease!important;
+}
+
+nav button.navbar-toggler {
+  background-color: none!important;
+}
+
+.navbar-toggler-icon {
+  background: none !important;
+}
+
+nav .nav-item a {
+  color: #fff;
+  font-size: 1rem;
+  display: block;
+  padding: .5rem 1rem;
+  margin: 0 1rem ;
+}
+
+/* nav .nav-item a:hover {
+  border: #fc4646d0 solid 2px !important;
+  border-radius: 2rem;
+  padding: .5rem 2rem  !important;
+transition: 0.1s ease!important;
+} */
+/* 
+nav .dropdown-menu  a:hover {
+  border: #fc4646d0 solid 1px !important;
+  border-radius: .3rem;
+transition: 0 !important;
+} */
+
+nav .btn {
+  text-transform: uppercase!important;
+  padding: 0.6rem 0.7rem !important;
+  /* border: #000 solid 2px !important; */
+  /* border-radius: 5px; */
+  width: 5rem !important;
+  /* color: #000; */
+}
+
+nav .btn2 {
+background: #096b00;
+color: #fff;
+border:transparent solid 1px !important;
+}
+nav .btn2:hover {
+  background: transparent !important;
+  color: #096b00 !important;
+  border: #096b00 solid 1px !important;
+  transition: 0.1s ease!important;
+}
+nav .btn3 {
+  background: transparent;
+  color: #096b00;
+  border: #096b00 solid 1px !important;
+  }
+
+  nav .btn3:hover {
+    background: #096b00 !important;
+    color: #fff !important;
+    border:transparent solid 1px !important;
+    transition: 0.1s ease!important;
+  }
+/* Navbar */
+
 /* Homepage  */
 /* Homepage  */
 
@@ -57,8 +137,7 @@ section {
 .showcase {
   margin: 0;
   padding: 0;
-  background: linear-gradient(#0000008c, #0000008c),
-    url(./Components/HomePage/img/showcase.png) no-repeat;
+  background: linear-gradient(#0000008c, #0000008c), url(./Components/HomePage/img/showcase.png) no-repeat;
   background-size: cover;
 
   width: 100vw;
@@ -210,16 +289,32 @@ section {
   font-style: normal;
   font-weight: normal;
   animation:ease;
+  margin-top: 3rem !important;
 }
 
 .login h6, .login label {
   font-size: smaller !important;
 
 }
+.login .login-img {
+  height: 100% !important;
+    position: fixed !important;
+    background-color: #7c4d4d;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    z-index: 2000 !important;
+
+}
+
+.login .login-form {
+  margin-left: 50% !important;
+}
+
 
 .login img {
   height: 100vh !important;
   object-fit: cover;
+  
 }
 
 .login .input-style {
@@ -301,6 +396,32 @@ footer .boxicons .box-icon:hover {
 /* Media Query for Mobile device */
 /* Media Query for Mobile device */
 
+@media screen and (max-width: 780px) {
+
+  /* Login  */
+  .login {
+    height: max-content !important;
+    overflow-y:visible;
+  }
+  
+  .login h6, .login h5 {
+    text-align: center !important;
+  }
+
+  
+  .login .login-form {
+    margin-left: 0 !important;
+  }
+  
+
+  
+  .hide-on-small {
+    display:none !important;
+  }
+  }
+  
+
+
 @media screen and (max-width: 580px) {
   /* Showcase  */
 
@@ -309,6 +430,7 @@ footer .boxicons .box-icon:hover {
   }
 
   /* Showcase  */
+
 
   /* How It Works  */
   .howitworks .card2 .row {

@@ -1,4 +1,3 @@
-
 /* Dashboard  */
 /* Dashboard  */
 .dashboard {
@@ -6,59 +5,58 @@
   margin-top: 4rem !important;
 }
 
-
 /* Dashboard Header  */
 
 .dash-header .first {
   margin: 0;
   padding: 0;
-  background: linear-gradient(#c0c0c0cc, #c0c0c0cc),
+  background: linear-gradient(#096b00c2, #096b00c2),
     url(./Components/User/Dashboard/img/pattern2.jpg) no-repeat;
   background-size: cover;
   overflow-x: hidden;
   padding: 3rem 2rem;
   border-radius: 1rem;
+  color: #ffffff !important;
 }
 
-.dash-header .first h5{
-font-weight: 100 !important;
+.dash-header .first h5 {
+  font-weight: 100 !important;
 }
 
-.dash-header .first h3{
+.dash-header .first h3 {
   font-weight: 800 !important;
   font-family: "Righteous", cursive !important;
   font-size: xx-large;
+}
 
-  }
+.dash-header .second {
+  margin-top: 1rem;
+  background: linear-gradient(#096b00c2, #096b00c2),
+    url(./Components/User/Dashboard/img/pattern2.jpg) no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+  padding: 1rem 1rem;
+  border-radius: 1rem;
+  color: #ffffff !important;
+}
 
-  .dash-header .second {
-    margin-top: 1rem;
-    background: linear-gradient(#c0c0c0cc, #c0c0c0cc),
-      url(./Components/User/Dashboard/img/pattern2.jpg) no-repeat;
-    background-size: cover;
-    overflow-x: hidden;
-    padding: 1rem 1rem;
-    border-radius: 1rem;
-  }
-  
-  .dash-header .second h6{
+.dash-header .second h6 {
   font-weight: 100 !important;
   text-transform: uppercase !important;
-  }
+}
 
 /* Dashboard Header  */
 
 /* Transaction History  */
 .history .first {
-background: #15e40217;
-margin-bottom: 1rem !important;
-padding: .5rem .5rem 0 .5rem !important;
-border-radius: 1rem;
-
+  background: #15e40217;
+  margin-bottom: 1rem !important;
+  padding: 0.5rem 1rem 0 1rem !important;
+  border-radius: 1rem;
 }
 
-.history .first .bold-text{
-font-weight: 900 !important;
+.history .first .bold-text {
+  font-weight: 900 !important;
 }
 
 /* Transaction History  */
@@ -66,10 +64,64 @@ font-weight: 900 !important;
 /* Dashboard  */
 /* Dashboard  */
 
+/* Send Package Page */
+/* Send Package Page */
+
+.send-package {
+  margin-left: 200px !important;
+  margin-top: 2rem !important;
+}
+
+.send-package .sendshowcase {
+ width: auto !important;
+ height: 40vh !important;
+ 
+}
+
+.send-package .sendshowcase .showcase-content {
+  margin-top: 7vh !important;
+  color: #ffffff;
+  text-align: justify;
+}
+
+.send-package #myTab{
+margin-top: 3rem;
+}
+.send-package a.nav-link {
+  font-size: 1.2rem;
+  color: #000;
+  font-weight: 500!important;
+  padding: 0.5rem 2rem ;
+}
+
+.send-package .nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-radius: 10px!important;
+}
+
+.send-package .nav-link.active {
+  
+  background-color:#096b00!important;
+border-radius: 10px!important;
+  color: #fff!important;
+
+}
+
+.send-package .nav-link:hover{
+  
+border:1px solid #096b00!important;
+border-radius: 10px!important;
+  color: #000!important;
+}
+
+.send-package .nav-link:focus{
+    color: #fff!important;
+  
+  }
 
 /* Send Package Form  */
 .send {
-  margin-top: 5rem;
+  margin-top: 3rem;
   margin-bottom: 5rem;
   color: #000 !important;
   font-family: Poppins;
@@ -77,7 +129,7 @@ font-weight: 900 !important;
   font-weight: normal;
 }
 
-.send .form {
+ .form {
   margin-top: 2rem;
 }
 
@@ -86,7 +138,7 @@ font-weight: 900 !important;
   -webkit-tap-highlight-color: transparent;
 }
 
-.send .input-style {
+ .input-style {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -114,6 +166,7 @@ font-weight: 900 !important;
 
 .send .textarea-style {
   height: 100px;
+  font-size: 15px;
 }
 
 .send .input-style:hover,
@@ -123,42 +176,169 @@ font-weight: 900 !important;
 
 .send .btn {
   background-color: #096b00;
-  border-radius: 50px;
   color: #ffffff !important;
   text-align: center !important;
 }
+
+.user-btn button {
+  background-color: #096b00;
+  border-radius: 10px;
+  color: #fff;
+  padding: 1.2rem 5rem !important;
+  margin-top: 2rem !important;
+  /* font-size: large !important; */
+}
+
+/* Invoice  */
+.send-package .invoice {
+  margin-top: 5rem;
+  /* margin-left: 50px !important; */
+}
+.send-package .invoice .card-body h6 {
+  font-size: smaller !important;
+}
+.send-package .invoice .bolder-text {
+  font-weight: 600 !important;
+}
+
+.invoice-btn button {
+  background-color: #096b00;
+  border-radius: 10px;
+  color: #fff;
+  padding: .6rem .2!important;
+  /* margin-top: 2rem !important; */
+}
+
+/* Invoice  */
+
+/* Track */
+.send-package .track {
+  margin-top: 2rem;
+}
+.send-package .track p {
+  font-size: smaller !important;
+}
+.send-package .track ol {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.send-package .track .eachorder {
+  display: flex !important;
+  margin-bottom: .5rem;
+}
+
+.send-package .track .eachorder .first {
+  /* background: #044b04f1 !important; */
+  border: 1px solid #096b00  ;
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+}
+
+.send-package .track .img{
+margin-bottom: 0 !important;
+}
+
+
+
+/* Track */
+
+
+
 /* Send Package Form  */
+
+/* Send Package Page */
+/* Send Package Page */
+
+
+    /* Page Not Found */
+
+    .pagenotfound {
+      margin: 8rem 0;
+      }
+  
+      .pagenotfound .gif {
+        color: transparent;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        text-align: center;
+        text-indent: 10000px;
+      }
+  
+      .pagenotfound .giffy {
+      width: 100%;
+      height: 100%;
+      max-width: 450px;
+      max-height: 450px;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      font-size: 1.25rem;
+      align-items: center;
+      flex-shrink: 0;
+      line-height: 1;
+      user-select: none;
+      border-radius: 70% 80% 60% 60%;
+      border-style: double;
+      border-color: #096b00;
+      
+      }
+  
+      .pagenotfound button{
+        margin-top: 3rem;
+        background-color:  #096b00;
+        border-radius: 50px;
+        color: #ffffff;
+      }
+  
+      /* Page Not Found */
+
 
 
 /* Media Query for Mobile device */
 /* Media Query for Mobile device */
 
 @media screen and (max-width: 780px) {
+  /* Login  */
+  .login {
+    height: max-content !important;
+    overflow-y: visible;
+  }
 
-/* Login  */
-.login {
-  height: max-content !important;
-  overflow-y:visible;
-}
+  .login h6,
+  .login h5 {
+    text-align: center !important;
+  }
 
-.login h6, .login h5 {
-  text-align: center !important;
-}
-
-.hide-on-small {
-  display:none !important;
-}
+  .hide-on-small {
+    display: none !important;
+  }
 }
 
 @media screen and (max-width: 580px) {
   /* Dashboard  */
-.dashboard {
+  .dashboard {
+    margin-left: 0 !important;
+  }
+
+  .dashboard .dash-body {
+    background: #e9ffe9;
+    margin-top: 2rem !important;
+    border-radius: 3rem 3rem 0 0 !important;
+    height: max-content !important;
+    padding-bottom: 3rem !important;
+    padding-top: .1rem !important;
+  }
+  /* Dashboard  */
+
+/* Send Package Page */
+.send-package {
   margin-left: 0 !important;
 }
-/* Dashboard  */
+/* Send Package Page */
 
 }
-
 
 /* Media Query for Mobile device */
 /* Media Query for Mobile device */

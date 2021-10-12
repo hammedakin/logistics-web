@@ -206,9 +206,9 @@ const Footer = () => {
 
           <div class="footer-copyright white black-text text-center py-3">
             Copyright © 2021{" "}
-            <a href="https://abulesowo.ng" class="green-text ">
+            <a href="https://eclipse.com.ng" class="green-text ">
               {" "}
-              eclipse.ng{" "}
+              eclipse.com.ng{" "}
             </a>{" "}
             || All rights reserved
 

@@ -1,10 +1,85 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
+import { Spinner, Alert } from "reactstrap";
+import { useHistory } from "react-router";
 import img from "./img/bicycle.png";
+import { Link } from "react-router-dom";
+import Navbar from '../Navbar/Navbar'
 
 const UserLogin = () => {
+
+  const [mail, setmail] = useState("");
+  const [pword, setpword] = useState("");
+  const [fullname, setfullname] = useState("");
+  const [usertoken, setusertoken] = useState("");
+  const [email, setemail] = useState("");
+  const [phone, setphone] = useState("");
+
+
+  const [issending, setissending] = useState(false);
+  const [showalert, setshowalert] = useState(false);
+  const [alert, setalert] = useState("");
+
+  let history = useHistory() 
+
+  function Login(e) {
+    if(mail, pword){
+      setissending(true)
+
+
+      const data = new FormData();
+      data.append("mail", mail);
+      data.append("pword", pword);
+      data.append("apptoken", "T9H1E6KUYM");
+
+      axios
+      .post(`https://test.api.eclipse.com.ng/v1/login`, data, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+     
+        if (res.data.success === true) {
+          localStorage.setItem("usertoken", res.data.usertoken)
+          localStorage.setItem("email", res.data.email)
+          localStorage.setItem("fullname", res.data.fullname)
+          localStorage.setItem("phone", res.data.phone)
+          setshowalert(true);
+          setemail(res.data.email)
+          setfullname(res.data.fullname)
+          setusertoken(res.data.usertoken)
+          setphone(res.data.phone)
+          setalert(res.data.message);
+          setissending(false);
+          history.push("/dashboard")
+        } else {
+          setshowalert(true);
+          setalert(res.data.message, 'error');
+          setissending(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error.name);
+        setshowalert(true);
+        setalert("Check your Network Connection!!!");
+        setissending(false);
+      });
+      
+    }else{
+       setshowalert(true)
+       setalert('Empty fields, Check form again!')
+       setissending(false)
+     }
+    e.preventDefault();
+  }
+
+
+
   return (
     <>
+    <Navbar/>
       <main className="login animated fadeInRight">
         <div className="row">
         
@@ -30,6 +105,8 @@ const UserLogin = () => {
                             type="email"
                             className=" input-style"
                             placeholder="Enter e-mail"
+                            onChange={(e) => setmail(e.target.value)}
+                            value={mail}
                             required
                           />
                         </div>
@@ -43,34 +120,65 @@ const UserLogin = () => {
                             type="password"
                             className=" input-style"
                             placeholder="Enter Password"
+                            onChange={(e) => setpword(e.target.value)}
+                        value={pword}
                             required
                           />
                         </div>
                       </div>
 
-                      <div className="ml-auto">
-                     <h6> <Link to="">Forget Password?</Link> </h6>     
-                     </div>
-
                       <div class="col-md-12  mx-auto text-center">
+                      {showalert ? (
+                <>
+                  <Alert color="success">{alert}</Alert>
+                </>
+              ) : (
+                <></>
+              )}
                         <div class="mb-4">
-                          <button
+                                           
+                {issending ? (
+                      <>
+
+                        <button
                             type="button"
                             class="btn shadow waves-effect"
                             action="submit"
                           >
                             {" "}
+                            <strong>  Logging In <Spinner color="light" size="0.1rem" />  </strong>{" "}
+                          </button>
+                      </>
+                    ) : (
+                      <>
+                             <button
+                            type="button"
+                            class="btn shadow waves-effect"
+                            action="submit"
+                          onClick={(e) => Login(e)}
+
+                          >
+                            {" "}
                             <strong> submit </strong>{" "}
                           </button>
+                      </>
+                    )}
                         </div>
                       </div>
 
-                      <div className="text-center">
+                    
+                    </div>
+                  </form>
+
+                  <div className="text-center">
                         <h6> Dont have an account? <Link to="/register"> Join free today </Link>
                         </h6>
                      </div>
-                    </div>
-                  </form>
+                     <hr/>
+
+                     <div className="text-center">
+                     <h6 class="ml-auto pr-3">Forget Password? <Link to=""> Click Here</Link> </h6>     
+                     </div>
                 </div>
               </div>
             </div>

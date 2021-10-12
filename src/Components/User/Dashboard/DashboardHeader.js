@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const DashboardHeader = () => {
   return (
@@ -19,9 +20,11 @@ const DashboardHeader = () => {
               </div>
             </div>
             <div className="col-md-5 col-6">
+              <Link to="/dashboard/fund-account">
               <div className="second shadow ">
                 <h6> Fund Account</h6>
               </div>
+              </Link>
             </div>
             <div className="col-md-5 col-6">
               <div className="second shadow">

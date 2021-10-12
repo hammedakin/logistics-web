@@ -1,5 +1,5 @@
 import React from "react";
-import Tracking from "./Tracking"; 
+import Tracking from "../User/TrackOrder/Tracking";
 
 const HomeShowcase = () => {
   return (

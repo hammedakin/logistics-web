@@ -1,6 +1,6 @@
  /* Navbar */
 
- nav {
+.usernav nav {
   background-color: #fafafa!important;
   transition: 0.5s ease!important;
   padding: .5rem 1rem !important;
@@ -10,37 +10,59 @@
 }
 
 
-.active1 {
-  border-right: #096b00 5px solid;
+.usernav .active1 {
+  border-right: #15df02 5px solid;
   color: #b4f3ae !important;
 transition: 0.1s ease!important;
 }
 
-nav button.navbar-toggler {
+.usernav nav button.navbar-toggler {
   background-color: none!important;
   }
 
   
-.navbar-toggler-icon {
+.usernav .navbar-toggler-icon {
   background: none !important;
 }
 
-nav .nav-item a {
+/* .usernav nav .nav-item a {
   color: #000;
   font-size: 1rem;
   display: block;
   padding: .5rem 1rem;
   margin: 0 1rem ;
-}
+} */
 
-nav .nav-item a:hover {
-  border-right: #fff 5px solid;
+.usernav nav .nav-item a:hover {
+  border-right: #fff 5px solid !important;
   color: #fff !important;
 transition: 0.1s ease!important;
 background: #096b0059;
+border: 0 5px 0 0 !important;
 
 }
+/* usernav dropdown  */
+.usernav nav .nav-item a.user:hover {
+border-right: none;
+color: black !important;
+transition: none;
+background: none;
+}
 
+.usernav nav .nav-item .dropdown-user {
+  /* border: none !important ; */
+  background: white !important;
+  text-align: center !important;
+  border-radius: .5rem !important;
+  font-size: x-small;
+}
+
+.usernav nav .btn {
+  text-transform: uppercase!important;
+  padding: 0.8rem 1rem !important;
+  width: 7rem !important;
+}
+/* 
 nav .btn {
  
   text-transform: uppercase!important;
@@ -53,9 +75,8 @@ nav .btn:hover {
   background-color: #000 !important;
   transition: 0.55s ease!important;
   color: #fafafa !important;
+} */
 
-
-}
 /* Navbar */
 .sidenav {
     height: 100%;
@@ -64,10 +85,9 @@ nav .btn:hover {
     top: 3rem;
     padding-top: 3rem;
     left: 0;
-    background-color: #000000;
+    background-color: #096b00;
     overflow-x: hidden;
     transition: 0.3s ease;
-    /* padding-top: 60px; */
     z-index: 2000 !important;
   }
   
@@ -130,7 +150,7 @@ nav .btn:hover {
   }
 
   @media screen and (max-width: 991px) {
-    .navbar ul {
+  .usernav .navbar ul {
         display: none !important;
     }
    }

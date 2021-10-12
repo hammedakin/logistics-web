@@ -1,7 +1,7 @@
 import React from "react";
 import Tracking from "../TrackOrder/Tracking";
 
-const SendPackageShowcase = () => {
+const TrackShowcase = () => {
   return (
     <>
       <section class="sendshowcase showcase ">
@@ -10,7 +10,7 @@ const SendPackageShowcase = () => {
             <div class=" animated fadeInUp content col-md-8 ml-auto mr-auto ">
               <h1 class="text-center ">
                 {" "}
-               SHIP GOODS
+               TRACK SHIPMENT
               </h1>
             </div>
 
@@ -23,4 +23,4 @@ const SendPackageShowcase = () => {
   );
 };
 
-export default SendPackageShowcase;
+export default TrackShowcase;

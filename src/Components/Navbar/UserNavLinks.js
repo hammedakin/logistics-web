@@ -1,57 +1,85 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React from "react";
+import { Link, NavLink, useHistory } from "react-router-dom";
 const closeNav = (e) => {
   document.getElementById("mySidenav").style.width = "0";
 };
 
-
 const UserNavLinks = () => {
-    return ( 
+  let history = useHistory();
 
-        <>
+  const HandleLogout = () => {
+    history.push("/home");
+    localStorage.removeItem("usertoken");
+    localStorage.removeItem("fullname");
+    localStorage.removeItem("email");
+    localStorage.removeItem("phone");
+    localStorage.removeItem("type");
+    localStorage.removeItem("results");
+    localStorage.removeItem("trackid");
+  };
 
-<ul class="navbar-nav ml-auto mr-auto text-center animated fadeInUp">
+  function LocalOrder() {
+    localStorage.setItem("type", "local"); 
+  }
 
+  function RemoveTrack() {
+    localStorage.removeItem("results");
+    localStorage.removeItem("trackid");  }
 
-            <li class="nav-item" >
-              <NavLink
-        // onClick={(e) => closeNav(e)}
-              tag={Link} activeClassName="active1 " to="/dashboard">
-                HOME
-              </NavLink>
-            </li>
+  return (
+    <>
+      <ul class="navbar-nav ml-auto mr-auto text-center">
+        <li class="nav-item">
+          <NavLink
+            // onClick={(e) => closeNav(e)}
+            tag={Link}
+            activeClassName="active1 "
+            to="/dashboard"
+            onClick={RemoveTrack}
 
-            <li class="nav-item">
-              <NavLink
-        // onClick={(e) => closeNav(e)}
-              tag={Link} activeClassName="active1" to="/gh">
-                HOME
-              </NavLink>
-            </li>
+          >
+            HOME
+          </NavLink>
+        </li>
 
-            <li class="nav-item ">
-              <NavLink
-        // onClick={(e) => closeNav(e)}
-              tag={Link} activeClassName="active1" to="/g">
-                HOME
-              </NavLink>
-            </li>
+        <li class="nav-item">
+          <NavLink
+            // onClick={(e) => closeNav(e)}
+            tag={Link}
+            activeClassName="active1"
+            to="/send-package"
+            onClick={LocalOrder}
+            onClick={RemoveTrack}
 
-          </ul>
-          <ul class="navbar-nav text-center">
-            <Link to="/contact"
-        // onClick={(e) => closeNav(e)}
-        >
-            <li>
-              <button type="btn" class="btn shadow"
-              >
+          >
+            SEND PACKAGE
+          </NavLink>
+        </li>
+
+        <li class="nav-item ">
+          <NavLink
+            // onClick={(e) => closeNav(e)}
+            tag={Link}
+            activeClassName="active1"
+            to="/track/"
+            onClick={RemoveTrack}
+
+          >
+            TRACK
+          </NavLink>
+        </li>
+      </ul>
+      <ul class="navbar-nav text-center"> 
+          <li>
+            <a onClick={HandleLogout}>
+              <button type="btn" class="btn shadow">
                 logout
-          </button>
-            </li>
-            </Link> 
-          </ul>
-        </>
-     );
-}
- 
+              </button>
+            </a>
+          </li>
+      </ul>
+    </>
+  );
+};
+
 export default UserNavLinks;
