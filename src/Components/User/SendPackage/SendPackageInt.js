@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
-import Invoice from "../Invoice";
 
 
-
-const SendPackageLocal = () => {
+const SendPackageInt = () => {
 
 // Sender 
   const [usertoken, setusertoken] = useState("");
@@ -24,16 +22,20 @@ const SendPackageLocal = () => {
   const [rphone, setrphone] = useState("");
   const [des_area, setdes_area] = useState("");
   const [rname, setrname] = useState("");
+  const [country, setcountry] = useState("");
+  const [zip, setzip] = useState("");
 
   // Items Details 
   const [packagename, setpackagename] = useState("");
   const [weight, setweight] = useState("");
+  const [worth, setworth] = useState("");
   const [description, setdescription] = useState("");
   const [onforwardingtownid, setonforwardingtownid] = useState("");
   const [iscargo, setiscargo] = useState("");
-  const [type, settype] = useState(localStorage.getItem('type'));
+  const [type, settype] = useState("int");
 
 // States and cities 
+  const [allcountries, setallcountries] = useState([]);
   const [allstates, setallstates] = useState([]);
   const [allcities, setallcities] = useState([]);
   const [allweight, setallweight] = useState([]);
@@ -47,7 +49,10 @@ const SendPackageLocal = () => {
   const [trackid, settrackid] = useState("");
   let history = useHistory(); 
 
-
+  useEffect(() => {
+    settype(localStorage.getItem('type'))
+    },[localStorage.getItem('type')]
+    )
 
 
   // Function for to process the form
@@ -60,6 +65,8 @@ const SendPackageLocal = () => {
       loc_area,
       senderphone,
       sendername,
+      country,
+      zip,
       state,
       town,
       rmail,
@@ -68,6 +75,7 @@ const SendPackageLocal = () => {
       rname,
       packagename,
       weight,
+      worth,
       description,
       iscargo,
       onforwardingtownid,
@@ -82,6 +90,8 @@ const SendPackageLocal = () => {
       data.append("loc_area", loc_area);
       data.append("senderphone", senderphone);
       data.append("sendername", sendername);
+      data.append("country", country);
+      data.append("zip", zip);
       data.append("state", state);
       data.append("town", town);
       data.append("rmail", rmail);
@@ -90,6 +100,7 @@ const SendPackageLocal = () => {
       data.append("rname", rname);
       data.append("packagename", packagename);
       data.append("weight", weight);
+      data.append("worth", worth);
       data.append("description", description);
       data.append("onforwardingtownid", onforwardingtownid);
       data.append("iscargo", iscargo);
@@ -137,6 +148,37 @@ const SendPackageLocal = () => {
   e.preventDefault();
 }
   // Function for to process the form
+
+
+   // Function for to call all countries
+   const fetchcountries = () => {
+    const data = {
+      apptoken: "T9H1E6KUYM"
+    }
+    axios
+      .get(`https://test.api.eclipse.com.ng/v1/get-countries`, {params:data})
+      .then((response) => {
+        if (response.data.success === false) {
+        console.log(response.data);
+        }else {
+        setallcountries(response.data);
+        console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  useEffect(() => {
+    fetchcountries();
+  }, [count]);
+
+  const countries = allcountries.map((item, i) => {
+   return (
+    <option value={`${item.country}`}> {item.country} </option>
+   );
+ });
+  // Function for to call all countries
 
   // Function for to call all states
   const fetchstates = () => {
@@ -225,22 +267,24 @@ useEffect(() => {
 
 const weights = allweight.map((item, i) => {
  return (
-  <option value={`${item.id}`}> {item.country} </option>
+  <option value={`${item.id}`}> {item.kg} </option>
  );
 });
 // Function for to call all weights for country
 
-        // item.hotdeals
-        let types
-        if (type=='local') {
-          types = 'LOCAL';
-        } 
-        else if (type=='international') {
-          types = 'INTERNATIONAL';
-        } else {
-          types = 'Select Type Above';
-          
-        }
+
+
+// item.hotdeals
+let types
+if (type=='local') {
+  types = 'LOCAL';
+} 
+else if (type=='int') {
+  types = 'INTERNATIONAL';
+} else {
+  types = 'Select Type Above';
+  
+}
 
 
   return (
@@ -299,6 +343,7 @@ const weights = allweight.map((item, i) => {
                           placeholder="Enter Email *"
                           onChange={(e) => setsendermail(e.target.value)}
                           value={sendermail}
+                        disabled
                         />
                       </div>
                     </div>
@@ -316,6 +361,20 @@ const weights = allweight.map((item, i) => {
                         />
                       </div>
                     </div>
+
+                    <div className="col-md-10 ">
+                      <select
+                        className="input-style"
+                      >
+                        <option value="" selected="">
+                          Select Country *
+                        </option>
+
+                        <option> Nigeria </option>                       
+                      </select>
+                    </div>
+
+
 
                     <div className="col-md-10 ">
                       <select
@@ -412,33 +471,62 @@ const weights = allweight.map((item, i) => {
                         />
                       </div>
                     </div>
-                   
+
+                         
                     <div className="col-md-10 ">
                       <select
                         className="input-style"
-                        onChange={(e) => setstate(e.target.value)}
+                        onChange={(e) => setcountry(e.target.value)}
                       >
                         <option value="" selected="">
-                          Select State *
+                          Select Country *
                         </option>
 
-                        {states}
+                        {countries}
                        
                       </select>
                     </div>
 
                     <div className="col-md-10 ">
-                      <select
-                        className="input-style"
-                        onChange={(e) => settown(e.target.value)}
-                      >
-                        <option value="" selected="">
-                          Select City *
-                        </option>
+                      {/* <label> State </label> */}
 
-                        {cities}
-                       
-                      </select>
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className=" input-style"
+                          placeholder="Enter State *"
+                          onChange={(e) => setstate(e.target.value)}
+                          value={state}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-md-10 ">
+                      {/* <label> City </label> */}
+
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className=" input-style"
+                          placeholder="Enter City *"
+                          onChange={(e) => settown(e.target.value)}
+                          value={town}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-md-10 ">
+                      {/* <label> Zip Code </label> */}
+
+                      <div className="input-group">
+                        <input
+                          type="number"
+                          className=" input-style"
+                          placeholder="Zip Code *"
+                          onChange={(e) => setzip(e.target.value)}
+                          value={zip}
+                        />
+                      </div>
                     </div>
 
                     <div className="col-md-10 ">
@@ -548,6 +636,21 @@ const weights = allweight.map((item, i) => {
                   <h5 className="text-center"> Means Info </h5>
 
                   <div className="row justify-content-center">
+
+                  <div className="col-md-10 ">
+                      {/* <label> Worth </label> */}
+
+                      <div className="input-group">
+                        <input
+                          type="number"
+                          className=" input-style"
+                          placeholder="Worth (₦)*"
+                          onChange={(e) => setworth(e.target.value)}
+                          value={worth}
+                        />
+                      </div>
+                    </div>
+
                     <div className="col-md-10 ">
                       <div className="input-group">
                         <textarea
@@ -639,4 +742,4 @@ const weights = allweight.map((item, i) => {
   );
 };
 
-export default SendPackageLocal;
+export default SendPackageInt;

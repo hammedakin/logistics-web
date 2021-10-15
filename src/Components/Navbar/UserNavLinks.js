@@ -13,18 +13,14 @@ const UserNavLinks = () => {
     localStorage.removeItem("fullname");
     localStorage.removeItem("email");
     localStorage.removeItem("phone");
-    localStorage.removeItem("type");
     localStorage.removeItem("results");
     localStorage.removeItem("trackid");
   };
 
-  function LocalOrder() {
-    localStorage.setItem("type", "local"); 
-  }
-
   function RemoveTrack() {
     localStorage.removeItem("results");
-    localStorage.removeItem("trackid");  }
+    localStorage.removeItem("trackid");  
+  }
 
   return (
     <>
@@ -48,8 +44,8 @@ const UserNavLinks = () => {
             tag={Link}
             activeClassName="active1"
             to="/send-package"
-            onClick={LocalOrder}
             onClick={RemoveTrack}
+            // onClick={RemoveTrack}
 
           >
             SEND PACKAGE

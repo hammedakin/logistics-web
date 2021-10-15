@@ -64,11 +64,12 @@ const Invoice = (props) => {
         {/* <button div class="btn"> back</button> */}
           <div className="container">
               <div className="mb-4">
-            <h5 className=""> Invoice - {trackid} 
-            <span class="ml-2 px-2 h6 yellow"><i> In Progress </i></span>
+            <h5 className=""> Invoice - {packagename} 
+            {/* <span class="ml-2 px-2 h6 yellow"><i> In Progress </i></span>
             <span class="ml-4 px-2 h6 green white-text"><i> Completed </i></span>
-            <span class="ml-4 px-2 h6 red white-text"><i> Cancelled </i></span>
+            <span class="ml-4 px-2 h6 red white-text"><i> Cancelled </i></span> */}
             </h5> 
+            <h5> Tracking ID : {trackid} </h5>
             <p class="grey-text mt-0 pt-0"><i>Created on : {date} </i></p>
             </div>
             <div class="text-center">
@@ -140,9 +141,20 @@ const Invoice = (props) => {
                     <h6>
                       <span className="bolder-text">Address: </span> {des_area}
                     </h6>
-                    <h6>
+
+                    {country === "" ? (
+                      <>
+
+                      </>
+                    ) : (
+                      <>
+                       <h6>
                       <span className="bolder-text">Country: </span> {country}
                     </h6>
+                      </>
+                    )
+                  }
+                   
                   </div>
                 </div>
               </div>
@@ -169,19 +181,30 @@ const Invoice = (props) => {
                       <span className="bolder-text">Onforwarding: </span>{" "}
                       {onforward}
                     </h6>
+
+                    {country === "" ? (
+                      <>
+
+                      </>
+                    ) : (
+                      <>
                     <h6>
                       <span className="bolder-text">Cargo: </span> {cargo}
                     </h6>
                     <h6>
-                      <span className="bolder-text">Worth: </span> {worth}
+                      <span className="bolder-text">Worth: </span>  ₦ {worth}
                     </h6>
+                      </>
+                    )
+                  }
+                
                     <h6>
                       <span className="bolder-text">Description: </span>{" "}
                       {description}
                     </h6>
                   </div>
                   <div className="text-left ml-2 invoice-btn">
-                    <Link to="/track">
+                    <Link to="/track" >
                       <button class="btn w-50"> TRACK ORDER</button>
                     </Link>
                   </div>

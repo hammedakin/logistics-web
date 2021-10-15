@@ -45,6 +45,29 @@
   text-transform: uppercase !important;
 }
 
+.dash-header .third {
+  margin-top: 1rem;
+  background-size: cover;
+  overflow-x: hidden;
+  padding: 0.3rem 1rem;
+  border-radius: 1rem;
+  color: #096b00 !important;
+  background: transparent !important;
+}
+
+.dash-header .third h6 {
+  font-weight: 100 !important;
+  margin-top: 0.5rem;
+}
+
+.dash-header .box-icon {
+  padding: 0.4rem;
+  text-align: center !important;
+  background-color: #096b001f;
+  border-radius: 50%;
+  transition: 0.15s ease;
+}
+
 /* Dashboard Header  */
 
 /* Transaction History  */
@@ -330,7 +353,13 @@ margin-bottom: 0 !important;
     padding-bottom: 3rem !important;
     padding-top: .1rem !important;
   }
+
+  .dash-header .third h6 {
+    font-size: smaller !important;
+  }
   /* Dashboard  */
+
+
 
 /* Send Package Page */
 .send-package {

@@ -30,7 +30,7 @@ const SendPackageLocal = () => {
   const [weight, setweight] = useState("");
   const [description, setdescription] = useState("");
   const [onforwardingtownid, setonforwardingtownid] = useState("");
-  const [type, settype] = useState(localStorage.getItem('type'));
+  const [type, settype] = useState("local");
 
 // States and cities 
   const [allstates, setallstates] = useState([]);
@@ -46,7 +46,10 @@ const SendPackageLocal = () => {
   let history = useHistory(); 
 
 
-
+  // useEffect(() => {
+  // settype(localStorage.getItem('type'))
+  // },[localStorage.getItem('type')]
+  // )
 
   // Function for to process the form
   function SendLocalPackage(e) {
@@ -265,6 +268,7 @@ const SendPackageLocal = () => {
                           placeholder="Enter Email *"
                           onChange={(e) => setsendermail(e.target.value)}
                           value={sendermail}
+                          disabled
                         />
                       </div>
                     </div>

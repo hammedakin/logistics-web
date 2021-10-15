@@ -46,13 +46,15 @@ const FundWallet = () => {
   return (
     <>
       <section className="fundwallet">
+      <div className="col-md-10 py-4 white ml-auto mr-auto shadow" style={{borderRadius: "1rem"}}>
+
         <div className="container">
           <h5 className="text-center "> FUND WALLET</h5>
           <div className="form">
 
           <form>
                     <div className="row justify-content-center">
-                      <div className="col-md-6 ">
+                      <div className="col-md-6 text-center">
                         <label> Amount </label>
 
                         <div className="input-group">
@@ -75,6 +77,7 @@ const FundWallet = () => {
 
           <div className="text-center">
             <PaystackHookExample />
+          </div>
           </div>
         </div>
       </section>

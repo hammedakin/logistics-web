@@ -5,6 +5,7 @@
   transition: 0.5s ease!important;
   padding: .5rem 1rem !important;
   z-index: 2001 !important;
+  text-align: left !important;
 
   /* height: 7rem ; */
 }

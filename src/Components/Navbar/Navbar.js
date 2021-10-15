@@ -1,7 +1,20 @@
 import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
+
 // import logo from "./logo.jpeg";
 const Navbar = () => {
+  let history = useHistory();
+
+  
+  const HandleLogout = () => {
+    history.push("/home");
+    localStorage.removeItem("usertoken");
+    localStorage.removeItem("fullname");
+    localStorage.removeItem("email");
+    localStorage.removeItem("phone");
+    localStorage.removeItem("results");
+    localStorage.removeItem("trackid");
+  };
 
   return (
     <>
@@ -26,7 +39,7 @@ const Navbar = () => {
               <box-icon
                 className="box-icon"
                 size="2rem"
-                color=" #FC4746"
+                color=" #096b00"
                 name="menu"
                 type="logo"
               ></box-icon>
@@ -53,6 +66,10 @@ const Navbar = () => {
               </li> */}
             </ul>
             <ul className="navbar-nav text-center">
+
+
+              {localStorage.getItem('email') == null ? (
+                <>
               <Link to="/login">
                 <li className="">
                   <button type="btn" className="btn btn2 shadow">
@@ -67,6 +84,28 @@ const Navbar = () => {
                   </button>
                 </li>
               </Link>
+                </>
+              ) : (
+                <>
+              <Link to="/dashboard">
+                <li className="">
+                  <button type="btn" className="btn btn4 shadow">
+                   dashboard 
+                  </button>
+                </li>
+              </Link>
+              <a onClick={HandleLogout}>
+                <li className="">
+                  <button type="btn" className="btn btn3 shadow">
+                    logout
+                  </button>
+                </li>
+              </a>
+                </>
+              )
+
+              }
+              
             </ul>
           </div>
         </div>

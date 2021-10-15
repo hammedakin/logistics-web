@@ -19,12 +19,12 @@ const SendPackage = () => {
   //   }
   // }
   
-  function LocalOrder() {
-    localStorage.setItem("type", "local"); 
-  }
-  function IntOrder() {
-    localStorage.setItem("type", "international"); 
-}
+//   function LocalOrder() {
+//     localStorage.setItem("type", "local"); 
+//   }
+//   function IntOrder() {
+//     localStorage.setItem("type", "int"); 
+// }
  
 
   return (
@@ -40,7 +40,7 @@ const SendPackage = () => {
           >
             <li class="nav-item">
               <a
-                onClick={LocalOrder}
+                // onClick={LocalOrder}
                 class="nav-link active"
                 id="home-tab"
                 data-toggle="tab"
@@ -57,7 +57,7 @@ const SendPackage = () => {
             
             <li class="nav-item">
               <a
-                onClick={IntOrder}
+                // onClick={IntOrder}
                 class="nav-link"
                 id="profile-tab"
                 data-toggle="tab"
