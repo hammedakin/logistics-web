@@ -5,6 +5,7 @@ import HomeShowcase from '../Components/HomePage/HomeShowcase';
 import WhatWeDo from '../Components/HomePage/WhatWeDo';
 import HowToSend from '../Components/HomePage/HowToSend'
 import HowItWorks from '../Components/HomePage/HowItWorks'
+import GetQuote from '../Components/HomePage/GetQuote';
 
 const Homepage = () => {
     return ( 
@@ -13,6 +14,7 @@ const Homepage = () => {
         <HomeShowcase />
         <WhatWeDo/>
         <HowToSend/>
+        <GetQuote/>
         <HowItWorks/>
 
 

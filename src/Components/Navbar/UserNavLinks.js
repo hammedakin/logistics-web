@@ -24,8 +24,15 @@ const UserNavLinks = () => {
 
   return (
     <>
-      <ul class="navbar-nav ml-auto mr-auto text-center">
+      <ul class="navbar-nav ml-auto mr-auto">
         <li class="nav-item">
+        <box-icon
+        class="box-icon"
+        size="1.1rem"
+        color=" #fff"
+        name="home"
+        type="logo"
+        ></box-icon>
           <NavLink
             // onClick={(e) => closeNav(e)}
             tag={Link}
@@ -33,26 +40,38 @@ const UserNavLinks = () => {
             to="/dashboard"
             onClick={RemoveTrack}
 
-          >
-            HOME
+          >Home
           </NavLink>
         </li>
 
         <li class="nav-item">
+        <box-icon
+        class="box-icon"
+        size="1.1rem"
+        color=" #fff"
+        name="gift"
+        type="logo"
+        ></box-icon>
           <NavLink
             // onClick={(e) => closeNav(e)}
             tag={Link}
             activeClassName="active1"
             to="/send-package"
             onClick={RemoveTrack}
-            // onClick={RemoveTrack}
+            onClick={RemoveTrack}
 
-          >
-            SEND PACKAGE
+          >Send Package
           </NavLink>
         </li>
 
         <li class="nav-item ">
+        <box-icon
+        class="box-icon"
+        size="1.1rem"
+        color=" #fff"
+        name="paper-plane"
+        type="logo"
+        ></box-icon>
           <NavLink
             // onClick={(e) => closeNav(e)}
             tag={Link}
@@ -60,15 +79,14 @@ const UserNavLinks = () => {
             to="/track/"
             onClick={RemoveTrack}
 
-          >
-            TRACK
+          >Track
           </NavLink>
         </li>
       </ul>
       <ul class="navbar-nav text-center"> 
           <li>
             <a onClick={HandleLogout}>
-              <button type="btn" class="btn shadow">
+              <button type="btn" class="btn shadow ">
                 logout
               </button>
             </a>

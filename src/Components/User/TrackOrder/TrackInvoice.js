@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Spinner} from "reactstrap";
 import icon from "./img/icon.svg";
 import img from "./img/icons1.png";
 
@@ -7,14 +8,17 @@ const TrackInvoice = () => {
   const [alltrackdetails, setalltrackdetails] = useState([]);
   const [trackid, settrackid] = useState(localStorage.getItem('trackid'));
   const [count, setcount] = useState(0);
+  const [isloading, setisloading] = useState(true);
 
 
   const fetchtrack = () => {
 
   if (localStorage.getItem('results') == null) {
     console.log("No Tracking Details Gotten");
+    setisloading(false)
   } else {
     setalltrackdetails(JSON.parse(localStorage.getItem('results')));
+    setisloading(false)
   };
 
 };
@@ -51,6 +55,7 @@ useEffect(() => {
     
     {localStorage.getItem('results') == null  ?  (
         <>
+         
         <div className="mt-5 text-center">
           <img src={img} width="100px" />
       <h5 class="mt-3 font-weight-normal" style={{color: "#CCCCCC"}}> Track ID is empty ...</h5>  
@@ -60,7 +65,13 @@ useEffect(() => {
 <>
         <div className="track">
         <div className="container">
-          <div className="mb-4">
+
+
+        {isloading ? (
+              <Spinner color="success" />
+            ) : (
+              <>
+ <div className="mb-4">
             <h6 className="ml-2">
              
               Tracking Number -
@@ -78,6 +89,8 @@ useEffect(() => {
 
             </ol>
           </div>
+              </>
+            )}
         </div>
       </div>
       </>

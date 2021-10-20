@@ -19,6 +19,10 @@
   color: #ffffff !important;
 }
 
+.dash-header .first .spin {
+  font-weight: 200 !important;
+}
+
 .dash-header .first h5 {
   font-weight: 100 !important;
 }

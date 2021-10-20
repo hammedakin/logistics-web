@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
-import UserNavbar from "../Navbar/UserNavbar";
+import UserNavbar from "../../Navbar/UserNavbar";
 
 const Invoice = (props) => {
   const [trackid, settrackid] = useState(props.location.state.trackid);

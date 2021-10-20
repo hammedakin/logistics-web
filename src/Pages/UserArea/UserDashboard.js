@@ -5,7 +5,7 @@ import DashboardHeader from "../../Components/User/Dashboard/DashboardHeader";
 import TransHistory from "../../Components/User/Dashboard/TransHistory";
 import UserFooter from "../../Components/Footer/UserFooter";
 import FundWallet from "../../Components/User/Dashboard/FundWallet";
-import Invoice from "../../Components/User/Invoice";
+import ProtectUser from "../../protectUser";
 
 const UserDashboard = () => {
   return (
@@ -20,9 +20,9 @@ const UserDashboard = () => {
 
             <div className="dash-body container">
               <Switch>
-                <Route exact path="/dashboard/fund-account" component={FundWallet} />
+                <ProtectUser exact path="/dashboard/fund-account" component={FundWallet} />
 
-                <Route exact path="/dashboard" component={TransHistory} />
+                <ProtectUser exact path="/dashboard" component={TransHistory} />
 
                </Switch>
 

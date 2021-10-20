@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AcctBal from "./AcctBal";
 
 const DashboardHeader = () => {
 
@@ -15,10 +16,10 @@ const DashboardHeader = () => {
               </div>
               <div className="first shadow">
                 <h5> Total Balance</h5>
-                <h3>
-                  {" "}
-                  <sup>₦ </sup> 2,000,000.00
-                </h3>
+              
+                  
+                   <AcctBal/>
+               
               </div>
             </div>
             <div className="col-md-3 col-5">
@@ -36,6 +37,7 @@ const DashboardHeader = () => {
               </Link>
             </div>
             <div className="col-md-3 col">
+            <Link to="/dashboard">
               <div className="third">
               <box-icon
                       class="box-icon"
@@ -46,6 +48,7 @@ const DashboardHeader = () => {
                     ></box-icon>
                 <h6>History</h6>
               </div>
+              </Link>
             </div>
 
             <div className="col-md-3 col">

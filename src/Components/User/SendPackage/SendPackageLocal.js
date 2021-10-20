@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
-import Invoice from "../Invoice";
+import Invoice from "./Invoice";
 
 
 
@@ -87,7 +87,6 @@ const SendPackageLocal = () => {
       data.append("rmail", rmail);
       data.append("rphone", rphone);
       data.append("des_area", des_area);
-  /* border: #000 solid 2px !important; */
       data.append("rname", rname);
       data.append("packagename", packagename);
       data.append("weight", weight);
@@ -110,8 +109,6 @@ const SendPackageLocal = () => {
           setalert(res.data.message);
           setissending(false);
           setusertoken((localStorage.getItem('usertoken')))
-          localStorage.removeItem('type');
-          // history.push(`/send-package/invoice/${res.data.trackid}`);
           history.push({
             pathname:`/send-package/invoice/${res.data.trackid}`, 
             state:res.data
@@ -204,7 +201,7 @@ const SendPackageLocal = () => {
         if (type=='local') {
           types = 'LOCAL';
         } 
-        else if (type=='international') {
+        else if (type=== 'int') {
           types = 'INTERNATIONAL';
         } else {
           types = 'Select Type Above';

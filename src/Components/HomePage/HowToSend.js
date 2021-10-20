@@ -7,9 +7,9 @@ import img3 from "./img/Vector5.svg";
 const HowToSend = () => {
   return (
     <>
-      <section className="howtosend">
+      <section className="howtosend mb-0">
         <div className="container">
-          <div class="mb-5 text-center">
+          <div class=" text-center">
             <h4> HOW TO SEND PACKAGE</h4>
           </div>
 

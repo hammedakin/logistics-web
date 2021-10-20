@@ -4,6 +4,7 @@ import "./User.css";
 import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
 import Homepage from "./Pages/Homepage";
+import GetQuote from './Components/HomePage/GetQuote';
 
 
 // User 
@@ -14,8 +15,10 @@ import UserRegister from './Components/User/UserRegister';
 import UserAuth from './Components/User/UserAuth';
 import PageNotFound from './PageNotFound';
 import FundWallet from './Components/User/Dashboard/FundWallet';
-import Invoice from './Components/User/Invoice';
+import Invoice from './Components/User/SendPackage/Invoice';
 import TrackOrder from './Pages/UserArea/TrackOrder';
+import ProtectUser from './protectUser';
+import User from './Components/User/Dashboard/User';
 
 
 // User 
@@ -30,6 +33,8 @@ function App() {
           <Route exact path="/" component={Homepage} />
 
           <Route exact path="/home" component={Homepage} />
+
+          <Route exact path="/get-quote" component={GetQuote} />
         
         {/* User Area  */}
 
@@ -43,20 +48,24 @@ function App() {
 
         {/* Log In, Sign Up and Auth */}
 
-
-        <Route exact path="/dashboard" component={UserDashboard} />
+        <ProtectUser exact path="/dashboard" component={UserDashboard} />
 
         {/* <Route path="/fund-account" component={FundWallet} /> */}
 
         
-        <Route exact path="/send-package" component={SendPackage} />
+        <ProtectUser exact path="/send-package" component={SendPackage} />
 
-        <Route exact path="/send-package/invoice/:trackid" component={Invoice} />
+        <ProtectUser exact path="/send-package/invoice/:trackid" component={Invoice} />
                         
-        <Route exact path="/send-package/invoice" component={Invoice} />
+        <ProtectUser exact path="/send-package/invoice" component={Invoice} />
 
-        <Route exact path="/track/:trackid" component={TrackOrder} />
-        <Route exact path="/track/" component={TrackOrder} />
+        <ProtectUser exact path="/track/:trackid" component={TrackOrder} />
+        
+        <ProtectUser exact path="/track/" component={TrackOrder} />
+
+        <ProtectUser exact path="/dashboard" component={User} />
+
+
 
              
         {/* User Area  */}

@@ -60,12 +60,12 @@ section {
   width: 15%!important;
 } */
 
-.active1 {
+/* .active1 {
   background-color: #096b00 !important;
-  /* border-radius: 2rem; */
+ // border-radius: 2rem;
   padding: .5rem 2rem  !important;
 transition: 0.1s ease!important;
-}
+} */
 
 nav button.navbar-toggler {
   background-color: none!important;
@@ -291,6 +291,20 @@ border:transparent solid 1px !important;
 
 /* Homepage  */
 /* Homepage  */
+
+/* Get Quote */
+.get-quote {
+  background: #096b00ec;
+  padding-top: 5rem;
+  color: #fff !important;
+}
+
+.get-quote .user-btn button {
+  margin-top: 7px !important;
+  background: white !important;
+  color: #096b00 !important;
+}
+/* Get Quote */
 
 
 /* Login and SignUp  */

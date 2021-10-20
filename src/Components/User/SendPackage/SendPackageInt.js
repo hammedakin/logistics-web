@@ -32,7 +32,7 @@ const SendPackageInt = () => {
   const [description, setdescription] = useState("");
   const [onforwardingtownid, setonforwardingtownid] = useState("");
   const [iscargo, setiscargo] = useState("");
-  const [type, settype] = useState("int");
+  const [type, settype] = useState('int');
 
 // States and cities 
   const [allcountries, setallcountries] = useState([]);
@@ -121,8 +121,6 @@ const SendPackageInt = () => {
           setalert(res.data.message);
           setissending(false);
           setusertoken((localStorage.getItem('usertoken')))
-          localStorage.removeItem('type');
-          // history.push(`/send-package/invoice/${res.data.trackid}`);
           history.push({
             pathname:`/send-package/invoice/${res.data.trackid}`, 
             state:res.data
@@ -276,14 +274,11 @@ const weights = allweight.map((item, i) => {
 
 // item.hotdeals
 let types
-if (type=='local') {
-  types = 'LOCAL';
-} 
-else if (type=='int') {
+
+if (type==='int') {
   types = 'INTERNATIONAL';
 } else {
   types = 'Select Type Above';
-  
 }
 
 
