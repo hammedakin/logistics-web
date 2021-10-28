@@ -33,6 +33,7 @@ const SendPackageLocal = () => {
   const [type, settype] = useState("local");
 
 // States and cities 
+  const [sendstates, setsendstates] = useState([]);
   const [allstates, setallstates] = useState([]);
   const [allcities, setallcities] = useState([]);
   const [count, setcount] = useState(0)
@@ -135,13 +136,44 @@ const SendPackageLocal = () => {
 }
   // Function for to process the form
 
+  // Function for to call sender states
+  const fetchsendstates = () => {
+    const data = {
+      apptoken: "T9H1E6KUYM"
+    }
+    axios
+      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
+      .then((response) => {
+        if (response.data.success === false) {
+
+        console.log(response.data);
+        }else {
+        setsendstates(response.data);
+        console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  useEffect(() => {
+    fetchsendstates();
+  }, [count]);
+
+  const sendstate = sendstates.map((item, i) => {
+   return (
+    <option value={`${item.id}`}> {item.state} </option>
+   );
+ });
+  // Function for to call Sender states
+
   // Function for to call all states
   const fetchstates = () => {
     const data = {
       apptoken: "T9H1E6KUYM"
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
+      .get(`https://test.api.eclipse.com.ng/v1/get-states-all`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
 
@@ -165,6 +197,8 @@ const SendPackageLocal = () => {
    );
  });
   // Function for to call all states
+
+
 
    // Function for to call all cities
    const fetchcities = () => {
@@ -293,7 +327,7 @@ const SendPackageLocal = () => {
                           Select State *
                         </option>
 
-                        {states}
+                        {sendstate}
                        
                       </select>
                     </div>
@@ -438,7 +472,7 @@ const SendPackageLocal = () => {
                         <input
                           type="text"
                           className=" input-style"
-                          placeholder="Package Name*"
+                          placeholder="Package Name *"
                           onChange={(e) => setpackagename(e.target.value)}
                           value={packagename}
                         />
@@ -446,24 +480,20 @@ const SendPackageLocal = () => {
                     </div>
 
                     <div className="col-md-10 ">
-                      <select
-                        className="input-style"
-                        onChange={(e) => setweight(e.target.value)}
-                      >
-                        <option value="" selected="">
-                        Select Weight (kg) *
-                        </option>
-                        <option value="1" selected="">
-                          Yes
-                        </option> 
-                        <option value="0" selected="">
-                          No
-                        </option>
-                       
-                      </select>
+
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className=" input-style"
+                          placeholder="Enter Weight *"
+                          onChange={(e) => setweight(e.target.value)}
+                          value={weight}
+                        />
+                      </div>
                     </div>
-                  
+
                   </div>
+
                 </div>
 
                 {/* Package Details  */}

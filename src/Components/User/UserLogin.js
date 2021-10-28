@@ -3,6 +3,7 @@ import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
 import img from "./img/bicycle.png";
+import eye from "./img/eye2.svg";
 import { Link } from "react-router-dom";
 import Navbar from '../Navbar/Navbar'
 
@@ -75,6 +76,23 @@ const UserLogin = () => {
     e.preventDefault();
   }
 
+function myInput() {
+  var x = document.getElementById("security");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password"
+  }
+}
+// function eyeChange() {
+//   var x = document.getElementById("eye");
+//   if (x.type === 'solid') {
+//     x.type = '';
+//   } else {
+//     x.type = 'solid'
+//   }
+// }
+
 
 
   return (
@@ -119,13 +137,18 @@ const UserLogin = () => {
                           <input
                             type="password"
                             className=" input-style"
+                            id="security"
                             placeholder="Enter Password"
                             onChange={(e) => setpword(e.target.value)}
                         value={pword}
                             required
                           />
+                            <a class="bi bi-eye-slash bi-eye toggle-eye" id="togglePassword" onClick={myInput}>
+                            <box-icon type='solid' name='show' id="eye"></box-icon>
+                            </a>
+                          {/* <input type="checkbox" onClick={myInput} /> <p style={{fontSize: "smaller"}}> Show Password </p> */}
                         </div>
-                      </div>
+                      </div> 
 
                       <div class="col-md-12  mx-auto text-center">
                       {showalert ? (

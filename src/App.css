@@ -48,6 +48,10 @@ section {
   margin-bottom: 5rem;
 }
 
+.hide {
+  display: none !important;
+}
+
 /* Global */
 
 
@@ -375,6 +379,17 @@ border:transparent solid 1px !important;
   width: 100% !important;
 }
 
+.login #togglePassword, #togglePassword2 {
+  font-size: 22px;
+}
+.login .toggle-eye {
+  right: 5%;
+  top: 25%;
+  position: absolute;
+  cursor: pointer;
+  font-weight: bolder;
+  display: block;
+}
 /* Login  */
 /* Login and SignUp  */
 /* Login and SignUp  */
@@ -451,6 +466,9 @@ footer .boxicons .box-icon:hover {
 
 
 @media screen and (max-width: 580px) {
+  .hide {
+    display: contents !important;
+  }
   /* Showcase  */
 
   .showcase .showcase-content {

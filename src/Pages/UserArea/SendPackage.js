@@ -6,25 +6,6 @@ import SendPackageLocal from "../../Components/User/SendPackage/SendPackageLocal
 import SendPackageInt from "../../Components/User/SendPackage/SendPackageInt";
 
 const SendPackage = () => {
-
-  const [type, settype] = useState();
-
-
-  // function typeOfOrder() {
-  //   if (href="#local") {
-  //     alert('Local');
-  //   } else {
-  //     alert('Int');
-
-  //   }
-  // }
-  
-//   function LocalOrder() {
-//     localStorage.setItem("type", "local"); 
-//   }
-//   function IntOrder() {
-//     localStorage.setItem("type", "int"); 
-// }
  
 
   return (

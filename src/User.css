@@ -75,6 +75,9 @@
 /* Dashboard Header  */
 
 /* Transaction History  */
+.send-package.first {
+  margin-left: 0px !important;
+}
 .history .first {
   background: #15e40217;
   margin-bottom: 1rem !important;

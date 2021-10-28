@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
 import UserNavbar from "../../Navbar/UserNavbar";
+import PayWithPayStack from "./PayWithPayStack";
+import PayWithWallet from "./PayWithWallet";
 
 const Invoice = (props) => {
+  // const [trackid, settrackid] = useState(props.match.params.trackid);
+
   const [trackid, settrackid] = useState(props.location.state.trackid);
   const [date, setdate] = useState(props.location.state.date);
 
@@ -52,9 +56,31 @@ const Invoice = (props) => {
   const [type, settype] = useState(props.location.state.type);
   const [cargo, setcargo] = useState(props.location.state.cargo);
   const [worth, setworth] = useState(props.location.state.worth);
+  const [Price, setPrice] = useState(props.location.state.Price);
 
   const [showalert, setshowalert] = useState(true);
   const [alert, setalert] = useState(props.location.state.message);
+
+// pay with wallet modal 
+const [showremove, setShowremove] = useState(false);
+const handleCloseremove = () => setShowremove(false);
+const handleShowremove = () => setShowremove(true);
+const [trackingid, settrackingid] = useState("")
+// pay with paystack modal 
+const [showremove1, setShowremove1] = useState(false);
+const handleCloseremove1 = () => setShowremove1(false);
+const handleShowremove1 = () => setShowremove1(true);
+function workModal(token) {
+  // console.log(token)
+  settrackingid(token)
+  handleShowremove()
+}
+function workModal1(token) {
+  // console.log(token)
+  settrackingid(token)
+  handleShowremove1()
+}
+  
 
   return (
     <>
@@ -221,16 +247,12 @@ const Invoice = (props) => {
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
                     <h1 className="bolder-text">
-                    ₦  12,000.00
+                    ₦  {Price}
                     </h1>
                   </div>
                   <div className="text-center invoice-btn">
-                    <Link to="/track">
-                      <button class="btn w-75"> pay with paystack</button>
-                    </Link>
-                    <Link to="/track">
-                      <button class="btn w-75"> pay with wallet</button>
-                    </Link>
+                      <button class="btn w-75" onClick={e=>workModal1(trackid)}> pay with paystack</button>
+                      <button class="btn w-75" onClick={e=>workModal(trackid)}> pay with wallet</button>
                   </div>
                 </div>
               </div>
@@ -238,6 +260,16 @@ const Invoice = (props) => {
           </div>
         </div>
       </div>
+
+      
+      {/* Pay With Wallet Modal */}
+<PayWithPayStack show={showremove1} onHide={handleCloseremove1} animation={false} trackid={trackingid} amount={Price} type={type}/>
+      {/* Pay With Wallet Modal */}
+
+      {/* Pay With Wallet Modal */}
+<PayWithWallet show={showremove} onHide={handleCloseremove} animation={false} trackid={trackingid} amount={Price} type={type}/>
+      {/* Pay With Wallet Modal */}
+
     </>
   );
 };

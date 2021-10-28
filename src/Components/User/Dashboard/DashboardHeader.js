@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AcctBal from "./AcctBal";
 
 const DashboardHeader = () => {
@@ -18,7 +18,7 @@ const DashboardHeader = () => {
                 <h5> Total Balance</h5>
               
                   
-                   <AcctBal/>
+                 <AcctBal/> 
                
               </div>
             </div>
@@ -52,7 +52,7 @@ const DashboardHeader = () => {
             </div>
 
             <div className="col-md-3 col">
-            <Link to="/track/">
+            <NavLink to="/track/">
               <div className="third">
               <box-icon
                       class="box-icon"
@@ -63,7 +63,7 @@ const DashboardHeader = () => {
                     ></box-icon>
                 <h6>Track</h6>
               </div>
-              </Link>
+              </NavLink>
             </div>
 
           </div>

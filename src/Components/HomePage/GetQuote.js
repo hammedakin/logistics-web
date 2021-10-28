@@ -12,8 +12,9 @@ const GetQuote = () => {
   const [state, setstate] = useState("");
   const [town, settown] = useState("");
   const [weight, setweight] = useState("");
-  const [fedexamount, setfedexamount] = useState("");
+  const [price, setprice] = useState("");
   // States and cities
+  const [sendstates, setsendstates] = useState([]);
   const [allstates, setallstates] = useState([]);
   const [allcities, setallcities] = useState([]);
   const [count, setcount] = useState(0);
@@ -47,7 +48,7 @@ const GetQuote = () => {
           if (res.data.success === true) {
             setshowalert(true);
             setalert(res.data.message);
-            setfedexamount(res.data.fedexamount);
+            setprice(res.data.price);
             setissending(false);
           } else {
             setshowalert(true);
@@ -69,13 +70,45 @@ const GetQuote = () => {
   }
   // Function for to process the form
 
+  
+  // Function for to call sender states
+  const fetchsendstates = () => {
+    const data = {
+      apptoken: "T9H1E6KUYM"
+    }
+    axios
+      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
+      .then((response) => {
+        if (response.data.success === false) {
+
+        console.log(response.data);
+        }else {
+        setsendstates(response.data);
+        console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  useEffect(() => {
+    fetchsendstates();
+  }, [count]);
+
+  const sendstate = sendstates.map((item, i) => {
+   return (
+    <option value={`${item.id}`}> {item.state} </option>
+   );
+ });
+  // Function for to call Sender states
+
   // Function for to call all states
   const fetchstates = () => {
     const data = {
       apptoken: "T9H1E6KUYM",
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states`, { params: data })
+      .get(`https://test.api.eclipse.com.ng/v1/get-states-all`, { params: data })
       .then((response) => {
         if (response.data.success === false) {
           console.log(response.data);
@@ -170,7 +203,7 @@ const GetQuote = () => {
                               Select State *
                             </option>
 
-                            {states}
+                            {sendstate}
                           </select>
                         </div>
 
@@ -226,8 +259,17 @@ const GetQuote = () => {
                             />
                           </div>
                         </div>
-
-                        <div class="col-md-6  mx-auto text-center">
+                        <div class="hide">
+                        {showalert ? (
+                          <>
+                            <Alert color="success">{alert}</Alert>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+           
+                        <div class="col-md-6 mx-auto text-center">
                           <div class="user-btn mr-auto text-center">
                             {issending ? (
                               <>
@@ -264,14 +306,14 @@ const GetQuote = () => {
               </div>
               <div className="col-md-6">
                 <div className="second mt-5 text-center white-text">
-                    {fedexamount === "" ? (
+                    {price === "" ? (
                         <> 
                   <h1 style={{ fontSize: "70px" }}>₦ 0.00 </h1>
                         </>
 
                     ) : (
                         <>
-                  <h1 style={{ fontSize: "60px" }}>₦ {fedexamount} </h1>
+                  <h1 style={{ fontSize: "60px" }}>₦ {price} </h1>
 
                         </>
                     )}

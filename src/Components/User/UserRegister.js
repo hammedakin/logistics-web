@@ -75,6 +75,16 @@ const UserRegister = () => {
     e.preventDefault();
   }
 
+  
+function myInput() {
+  var x = document.getElementById("security");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password"
+  }
+}
+
   return (
     <>
     <Navbar />
@@ -197,11 +207,15 @@ const UserRegister = () => {
                           <input
                             type="password"
                             className=" input-style"
+                            id="security"
                             placeholder="Enter Password"
                             onChange={(e) => setpword(e.target.value)}
                             value={pword}
                             required
                           />
+                          <a class="bi bi-eye-slash bi-eye toggle-eye" id="togglePassword" onClick={myInput}>
+                           <box-icon type='solid' name='show' id="eye"></box-icon>
+                            </a>
                         </div>
                       </div>
 
