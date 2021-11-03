@@ -12,7 +12,7 @@ const GetQuote = () => {
   const [state, setstate] = useState("");
   const [town, settown] = useState("");
   const [weight, setweight] = useState("");
-  const [price, setprice] = useState("");
+  const [price_th, setprice_th] = useState("");
   // States and cities
   const [sendstates, setsendstates] = useState([]);
   const [allstates, setallstates] = useState([]);
@@ -48,7 +48,7 @@ const GetQuote = () => {
           if (res.data.success === true) {
             setshowalert(true);
             setalert(res.data.message);
-            setprice(res.data.price);
+            setprice_th(res.data.price_th);
             setissending(false);
           } else {
             setshowalert(true);
@@ -306,14 +306,14 @@ const GetQuote = () => {
               </div>
               <div className="col-md-6">
                 <div className="second mt-5 text-center white-text">
-                    {price === "" ? (
+                    {price_th === "" ? (
                         <> 
                   <h1 style={{ fontSize: "70px" }}>₦ 0.00 </h1>
                         </>
 
                     ) : (
                         <>
-                  <h1 style={{ fontSize: "60px" }}>₦ {price} </h1>
+                  <h1 style={{ fontSize: "60px" }}>₦ {price_th} </h1>
 
                         </>
                     )}

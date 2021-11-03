@@ -17,55 +17,112 @@ const PayWithWallet = (props) => {
   const [alert, setalert] = useState("");
   let history = useHistory();
 
+
   const WalletPayment = (e) => {
     if ((usertoken, trackid, amount, type)) {
+
       setissending(true);
-      const data = {
-        apptoken: "T9H1E6KUYM",
-        usertoken: localStorage.getItem("usertoken"),
-        trackid: props.trackid,
-        price: props.amount,
-        shiptype: props.type,
-      };
+
+
+      const data = new FormData();
+      data.append("usertoken", localStorage.getItem("usertoken"));
+      data.append("trackid", props.trackid);
+      data.append("price", props.amount);
+      data.append("shiptype", props.type);
+      data.append("apptoken", "T9H1E6KUYM");
+
       axios
-        .get(`https://test.api.eclipse.com.ng/v1/pay-order-wallet`, {
-          params: data,
-        })
-        .then((response) => {
-          if (response.data.response === false) {
-            setshowalert(true);
-            setalert(response.data.message);
-            setissending(false);
-            console.log(response.data);
-          } else {
-            settrackid(response.data.trackid);
-            setamount(response.data.amount);
-            settype(response.data.type);
-            setshowalert(true);
-            setalert(response.data.message);
-            setissending(false);
-            console.log(response.data);
-            history.push({
-              pathname: "/dashboard",
-              state: response.data,
-            });
-            window.location.reload(true);
-            alert(response.data.message);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
+      .post(`https://test.api.eclipse.com.ng/v1/pay-order-wallet`, data, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        if (response.data.response === true) {
+          settrackid(response.data.trackid);
+          setamount(response.data.amount);
+          settype(response.data.type);
           setshowalert(true);
-          setalert(error.name);
+          setalert(response.data.message);
           setissending(false);
-        });
-    } else {
-      setshowalert(true);
-      setalert("Try Again!!!");
-      setissending(false);
+          console.log(response.data);
+          history.push({
+        pathname: "/dashboard",
+        state: response.data,
+          });
+          // window.location.reload(true);
+          // alert(response.data.message);
+
+        } else {
+          setshowalert(true);
+          setalert(response.data.message);
+          setissending(false);
+          console.log(response.data);
+          }
+      })
+      .catch((error) => {
+        console.log(error);
+        setshowalert(true);
+        setalert(error.name, "Check your Network Connection!!!");
+        setissending(false);
+      });
+  } else {
+    setshowalert(true);
+    setalert("Try Again!!!");
+    setissending(false);
     }
     e.preventDefault();
-  };
+  }
+
+  // const WalletPayment = (e) => {
+  //   if ((usertoken, trackid, amount, type)) {
+  //     setissending(true);
+  //     const data = {
+  //       apptoken: "T9H1E6KUYM",
+  //       usertoken: localStorage.getItem("usertoken"),
+  //       trackid: props.trackid,
+  //       price: props.amount,
+  //       shiptype: props.type,
+  //     };
+  //     axios
+  //       .get(`https://test.api.eclipse.com.ng/v1/pay-order-wallet`, {
+  //         params: data,
+  //       })
+  //       .then((response) => {
+  //         if (response.data.response === false) {
+  //           setshowalert(true);
+  //           setalert(response.data.message);
+  //           setissending(false);
+  //           console.log(response.data);
+  //         } else {
+  //           settrackid(response.data.trackid);
+  //           setamount(response.data.amount);
+  //           settype(response.data.type);
+  //           setshowalert(true);
+  //           setalert(response.data.message);
+  //           setissending(false);
+  //           console.log(response.data);
+  //           history.push({
+  //             pathname: "/dashboard",
+  //             state: response.data,
+  //           });
+  //           window.location.reload(true);
+  //           alert(response.data.message);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //         setshowalert(true);
+  //         setalert(error.name);
+  //         setissending(false);
+  //       });
+  //   } else {
+  //     setshowalert(true);
+  //     setalert("Try Again!!!");
+  //     setissending(false);
+  //   }
+  //   e.preventDefault();
+  // };
 
   const fetchBal = () => {
     const data = {

@@ -48,11 +48,8 @@ function App() {
 
         {/* Log In, Sign Up and Auth */}
 
-        <ProtectUser exact path="/dashboard" component={UserDashboard} />
+        <ProtectUser path="/dashboard" component={UserDashboard} />
 
-        {/* <Route path="/fund-account" component={FundWallet} /> */}
-
-        
         <ProtectUser exact path="/send-package" component={SendPackage} />
 
         <ProtectUser exact path="/send-package/invoice/:trackid" component={Invoice} />

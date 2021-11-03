@@ -49,6 +49,7 @@ const FundWallet = () => {
           setreference(res.data.reference)
           history.push("/dashboard")
           setshowalert(true);
+          window.location.reload(true);
         })
       }else{
          setshowalert(true)

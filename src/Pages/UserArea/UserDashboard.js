@@ -6,6 +6,7 @@ import TransHistory from "../../Components/User/Dashboard/TransHistory";
 import UserFooter from "../../Components/Footer/UserFooter";
 import FundWallet from "../../Components/User/Dashboard/FundWallet";
 import ProtectUser from "../../protectUser";
+import TrackOrder from "./TrackOrder";
 
 const UserDashboard = () => {
   return (
@@ -22,7 +23,9 @@ const UserDashboard = () => {
               <Switch>
                 <ProtectUser exact path="/dashboard/fund-account" component={FundWallet} />
 
-                <ProtectUser exact path="/dashboard" component={TransHistory} />
+                <ProtectUser path="/dashboard" component={TransHistory} />
+            
+                <ProtectUser path="/track/" component={TrackOrder} />
 
                </Switch>
 
