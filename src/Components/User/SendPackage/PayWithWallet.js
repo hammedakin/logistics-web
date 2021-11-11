@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 const PayWithWallet = (props) => {
-  const [usertoken, setusertoken] = useState("");
+  const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
   const [trackid, settrackid] = useState(props.trackid);
   const [type, settype] = useState(props.type);
   const [amount, setamount] = useState(props.Price);
@@ -19,13 +19,11 @@ const PayWithWallet = (props) => {
 
 
   const WalletPayment = (e) => {
-    if ((usertoken, trackid, amount, type)) {
-
+    if ((usertoken, props.trackid, props.amount, props.type)) {
       setissending(true);
 
-
       const data = new FormData();
-      data.append("usertoken", localStorage.getItem("usertoken"));
+      data.append("usertoken", usertoken);
       data.append("trackid", props.trackid);
       data.append("price", props.amount);
       data.append("shiptype", props.type);
@@ -47,11 +45,11 @@ const PayWithWallet = (props) => {
           setissending(false);
           console.log(response.data);
           history.push({
-        pathname: "/dashboard",
+        pathname: `/send-package/invoice/${response.data.trackid}`,
         state: response.data,
           });
-          // window.location.reload(true);
-          // alert(response.data.message);
+          window.location.reload(true);
+          alert(response.data.message);
 
         } else {
           setshowalert(true);
@@ -68,61 +66,11 @@ const PayWithWallet = (props) => {
       });
   } else {
     setshowalert(true);
-    setalert("Try Again!!!");
+    // setalert("Try Again!!!");
     setissending(false);
     }
     e.preventDefault();
   }
-
-  // const WalletPayment = (e) => {
-  //   if ((usertoken, trackid, amount, type)) {
-  //     setissending(true);
-  //     const data = {
-  //       apptoken: "T9H1E6KUYM",
-  //       usertoken: localStorage.getItem("usertoken"),
-  //       trackid: props.trackid,
-  //       price: props.amount,
-  //       shiptype: props.type,
-  //     };
-  //     axios
-  //       .get(`https://test.api.eclipse.com.ng/v1/pay-order-wallet`, {
-  //         params: data,
-  //       })
-  //       .then((response) => {
-  //         if (response.data.response === false) {
-  //           setshowalert(true);
-  //           setalert(response.data.message);
-  //           setissending(false);
-  //           console.log(response.data);
-  //         } else {
-  //           settrackid(response.data.trackid);
-  //           setamount(response.data.amount);
-  //           settype(response.data.type);
-  //           setshowalert(true);
-  //           setalert(response.data.message);
-  //           setissending(false);
-  //           console.log(response.data);
-  //           history.push({
-  //             pathname: "/dashboard",
-  //             state: response.data,
-  //           });
-  //           window.location.reload(true);
-  //           alert(response.data.message);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //         setshowalert(true);
-  //         setalert(error.name);
-  //         setissending(false);
-  //       });
-  //   } else {
-  //     setshowalert(true);
-  //     setalert("Try Again!!!");
-  //     setissending(false);
-  //   }
-  //   e.preventDefault();
-  // };
 
   const fetchBal = () => {
     const data = {
@@ -154,7 +102,6 @@ const PayWithWallet = (props) => {
     fetchBal();
   }, 0);
 
-  // console.log(props.location.state.type);
 
   return (
     <>
@@ -165,8 +112,9 @@ const PayWithWallet = (props) => {
         keyboard={false}
         centered
       >
+        <Modal.Body style={{ backgroundColor: "transparent!important" }} >
         <Modal.Header closeButton></Modal.Header>
-        <Modal.Body style={{ backgroundColor: "transparent!important" }}>
+
           <section class=" ">
             <div class="container">
               <div class="text-center">
@@ -187,6 +135,7 @@ const PayWithWallet = (props) => {
                 <Alert color="warning">
                   Account Balance : ₦ {walletbalance_th}
                 </Alert>
+                {props.amount} {props.trackid} {props.type} {usertoken}
               </div>
 
               <div class="text-center h5">
@@ -232,6 +181,7 @@ const PayWithWallet = (props) => {
                     >
                       pay ₦ {props.amount}
                     </button>
+                    <button onClick={props.onHide} class="btn btn-red"> Close</button>
                   </>
                 )}
               </>

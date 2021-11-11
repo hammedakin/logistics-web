@@ -58,7 +58,6 @@ const UserNavLinks = () => {
             activeClassName="active1"
             to="/send-package"
             onClick={RemoveTrack}
-            onClick={RemoveTrack}
 
           >Send Package
           </NavLink>
@@ -80,6 +79,25 @@ const UserNavLinks = () => {
             onClick={RemoveTrack}
 
           >Track
+          </NavLink>
+        </li>
+
+        <li class="nav-item ">
+        <box-icon
+        class="box-icon"
+        size="1.1rem"
+        color=" #fff"
+        name="dish"
+        type="logo"
+        ></box-icon>
+          <NavLink
+            // onClick={(e) => closeNav(e)}
+            tag={Link}
+            activeClassName="active1"
+            to="/food"
+            onClick={RemoveTrack}
+
+          >Food
           </NavLink>
         </li>
       </ul>

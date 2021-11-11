@@ -219,11 +219,21 @@ border-radius: 10px!important;
   /* font-size: large !important; */
 }
 
+/* Send Package Form  */
+
+
 /* Invoice  */
 .send-package .invoice {
   margin-top: 5rem;
-  /* margin-left: 50px !important; */
 }
+
+.send-package .card-header{
+  border-radius: 1.5rem 1.5rem 0 0!important;
+}
+.send-package .card.curve{
+  border-radius: 1.5rem !important;
+}
+
 .send-package .invoice .card-body h6 {
   font-size: smaller !important;
 }
@@ -236,12 +246,17 @@ border-radius: 10px!important;
   border-radius: 10px;
   color: #fff;
   padding: .6rem .2!important;
-  /* margin-top: 2rem !important; */
 }
 
 /* Invoice  */
 
+/* Send Package Page */
+/* Send Package Page */
+
+
 /* Track */
+/* Track */
+
 .send-package .track {
   margin-top: 2rem;
 }
@@ -270,15 +285,71 @@ margin-bottom: 0 !important;
 }
 
 
-
+/* Track */
 /* Track */
 
 
+/* Food */
+/* Food */
+.food {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
 
-/* Send Package Form  */
+}
 
-/* Send Package Page */
-/* Send Package Page */
+.food .card img.card-img-top {
+  height: 10rem;
+  object-fit: cover;
+}
+
+.food .card {
+border-radius: .2rem .2rem 1rem 1rem !important;
+}
+
+.food .card p {
+  margin-bottom: 0 !important;
+  font-size: smaller !important;
+}
+
+.food .card p.price {
+  font-size: large !important;
+font-weight: 600 !important;
+color: #f86801 !important;
+}
+
+.food button {
+  background-color: #096b00;
+  border-radius: 5px;
+  color: #fff;
+  padding: 0.5rem 2rem !important;
+  margin-top: 1rem !important;
+}
+
+/* Food Details */
+
+.send-package .food-details {
+  margin-top: 5rem;
+}
+
+.food-details .curve .card{
+border-radius: 2rem !important;
+}
+.food-details .card-header{
+  border-radius: 2rem 2rem 0 0!important;
+}
+
+.food-details .curve .card img{
+  border-radius: 2rem !important;
+  }
+
+
+/* Food Details */
+
+
+
+/* Food */
+/* Food */
+
 
 
     /* Page Not Found */

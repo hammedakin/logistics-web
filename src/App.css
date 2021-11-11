@@ -52,6 +52,43 @@ section {
   display: none !important;
 }
 
+.green-word {
+  color: #096b00 !important;
+}
+.green {
+  background-color: #096b00 !important;
+}
+
+/* Modal Props */
+
+
+.modal-dialog .modal-content {
+border-radius: 1.5rem !important;
+}
+
+.modal-header {
+  border-bottom: none !important;
+}
+
+button.close span {
+  display: none !important;
+}
+
+.close {
+  box-sizing: content-box;
+  width: 1em !important;
+  height: 1em;
+  padding: .25em;
+  color: #000 !important; 
+  background: transparent url(/src/Components/User/img/close.svg) 50%/1em auto no-repeat !important;
+  border: 0;
+  border-radius: .25rem;
+  opacity: .5;
+}
+/* Modal Props */
+
+
+/* Global */
 /* Global */
 
 

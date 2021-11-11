@@ -5,21 +5,22 @@ import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
 import Homepage from "./Pages/Homepage";
 import GetQuote from './Components/HomePage/GetQuote';
+import PageNotFound from './PageNotFound';
 
 
 // User 
+import ProtectUser from './protectUser';
+import User from './Components/User/Dashboard/User';
 import SendPackage from "./Pages/UserArea/SendPackage";
 import UserDashboard from './Pages/UserArea/UserDashboard';
 import UserLogin from './Components/User/UserLogin';
 import UserRegister from './Components/User/UserRegister';
 import UserAuth from './Components/User/UserAuth';
-import PageNotFound from './PageNotFound';
 import FundWallet from './Components/User/Dashboard/FundWallet';
 import Invoice from './Components/User/SendPackage/Invoice';
 import TrackOrder from './Pages/UserArea/TrackOrder';
-import ProtectUser from './protectUser';
-import User from './Components/User/Dashboard/User';
-
+import Food from './Pages/UserArea/Food';
+import FoodDetails from './Components/User/Food/FoodDetails'
 
 // User 
 
@@ -38,6 +39,9 @@ function App() {
         
         {/* User Area  */}
 
+
+        <ProtectUser path="/dashboard" component={UserDashboard} />
+
         {/* Log In, Sign Up and Auth */}
 
         <Route exact path="/register" component={UserRegister} />
@@ -48,7 +52,7 @@ function App() {
 
         {/* Log In, Sign Up and Auth */}
 
-        <ProtectUser path="/dashboard" component={UserDashboard} />
+        {/* Send Package */}
 
         <ProtectUser exact path="/send-package" component={SendPackage} />
 
@@ -56,15 +60,25 @@ function App() {
                         
         <ProtectUser exact path="/send-package/invoice" component={Invoice} />
 
+        {/* Send Package */}
+
+        {/* Tracking */}
         <ProtectUser exact path="/track/:trackid" component={TrackOrder} />
         
         <ProtectUser exact path="/track/" component={TrackOrder} />
 
-        <ProtectUser exact path="/dashboard" component={User} />
+        {/* Tracking */}
+
+        {/* Food */}
+        
+        <ProtectUser exact path="/food" component={Food} />
+        
+        <ProtectUser exact path="/food/:id" component={FoodDetails} />
+
+        {/* Food */}
 
 
-
-             
+        <ProtectUser exact path="/dashboard" component={User} />             
         {/* User Area  */}
 
 

@@ -5,7 +5,7 @@ import { usePaystackPayment } from "react-paystack";
 import { useHistory } from "react-router";
 
 const PayWithPayStack = (props) => {
-  const [usertoken, setusertoken] = useState("");
+  const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
   const [trackid, settrackid] = useState(props.trackid);
   const [type, settype] = useState(props.type);
   const [amount, setamount] = useState(props.Price);
@@ -25,9 +25,9 @@ const PayWithPayStack = (props) => {
 
   // you can call this function anything
   const onSuccess = (reference) => {
-    if ((usertoken, trackid, amount, type)) {
+    if ((usertoken, props.trackid, props.amount, props.type)) {
       const data = new FormData();
-      data.append("usertoken", localStorage.getItem("usertoken"));
+      data.append("usertoken", usertoken);
       data.append("trackid", props.trackid);
       data.append("trxid", reference.transaction);
       data.append("price", props.amount);
@@ -53,7 +53,7 @@ const PayWithPayStack = (props) => {
           settype(res.data.type);
         
           history.push({
-            pathname: `/dashboard`,
+            pathname: `/send-package/invoice/${res.data.trackid}`,
             state: res.data,
           });
           window.location.reload(true);
@@ -93,8 +93,10 @@ const PayWithPayStack = (props) => {
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton></Modal.Header>
+
         <Modal.Body style={{ backgroundColor: "transparent!important" }}>
+        <Modal.Header closeButton></Modal.Header>
+
           <section class=" ">
             <div class="container">
               <div class="text-center">
@@ -112,6 +114,7 @@ const PayWithPayStack = (props) => {
                   {" "}
                   ₦ {props.amount}
                 </h1>
+                {props.amount} {props.trackid} {props.type} {usertoken}
               </div>
 
               <div class="text-center h5"></div>
@@ -121,6 +124,7 @@ const PayWithPayStack = (props) => {
         <Modal.Footer>
           <div class="ml-auto mr-auto">
             <PaystackHookExample />
+            <button onClick={props.onHide} class="btn btn-red"> Close</button>
           </div>
         </Modal.Footer>
       </Modal>
