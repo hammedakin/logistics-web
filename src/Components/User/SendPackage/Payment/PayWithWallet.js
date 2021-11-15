@@ -9,7 +9,7 @@ const PayWithWallet = (props) => {
   const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
   const [trackid, settrackid] = useState(props.trackid);
   const [type, settype] = useState(props.type);
-  const [amount, setamount] = useState(props.Price);
+  const [amount, setamount] = useState(props.price);
   const [walletbalance_th, setwalletbalance_th] = useState("");
 
   const [issending, setissending] = useState(false);
@@ -119,7 +119,7 @@ const PayWithWallet = (props) => {
             <div class="container">
               <div class="text-center">
                 <h6 className="font-weight-light">
-                  You are about to make payent for this invoice
+                  You are about to make payment for this invoice
                 </h6>
                 <h5>
                   <span class=" font-weight-bold green-text">
@@ -130,12 +130,12 @@ const PayWithWallet = (props) => {
                 <h6 className="font-weight-light"> Amount :</h6>
                 <h1 className="font-weight-bold green-text">
                   {" "}
-                  ₦ {props.amount}
+                  ₦ {props.amountth}
                 </h1>
                 <Alert color="warning">
                   Account Balance : ₦ {walletbalance_th}
                 </Alert>
-                {props.amount} {props.trackid} {props.type} {usertoken}
+                {props.amountth} {props.trackid} {props.type} {usertoken}
               </div>
 
               <div class="text-center h5">

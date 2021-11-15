@@ -4,11 +4,13 @@ import axios from "axios";
 import { usePaystackPayment } from "react-paystack";
 import { useHistory } from "react-router";
 
-const PayWithPayStack = (props) => {
+const ExPayWithPayStack = (props) => {
+
+  console.log(props)
   const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
   const [trackid, settrackid] = useState(props.trackid);
   const [type, settype] = useState(props.type);
-  const [amount, setamount] = useState(props.Price);
+  const [amount, setamount] = useState(props.price);
   const [message, setmessage] = useState("");
   const [status, setstatus] = useState("");
   const [ref, setref] = useState("");
@@ -35,7 +37,7 @@ const PayWithPayStack = (props) => {
       data.append("apptoken", "T9H1E6KUYM");
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/pay-order-card`, data, {
+        .post(`https://test.api.eclipse.com.ng/v1/pay-order-card-express`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },
@@ -101,7 +103,7 @@ const PayWithPayStack = (props) => {
             <div class="container">
               <div class="text-center">
                 <h6 className="font-weight-light">
-                  You are about to make payent for this invoice
+                  You are about to make an express payment for this invoice
                 </h6>
                 <h5>
                   <span class=" font-weight-bold green-text">
@@ -112,9 +114,9 @@ const PayWithPayStack = (props) => {
                 <h6 className="font-weight-light"> Amount :</h6>
                 <h1 className="font-weight-bold green-text">
                   {" "}
-                  ₦ {props.amount}
+                  ₦ {props.amountth}
                 </h1>
-                {props.amount} {props.trackid} {props.type} {usertoken}
+                {props.amountth} {props.trackid} {props.type} {usertoken}
               </div>
 
               <div class="text-center h5"></div>
@@ -132,4 +134,4 @@ const PayWithPayStack = (props) => {
   );
 };
 
-export default PayWithPayStack;
+export default ExPayWithPayStack;

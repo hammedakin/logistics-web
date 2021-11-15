@@ -1,9 +1,13 @@
 import React from 'react';
 import NormalPay from './NormalPay';
+import { useState } from 'react';
+import ExpressPay from './ExpressPay';
 
-const Payment = () => {
-<>
-<ul
+const Payment = (props) => {
+
+  return ( <>
+  <div className="payment">
+  <ul
             class="nav nav-tabs justify-content-center "
             id="myTab"
             role="tablist"
@@ -14,7 +18,7 @@ const Payment = () => {
                 class="nav-link active"
                 id="home-tab"
                 data-toggle="tab"
-                href="#local"
+                href="#normal"
                 role="tab"
                 aria-controls="home"
                 aria-selected="true"
@@ -31,36 +35,38 @@ const Payment = () => {
                 class="nav-link"
                 id="profile-tab"
                 data-toggle="tab"
-                href="#int"
+                href="#express"
                 role="tab"
                 aria-controls="profile"
                 aria-selected="false"
               >
                 {" "}
-                International{" "}
+                Express{" "}
               </a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
             <div
               class="tab-pane fade show active"
-              id="local"
+              id="normal"
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <NormalPay/>
+              
+              <NormalPay trackid={props.trackid} price={props.price} priceth={props.priceth} type={props.type} status={props.status} />
             </div>
             <div
               class="tab-pane fade"
-              id="int"
+              id="express"
               role="tabpanel"
               aria-labelledby="profile-tab"
             >
+              <ExpressPay trackid={props.trackid} express={props.express} expressth={props.expressth} type={props.type} status={props.status}   />
+
             </div>
           </div>
-
-
-</>
-};
-
+          </div>
+  </> );
+}
+ 
 export default Payment;

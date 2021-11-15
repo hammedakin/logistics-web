@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Alert } from "reactstrap";
-import PayWithPayStack from "../Payment/PayWithPayStack";
-import PayWithWallet from "../Payment/PayWithWallet";
+import ExPayWithPayStack from "../Payment/ExPayWithPayStack";
+import ExPayWithWallet from "../Payment/ExPayWithWallet";
 
 
-const NormalPay = (props) => {
+const ExpressPay = (props) => {
   console.log(props)  
 
    // pay with wallet modal
@@ -36,7 +36,7 @@ const NormalPay = (props) => {
                     <h4 className="mb-4">
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
-                    <h1 className="bolder-text">₦ {props.priceth}</h1>
+                    <h1 className="bolder-text">₦ {props.expressth}</h1>
                   </div>
                   {props.status === "paid" ? (
                     <>
@@ -69,25 +69,25 @@ const NormalPay = (props) => {
 
     
       {/* Pay With Wallet Modal */}
-      <PayWithPayStack
+      <ExPayWithPayStack
         show={showremove1}
         onHide={handleCloseremove1}
         animation={false}
         trackid={trackingid}
-        amount={props.price}
-        amountth={props.priceth}
+        amount={props.express}
+        amountth={props.expressth}
         type={props.type}
       />
       {/* Pay With Wallet Modal */}
 
       {/* Pay With Wallet Modal */}
-      <PayWithWallet
+      <ExPayWithWallet
         show={showremove}
         onHide={handleCloseremove}
         animation={false}
         trackid={trackingid}
-        amount={props.price}
-        amountth={props.priceth}
+        amount={props.express}
+        amountth={props.expressth}
         type={props.type}
       />
       {/* Pay With Wallet Modal */}
@@ -98,4 +98,4 @@ const NormalPay = (props) => {
     );
 }
  
-export default NormalPay;
+export default ExpressPay;

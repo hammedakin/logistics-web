@@ -253,6 +253,59 @@ border-radius: 10px!important;
 /* Send Package Page */
 /* Send Package Page */
 
+/* Payment */
+.payment a{
+  font-size: smaller !important;
+}
+
+.payment  #myTab{
+  margin-top: 10px !important;
+  }
+
+.payment ul {
+  background-color: #096b0015;
+  width: max-content !important;
+  border-radius: 10px!important;
+padding: 2px !important;
+margin-left: auto !important;
+margin-right: auto !important;
+}
+
+.payment a.nav-link {
+  font-size: 1.2rem;
+  color: #000;
+  font-weight: 500!important;
+  padding: 0.5rem 2rem ;
+  transition: 0.7s !important;
+}
+
+.payment .nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-radius: 10px!important;
+}
+
+.payment .nav-link.active {
+  
+  background-color:#096b00!important;
+border-radius: 10px!important;
+  color: #fff!important;
+
+}
+
+.payment .nav-link:hover{
+  
+border:1px solid #096b00!important;
+border-radius: 10px!important;
+  color: #000!important;
+}
+
+.payment .nav-link:focus{
+    color: #fff!important;
+  
+  }
+
+/* Payment */
+
 
 /* Track */
 /* Track */

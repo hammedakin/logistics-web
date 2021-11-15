@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import UserNavbar from "../../Navbar/UserNavbar";
-import PayWithPayStack from "../SendPackage/PayWithPayStack";
-import PayWithWallet from "../SendPackage/PayWithWallet";
+import PayWithPayStack from "../SendPackage/Payment/PayWithPayStack";
+import PayWithWallet from "../SendPackage/Payment/PayWithWallet";
 
 const FoodDetails = (props) => {
   const [id, setid] = useState("");
@@ -11,7 +11,7 @@ const FoodDetails = (props) => {
   const [resname, setresname] = useState("");
   const [resloc, setresloc] = useState("");
   const [dfee, setdfee] = useState("");
-  const [price, setprice] = useState("12,000");
+  const [price, setprice] = useState("");
   const [amount, setamount] = useState("");
 
 
@@ -194,7 +194,8 @@ const FoodDetails = (props) => {
         onHide={handleCloseremove1}
         animation={false}
         id={foodid}
-        amount={price}
+        trackid={title}
+        amountth={price}
       />
       {/* Pay With Wallet Modal */}
 
@@ -204,7 +205,8 @@ const FoodDetails = (props) => {
         onHide={handleCloseremove}
         animation={false}
         id={foodid}
-        amount={price}
+        trackid={title}
+        amountth={price}
       />
       {/* Pay With Wallet Modal */}
     </>

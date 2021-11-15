@@ -49,10 +49,10 @@ const SendPackageInt = () => {
   const [trackid, settrackid] = useState("");
   let history = useHistory(); 
 
-  useEffect(() => {
-    settype(localStorage.getItem('type'))
-    },[localStorage.getItem('type')]
-    )
+  // useEffect(() => {
+  //   settype(localStorage.getItem('type'))
+  //   },[localStorage.getItem('type')]
+  //   )
 
 
   // Function for to process the form

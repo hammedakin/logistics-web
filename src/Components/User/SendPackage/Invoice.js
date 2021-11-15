@@ -3,8 +3,11 @@ import axios from 'axios'
 import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
 import UserNavbar from "../../Navbar/UserNavbar";
-import PayWithPayStack from "./PayWithPayStack";
-import PayWithWallet from "./PayWithWallet";
+import PayWithPayStack from "./Payment/PayWithPayStack";
+import PayWithWallet from "./Payment/PayWithWallet";
+import Payment from "./Payment/Payment";
+import { useHistory } from "react-router";
+
 
 const Invoice = (props) => {
   // const [trackid, settrackid] = useState(props.match.params.trackid);
@@ -39,11 +42,15 @@ const Invoice = (props) => {
   const [type, settype] = useState("");
   const [cargo, setcargo] = useState("");
   const [worth, setworth] = useState("");
-  const [Price, setPrice] = useState("");
+  const [price, setprice] = useState("");
+  const [priceth, setpriceth] = useState("");
+  const [express, setexpress] = useState("");
+  const [expressth, setexpressth] = useState("");
 
   const [showalert, setshowalert] = useState(true);
   const [alert, setalert] = useState("");
 
+  let history = useHistory();
 
   const fetchInvoice = () => {
     // const data = {
@@ -55,12 +62,11 @@ const Invoice = (props) => {
     const data = new FormData();
     data.append("apptoken", "T9H1E6KUYM");
     data.append("trackid", props.match.params.trackid);
-
     axios
       .post(`https://test.api.eclipse.com.ng/v1/get-invoice-data`, data, {
         headers: {
           "content-type": "multipart/form-data",
-        },
+        }
       })
       .then((response) => {
         if (response.data.success == false) {
@@ -90,10 +96,17 @@ const Invoice = (props) => {
           settype(response.data.type);
           setcargo(response.data.cargo);
           setworth(response.data.worth);
-          setPrice(response.data.Price);
+          setpriceth(response.data.price_thousand);
+          setprice(response.data.Price);
+          setexpress(response.data.price_express);
+          setexpressth(response.data.price_express_th);
           setalert(response.data.message);
-
           console.log(response.data);
+                  
+          history.push({
+            state: response.data
+          });
+
         }
       });
     };
@@ -101,27 +114,27 @@ const Invoice = (props) => {
       fetchInvoice();
     }, 0);
   
-  // pay with wallet modal
-  const [showremove, setShowremove] = useState(false);
-  const handleCloseremove = () => setShowremove(false);
-  const handleShowremove = () => setShowremove(true);
-  const [trackingid, settrackingid] = useState("");
+  // // pay with wallet modal
+  // const [showremove, setShowremove] = useState(false);
+  // const handleCloseremove = () => setShowremove(false);
+  // const handleShowremove = () => setShowremove(true);
+  // const [trackingid, settrackingid] = useState("");
  
-  function workModal(token) {
-    settrackingid(token);
-    handleShowremove();
-  }
+  // function workModal(token) {
+  //   settrackingid(token);
+  //   handleShowremove();
+  // }
  
-  // pay with paystack modal
-  const [showremove1, setShowremove1] = useState(false);
-  const handleCloseremove1 = () => setShowremove1(false);
-  const handleShowremove1 = () => setShowremove1(true);
+  // // pay with paystack modal
+  // const [showremove1, setShowremove1] = useState(false);
+  // const handleCloseremove1 = () => setShowremove1(false);
+  // const handleShowremove1 = () => setShowremove1(true);
   
  
-  function workModal1(token) {
-    settrackingid(token);
-    handleShowremove1();
-  }
+  // function workModal1(token) {
+  //   settrackingid(token);
+  //   handleShowremove1();
+  // }
 
   let statuss
   if (status === "paid") {
@@ -288,11 +301,12 @@ const Invoice = (props) => {
                   <div className="card-header">
                     <h6 className="font-weight-bold">PAYMENT DETAILS </h6>
                   </div>
-                  <div className="card-body text-center">
+                  <Payment trackid={trackid} price={price} priceth={priceth} type={type} status={status} express={express} expressth={expressth} />
+                  {/* <div className="card-body text-center">
                     <h4 className="mb-4">
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
-                    <h1 className="bolder-text">₦ {Price}</h1>
+                    <h1 className="bolder-text">₦ {price}</h1>
                   </div>
                   {status === "paid" ? (
                     <>
@@ -322,7 +336,7 @@ const Invoice = (props) => {
                   </div>
                     </>
                   )}
-                 
+                  */}
                 </div>
               </div>
             </div>
@@ -331,25 +345,25 @@ const Invoice = (props) => {
       </div>
 
       {/* Pay With Wallet Modal */}
-      <PayWithPayStack
+      {/* <PayWithPayStack
         show={showremove1}
         onHide={handleCloseremove1}
         animation={false}
         trackid={trackingid}
-        amount={Price}
+        amount={price}
         type={type}
-      />
+      /> */}
       {/* Pay With Wallet Modal */}
 
       {/* Pay With Wallet Modal */}
-      <PayWithWallet
+      {/* <PayWithWallet
         show={showremove}
         onHide={handleCloseremove}
         animation={false}
         trackid={trackingid}
-        amount={Price}
+        amount={price}
         type={type}
-      />
+      /> */}
       {/* Pay With Wallet Modal */}
     </>
   );
