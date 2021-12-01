@@ -1,7 +1,12 @@
+/* Admin Dashboard  */
+/* Admin Dashboard  */
+
+/* Nav Buttons  */
+
 .nav-button {
     /* background-color: #272626; */
     border: #272626 solid 1px;
-    border-radius: 1rem;
+    border-radius: 1rem; 
     padding: 2rem 1rem;
 }
 
@@ -18,8 +23,29 @@
     color: black !important;
 }
 
-.admin {
-    margin-top: 4rem !important;
+.nav-button .navb:hover{
+background-color: #dfdfdf;
 }
 
-  
+/* Nav Buttons  */
+
+
+/* Admin Dashboard  */
+/* Admin Dashboard  */
+
+
+.userlist{
+    /* background-color: red !important; */
+    overflow-x: scroll !important;
+}
+
+.userlist #table {
+    overflow-x: scroll !important;
+}
+
+/* Create Order  */
+.send-package.admin-create-order {
+    margin-left: 0px !important;
+    margin-top: 2rem !important;
+  }
+/* Create Order  */

@@ -66,21 +66,21 @@ const AdminAllFood = () => {
         <td class="pt-3-half">₦ {item.amount}</td>
         <td class="pt-3-half">
           <span class="table-up">
-            <Link to={`/admin/food-details`}>
+            {/* <Link to={`/admin/food-details`}> */}
               <button
                 type="button"
                 class="btn btn-success btn-rounded btn-sm my-0"
               >
                 Edit
               </button>
-            </Link>{" "}
+            {/* </Link>{" "} */}
           </span>
         </td>
         <td>
           <span class="table-remove">
             <button
               type="button"
-              onClick={(e) => workModal(item.propstoken)}
+              // onClick={(e) => workModal(item.propstoken)}
               class="btn btn-danger btn-rounded btn-sm my-0"
             >
               Remove

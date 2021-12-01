@@ -30,11 +30,13 @@ import FoodInvoice from './Components/User/Food/FoodInvoice';
 import ProtectAdmin from './protectAdmin';
 import AdminLogin from './Components/Admin/AdminLogin';
 import AdminDashboard from './Pages/AdminArea/AdminDashboard';
-import NavButton from './Components/Admin/AdminDashboard/NavButton';
 import AllOrder from './Components/Admin/Order/AllOrder';
 import EachOrder from './Components/Admin/Order/EachOrder';
-import UploadFood from './Components/Admin/AdminFood/UploadFood';
 import AdminFood from './Pages/AdminArea/AdminFood';
+import AdminRestaurant from './Pages/AdminArea/AdminRestaurant';
+import UserList from './Components/Admin/Account/UserList';
+import AdCreateOrder from './Pages/AdminArea/AdCreateOrder';
+import AdOrderInvoice from './Components/Admin/AdminCreateOrder/AdOrderInvoice';
 
 
 // Admin
@@ -114,15 +116,31 @@ function App() {
 
         <ProtectAdmin exact path="/admin/order" component={AllOrder} />
 
-        <ProtectAdmin exact path="/admin/order/package" component={EachOrder} />
+        <ProtectAdmin exact path="/admin/order/invoice" component={EachOrder} />
+
+        <ProtectAdmin exact path="/admin/create-order" component={AdCreateOrder} />
+
+        <ProtectAdmin exact path="/admin/order/invoicee" component={AdOrderInvoice} />
+
+
 
         {/* Admin Orders */}
 
         {/* Admin Food */}
-        <ProtectAdmin exact path="/admin/addfood" component={AdminFood} />
+        <ProtectAdmin exact path="/admin/food" component={AdminFood} />
 
+        <ProtectAdmin exact path="/admin/restaurant" component={AdminRestaurant} />
 
         {/* Admin Food */}
+
+        {/* Account */}
+        <ProtectAdmin exact path="/admin/userlist" component={UserList} />
+
+
+        {/* Account */}
+
+
+
 
         {/* Admin Dashboard */}
 

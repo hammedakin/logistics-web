@@ -21,17 +21,17 @@ const FoodPayWithPayStack = (props) => {
   const config = {
     reference: new Date().getTime().toString(),
     email: localStorage.getItem("email"),
-    amount: Number(props.price) * 100,
+    amount: Number(props.amount) * 100,
     publicKey: "pk_test_e7c207ebc76888253b867c7f9bf43a5042459bf0",
   };
 
   // you can call this function anything
   const onSuccess = (reference) => {
-    if ((usertoken, props.id, props.price, props.phone, props.address)) {
+    if ((usertoken, props.id, props.amount, props.phone, props.address)) {
       const data = new FormData();
       data.append("usertoken", usertoken);
       data.append("fid", props.id);
-      data.append("price", props.price);
+      data.append("price", props.amount);
       data.append("phone", props.phone);
       data.append("location", props.address);
       // data.append("trxid", reference.transaction);
@@ -142,11 +142,11 @@ const FoodPayWithPayStack = (props) => {
                 <hr />
                 <h6 className="font-weight-light"> Amount :</h6>
                 <h1 className="font-weight-bold green-text">
-                  ₦ {props.priceth}
+                  ₦ {props.amount}
                 </h1>
                 <hr />
-                {props.price} {props.title} {props.id} {props.phone} {usertoken}{" "}
-                {props.address}
+                {/* {props.price} {props.title} {props.id} {props.phone} {usertoken}{" "}
+                {props.address} */}
               </div>
             </div>
           </section>

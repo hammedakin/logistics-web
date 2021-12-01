@@ -9,7 +9,7 @@ const [name, setname] = useState(localStorage.getItem('adminname'));
       <div className="welcome text-left">
         <h6>
           {" "}
-          Welcome back, <span> {name} </span>{" "}
+          Welcome back, <span> {name} </span> 😃{" "}
         </h6>
       </div>
 

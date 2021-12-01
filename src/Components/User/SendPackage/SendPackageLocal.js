@@ -36,6 +36,7 @@ const SendPackageLocal = () => {
   const [sendstates, setsendstates] = useState([]);
   const [allstates, setallstates] = useState([]);
   const [allcities, setallcities] = useState([]);
+  const [allonforward, setallonforward] = useState([]);
   const [count, setcount] = useState(0)
 
 
@@ -229,6 +230,36 @@ const SendPackageLocal = () => {
    );
  });
   // Function for to call all cities
+
+   // Function for to call all onforward
+   const fetchonforward = () => {
+    const data = {
+      apptoken: "T9H1E6KUYM"
+    }
+    axios
+      .get(`https://test.api.eclipse.com.ng/v1/getOnforwarding`, {params:data})
+      .then((response) => {
+        if (response.data.success === false) {
+        console.log(response.data);
+        }else {
+        setallonforward(response.data);
+        console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  useEffect(() => {
+    fetchonforward();
+  }, [count]);
+
+  const onforward = allonforward.map((item, i) => {
+   return (
+    <option value={`${item.id}`}> {item.name} </option>
+   );
+ });
+  // Function for to call all onforward
 
         // item.hotdeals
         let types
@@ -526,12 +557,7 @@ const SendPackageLocal = () => {
                         <option value="" selected="">
                         Onforwarding *
                         </option>
-                        <option value="1" selected="">
-                          Yes
-                        </option> 
-                        <option value="0" selected="">
-                          No
-                        </option>
+                        {onforward}
                        
                       </select>
                     </div>

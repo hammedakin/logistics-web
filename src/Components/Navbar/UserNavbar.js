@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./Nav.css";
 import UserNavLinks from "./UserNavLinks";
 import UserSideNav from './UserSideNav'
 
 const UserNavbar = () => {
+const [name, setname] = useState(localStorage.getItem('adminname'));
   
   let history = useHistory();
 
@@ -38,7 +39,7 @@ const UserNavbar = () => {
         class="navbar navbar-expand-sm navbar-light fixed-top"
         id="navbar main"
       >
-        <div class="container" id="logo">
+        <div class="container-fluid" id="logo">
         <a
             class="navbar-toggler"
             type="button"
@@ -90,7 +91,7 @@ const UserNavbar = () => {
           
               
               <div class="">
-                <p> Jane Doe</p>
+                <p> {name}</p>
                 <button class="btn btn-red" onClick={HandleLogout}>Logout</button>
 
               </div>

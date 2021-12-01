@@ -48,7 +48,7 @@ const FoodHistory = () => {
     .map((item, i) => {
       return (
         <>
- <Link to={`/food/invoice/${item.oid}`}>
+ <a href={`https://test.eclipse.com.ng/food/invoice/${item.oid}`}>
    <div className="first mt-3 black-text" key={item.fid}>
             <div className="row ">
               <div className="col-7 mr-auto ">
@@ -96,7 +96,7 @@ const FoodHistory = () => {
             </div>
           </div>
           <hr className="p-0 m-0" />
-          </Link>
+          </a>
         </>
       );
     });

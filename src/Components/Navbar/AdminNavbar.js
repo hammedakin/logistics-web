@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import "./Nav.css";
 import UserNavLinks from "./UserNavLinks";
 import UserSideNav from './UserSideNav'
 
 const UserNavbar = () => {
+const [name, setname] = useState(localStorage.getItem('adminname'));
+
   let history = useHistory();
 
 
@@ -57,7 +59,7 @@ const UserNavbar = () => {
           
               
               <div class="">
-                <p> Jane Doe</p>
+                <p> {name}</p>
                 <button class="btn btn-red" onClick={HandleLogout}>Logout</button>
               </div>
             </div>

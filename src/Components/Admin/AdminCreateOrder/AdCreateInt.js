@@ -4,16 +4,16 @@ import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
 
 
-const SendPackageInt = () => {
+const AdCreateInt = () => {
 
 // Sender 
   const [usertoken, setusertoken] = useState("");
   const [pickstate, setpickstate] = useState("");
   const [picktown, setpicktown] = useState("");
-  const [sendermail, setsendermail] = useState(localStorage.getItem('email'));
+  const [sendermail, setsendermail] = useState("");
   const [loc_area, setloc_area] = useState("");
-  const [senderphone, setsenderphone] = useState(localStorage.getItem('phone'));
-  const [sendername, setsendername] = useState(localStorage.getItem('fullname'));
+  const [senderphone, setsenderphone] = useState("");
+  const [sendername, setsendername] = useState("");
 
   // Receiver 
   const [state, setstate] = useState("");
@@ -21,7 +21,7 @@ const SendPackageInt = () => {
   const [rmail, setrmail] = useState("");
   const [rphone, setrphone] = useState("");
   const [des_area, setdes_area] = useState("");
-  const [rname, setrname] = useState("");
+  const [rname, setrname] = useState("GG");
   const [country, setcountry] = useState("");
   const [zip, setzip] = useState("");
 
@@ -335,7 +335,7 @@ if (type==='int') {
                           placeholder="Enter Email *"
                           onChange={(e) => setsendermail(e.target.value)}
                           value={sendermail}
-                        disabled
+                        
                         />
                       </div>
                     </div>
@@ -717,4 +717,4 @@ if (type==='int') {
   );
 };
 
-export default SendPackageInt;
+export default AdCreateInt;

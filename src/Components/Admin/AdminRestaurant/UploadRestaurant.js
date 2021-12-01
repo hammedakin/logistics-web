@@ -2,32 +2,26 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 
-const UploadFood = () => {
-  const [title, settitle] = useState("");
-  const [des, setdes] = useState("");
-  const [resid, setresid] = useState("");
-  const [price, setprice] = useState("");
+const UploadRestaurant = () => {
+  const [rest, setrest] = useState("");
+  const [location, setlocation] = useState("");
 
-  const [allres, setallres] = useState([]);
-  const [count, setcount] = useState(0);
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
   const [alertt, setalert] = useState("");
 
-  function FoodUpload(e) {
-    if ((title, des, resid, price)) {
+  function RestaurantUpload(e) {
+    if ((rest, location)) {
       setissending(true);
 
       const data = new FormData();
-      data.append("title", title);
-      data.append("description", des);
-      data.append("resid", resid);
-      data.append("price", price);
+      data.append("rest", rest);
+      data.append("location", location);
       data.append("apptoken", "T9H1E6KUYM");
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/admin-add-food`, data, {
+        .post(`https://test.api.eclipse.com.ng/v1/admin-add-restaurant`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },
@@ -37,14 +31,11 @@ const UploadFood = () => {
 
           if (res.data.success === true) {
             setshowalert(true);
-            settitle("");
-            setdes("");
-            setprice("");
-            setresid("");
+            setrest("");
+            setlocation("");
             setalert(res.data.message);
             setissending(false);
             window.location.reload(true);
-            // history.push("/login")
             console.log(res.data);
           } else {
             setshowalert(true);
@@ -67,36 +58,6 @@ const UploadFood = () => {
     e.preventDefault();
   }
 
-  // Function for to call get Restaurants
-  const fetchres = () => {
-    const data = {
-      apptoken: "T9H1E6KUYM",
-    };
-    axios
-      .get(`https://test.api.eclipse.com.ng/v1/admin-list-restaurant`, {
-        params: data,
-      })
-      .then((response) => {
-        if (response.data.success === false) {
-          console.log(response.data);
-        } else {
-          setallres(response.data);
-          console.log(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  };
-  useEffect(() => {
-    fetchres();
-  }, [count]);
-
-  const res = allres.map((item, i) => {
-    return <option value={`${item.id}`}> {item.name} </option>;
-  });
-  // Function for to call get Restaurants
-
   return (
     <>
       <div className="add-food">
@@ -116,9 +77,9 @@ const UploadFood = () => {
                       <input
                         type="text"
                         className=" input-style"
-                        placeholder="Food Name *"
-                        onChange={(e) => settitle(e.target.value)}
-                        value={title}
+                        placeholder="Restaurant Name *"
+                        onChange={(e) => setrest(e.target.value)}
+                        value={rest}
                       />
                     </div>
                   </div>
@@ -127,45 +88,17 @@ const UploadFood = () => {
                     {/* <label> Name </label> */}
 
                     <div className="input-group">
-                      <input
-                        type="number"
-                        className=" input-style"
-                        placeholder="Price *"
-                        onChange={(e) => setprice(e.target.value)}
-                        value={price}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-md-10 ">
-                    {/* <label> Name </label> */}
-
-                    <div className="input-group">
                   
                         <textarea
                         type="text"
                         className="input-style textarea-style"
-                        placeholder="Description *"
-                        onChange={(e) => setdes(e.target.value)}
-                        value={des}
+                        placeholder="Location *"
+                        onChange={(e) => setlocation(e.target.value)}
+                        value={location}
                       ></textarea>
                       
                     </div>
                   </div>
-                  <div className="col-md-10 ">
-                    {/* <label>Cargo Shipment ? * </label> */}
-
-                    <select
-                      className="input-style"
-                      onChange={(e) => setresid(e.target.value)}
-                    >
-                      <option value="" selected>
-                        Select Restaurant *
-                      </option>
-                        {res}
-                    </select>
-                  </div>
-
                   <div class="col-md-10  mx-auto text-center">
                     {showalert ? (
                       <>
@@ -193,7 +126,7 @@ const UploadFood = () => {
                             type="button"
                             class="btn shadow waves-effect"
                             action="submit"
-                            onClick={(e) => FoodUpload(e)}
+                            onClick={(e) => RestaurantUpload(e)}
                           >
                             <strong> ADD </strong>
                           </button>
@@ -212,4 +145,4 @@ const UploadFood = () => {
   );
 };
 
-export default UploadFood;
+export default UploadRestaurant;

@@ -41,7 +41,7 @@ const FoodDetails = (props) => {
           setdes(response.data.description);
           setresname(response.data.resname);
           setresloc(response.data.reslocation);
-          setdfee(response.data.dfee);
+          setdfee(response.data.deliveryfee);
           setpriceth(response.data.price_th);
           setprice(response.data.price);
           setamount(response.data.amount);
@@ -120,14 +120,13 @@ const FoodDetails = (props) => {
                     <h6>Price: 
                      <span class="font-weight-bold"> ₦{priceth} </span> </h6>
                     <hr />
-                    <h6>Restaurant:
-                    <span class="font-weight-bold">
-                      {resname} </span> </h6>
+                    <h6>Restaurant: 
+                    <span class="font-weight-bold"> {resname} </span> </h6>
                     <hr />
                     <h6>Location:
                     <span class="font-weight-bold">  {resloc} </span></h6>
                     <hr />
-                    <h6>Delivery Fee:<span class="font-weight-bold"> {dfee} </span></h6>
+                    <h6>Delivery Fee:<span class="font-weight-bold"> ₦{dfee} </span></h6>
                     <hr />
                   </div>
                 </div>
@@ -190,7 +189,7 @@ const FoodDetails = (props) => {
                     <h4 className="mb-4">
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
-                    <h1 className="bolder-text">₦ {priceth}</h1>
+                    <h1 className="bolder-text">₦ {amount}</h1>
                   </div>
                   <div className="text-center px-3">
                   {fill ? (
@@ -222,7 +221,7 @@ const FoodDetails = (props) => {
                     <h4 className="mb-4">
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
-                    <h1 className="bolder-text">₦ {priceth}</h1>
+                    <h1 className="bolder-text">₦ {amount}</h1>
                   </div>
                  
                   <div className="text-center invoice-btn">
@@ -255,11 +254,12 @@ const FoodDetails = (props) => {
         animation={false}
         id={id}
         title={title}
-        price={price}
+        amount={amount}
         priceth={priceth}
         phone={phone}
         address={address}
         resname={resname}
+        dfee={dfee}
       />
       {/* Pay With Wallet Modal */}
 
@@ -270,7 +270,7 @@ const FoodDetails = (props) => {
         animation={false}
         id={id}
         title={title}
-        price={price}
+        amount={amount}
         priceth={priceth}
         phone={phone}
         address={address}

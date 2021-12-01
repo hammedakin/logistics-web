@@ -21,13 +21,13 @@ const FoodPayWithWallet = (props) => {
   let history = useHistory();
 
   const WalletPayment = (e) => {
-    if ((usertoken, props.id, props.price, props.phone, props.address)) {
+    if ((usertoken, props.id, props.amount, props.phone, props.address)) {
       setissending(true);
 
       const data = new FormData();
       data.append("usertoken", usertoken);
       data.append("fid", props.id);
-      data.append("price", props.price);
+      data.append("price", props.amount);
       data.append("phone", props.phone);
       data.append("location", props.address);
       data.append("apptoken", "T9H1E6KUYM");
@@ -155,16 +155,16 @@ const FoodPayWithWallet = (props) => {
                   <hr />
                   <h6 className="font-weight-light"> Amount :</h6>
                   <h1 className="font-weight-bold green-text">
-                    ₦ {props.priceth}
+                    ₦ {props.amount}
                   </h1>
                   <hr />
-                  {/* {props.price} {props.title} {props.id} {props.phone} {usertoken}{" "}
+                  {/* {props.amount} {props.title} {props.id} {props.phone} {usertoken}{" "}
                 {props.address} */}
                 </div>
                 <Alert color="warning">
                   Account Balance : ₦ {walletbalance_th}
                 </Alert>
-                {/* {props.price} {props.title} {props.id} {props.phone} {usertoken}
+                {/* {props.amount} {props.title} {props.id} {props.phone} {usertoken}
                 {props.address} */}
               </div>
 
@@ -182,7 +182,7 @@ const FoodPayWithWallet = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <div class="ml-auto mr-auto text-center">
-            {props.price < walletbalance ? (
+            {props.amount > walletbalance ? (
               <>
              <Link to="/dashboard/fund-wallet">
                 <button type="button" class="btn btn-danger  btn my-0">
@@ -211,7 +211,7 @@ const FoodPayWithWallet = (props) => {
                       class="btn btn-success my-0"
                       onClick={(e) => WalletPayment(e)}
                     >
-                      pay ₦ {props.priceth}
+                      pay ₦ {props.amount}
                     </button>
                     <button onClick={props.onHide} class="btn btn-red">
                       {" "}

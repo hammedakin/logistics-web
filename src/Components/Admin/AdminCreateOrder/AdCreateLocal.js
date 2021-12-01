@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
+import Invoice from "./AdOrderInvoice";
 
 
-const SendPackageInt = () => {
+
+const AdCreateLocal = () => {
 
 // Sender 
   const [usertoken, setusertoken] = useState("");
   const [pickstate, setpickstate] = useState("");
   const [picktown, setpicktown] = useState("");
-  const [sendermail, setsendermail] = useState(localStorage.getItem('email'));
+  const [sendermail, setsendermail] = useState("");
   const [loc_area, setloc_area] = useState("");
-  const [senderphone, setsenderphone] = useState(localStorage.getItem('phone'));
-  const [sendername, setsendername] = useState(localStorage.getItem('fullname'));
+  const [senderphone, setsenderphone] = useState("");
+  const [sendername, setsendername] = useState("");
 
   // Receiver 
   const [state, setstate] = useState("");
@@ -22,22 +24,19 @@ const SendPackageInt = () => {
   const [rphone, setrphone] = useState("");
   const [des_area, setdes_area] = useState("");
   const [rname, setrname] = useState("");
-  const [country, setcountry] = useState("");
-  const [zip, setzip] = useState("");
 
   // Items Details 
   const [packagename, setpackagename] = useState("");
   const [weight, setweight] = useState("");
-  const [worth, setworth] = useState("");
   const [description, setdescription] = useState("");
-  const [iscargo, setiscargo] = useState("");
-  const [type, settype] = useState('int');
+  const [onforwardingtownid, setonforwardingtownid] = useState("");
+  const [type, settype] = useState("local");
 
 // States and cities 
-  const [allcountries, setallcountries] = useState([]);
+  const [sendstates, setsendstates] = useState([]);
   const [allstates, setallstates] = useState([]);
   const [allcities, setallcities] = useState([]);
-  const [allweight, setallweight] = useState([]);
+  const [allonforward, setallonforward] = useState([]);
   const [count, setcount] = useState(0)
 
 
@@ -48,11 +47,11 @@ const SendPackageInt = () => {
   const [trackid, settrackid] = useState("");
   let history = useHistory(); 
 
-  // useEffect(() => {
-  //   settype(localStorage.getItem('type'))
-  //   },[localStorage.getItem('type')]
-  //   )
 
+  // useEffect(() => {
+  // settype(localStorage.getItem('type'))
+  // },[localStorage.getItem('type')]
+  // )
 
   // Function for to process the form
   function SendLocalPackage(e) {
@@ -64,8 +63,6 @@ const SendPackageInt = () => {
       loc_area,
       senderphone,
       sendername,
-      country,
-      zip,
       state,
       town,
       rmail,
@@ -74,9 +71,8 @@ const SendPackageInt = () => {
       rname,
       packagename,
       weight,
-      worth,
       description,
-      iscargo,
+      onforwardingtownid,
       type
       )
     ) {
@@ -88,8 +84,6 @@ const SendPackageInt = () => {
       data.append("loc_area", loc_area);
       data.append("senderphone", senderphone);
       data.append("sendername", sendername);
-      data.append("country", country);
-      data.append("zip", zip);
       data.append("state", state);
       data.append("town", town);
       data.append("rmail", rmail);
@@ -98,9 +92,8 @@ const SendPackageInt = () => {
       data.append("rname", rname);
       data.append("packagename", packagename);
       data.append("weight", weight);
-      data.append("worth", worth);
       data.append("description", description);
-      data.append("iscargo", iscargo);
+      data.append("onforwardingtownid", onforwardingtownid);
       data.append("type", type);
       data.append("usertoken", localStorage.getItem('usertoken'));
       data.append("apptoken", "T9H1E6KUYM");
@@ -119,7 +112,7 @@ const SendPackageInt = () => {
           setissending(false);
           setusertoken((localStorage.getItem('usertoken')))
           history.push({
-            pathname:`/send-package/invoice/${res.data.trackid}`, 
+            pathname:`/admin/order/invoicee`, 
             state:res.data
             })
 
@@ -144,19 +137,19 @@ const SendPackageInt = () => {
 }
   // Function for to process the form
 
-
-   // Function for to call all countries
-   const fetchcountries = () => {
+  // Function for to call sender states
+  const fetchsendstates = () => {
     const data = {
       apptoken: "T9H1E6KUYM"
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-countries`, {params:data})
+      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
+
         console.log(response.data);
         }else {
-        setallcountries(response.data);
+        setsendstates(response.data);
         console.log(response.data);
         }
       })
@@ -165,15 +158,15 @@ const SendPackageInt = () => {
       });
   };
   useEffect(() => {
-    fetchcountries();
+    fetchsendstates();
   }, [count]);
 
-  const countries = allcountries.map((item, i) => {
+  const sendstate = sendstates.map((item, i) => {
    return (
-    <option value={`${item.country}`}> {item.country} </option>
+    <option value={`${item.id}`}> {item.state} </option>
    );
  });
-  // Function for to call all countries
+  // Function for to call Sender states
 
   // Function for to call all states
   const fetchstates = () => {
@@ -181,7 +174,7 @@ const SendPackageInt = () => {
       apptoken: "T9H1E6KUYM"
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
+      .get(`https://test.api.eclipse.com.ng/v1/get-states-all`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
 
@@ -205,6 +198,8 @@ const SendPackageInt = () => {
    );
  });
   // Function for to call all states
+
+
 
    // Function for to call all cities
    const fetchcities = () => {
@@ -236,47 +231,47 @@ const SendPackageInt = () => {
  });
   // Function for to call all cities
 
+   // Function for to call all onforward
+   const fetchonforward = () => {
+    const data = {
+      apptoken: "T9H1E6KUYM"
+    }
+    axios
+      .get(`https://test.api.eclipse.com.ng/v1/getOnforwarding`, {params:data})
+      .then((response) => {
+        if (response.data.success === false) {
+        console.log(response.data);
+        }else {
+        setallonforward(response.data);
+        console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  useEffect(() => {
+    fetchonforward();
+  }, [count]);
 
-// Function for to call all weights for country
-const fetchweight = () => {
-  const data = {
-    apptoken: "T9H1E6KUYM"
-  }
-  axios
-    .get(`https://test.api.eclipse.com.ng/v1/get-country-weights`, {params:data})
-    .then((response) => {
-      if (response.data.success === false) {
-      console.log(response.data);
-      }else {
-      setallweight(response.data);
-      console.log(response.data);
-      }
-    })
-    .catch((error) => {
-      console.log(error.response);
-    });
-};
-useEffect(() => {
-  fetchweight();
-}, [count]);
+  const onforward = allonforward.map((item, i) => {
+   return (
+    <option value={`${item.id}`}> {item.name} </option>
+   );
+ });
+  // Function for to call all onforward
 
-const weights = allweight.map((item, i) => {
- return (
-  <option value={`${item.id}`}> {item.kg} </option>
- );
-});
-// Function for to call all weights for country
-
-
-
-// item.hotdeals
-let types
-
-if (type==='int') {
-  types = 'INTERNATIONAL';
-} else {
-  types = 'Select Type Above';
-}
+        // item.hotdeals
+        let types
+        if (type=='local') {
+          types = 'LOCAL';
+        } 
+        else if (type=== 'int') {
+          types = 'INTERNATIONAL';
+        } else {
+          types = 'Select Type Above';
+          
+        }
 
 
   return (
@@ -284,7 +279,7 @@ if (type==='int') {
     <>
       <section className="send">
         <div className="container">
-          <h5 className="text-center"> SEND INTERNATIONAL PACKAGE </h5>
+          <h5 className="text-center"> SEND LOCAL PACKAGE </h5>
 
           <div className="form">
             <form>
@@ -335,7 +330,6 @@ if (type==='int') {
                           placeholder="Enter Email *"
                           onChange={(e) => setsendermail(e.target.value)}
                           value={sendermail}
-                        disabled
                         />
                       </div>
                     </div>
@@ -357,27 +351,13 @@ if (type==='int') {
                     <div className="col-md-10 ">
                       <select
                         className="input-style"
-                      >
-                        <option value="" selected="">
-                          Select Country *
-                        </option>
-
-                        <option> Nigeria </option>                       
-                      </select>
-                    </div>
-
-
-
-                    <div className="col-md-10 ">
-                      <select
-                        className="input-style"
                         onChange={(e) => setpickstate(e.target.value)}
                       >
                         <option value="" selected="">
                           Select State *
                         </option>
 
-                        {states}
+                        {sendstate}
                        
                       </select>
                     </div>
@@ -463,62 +443,33 @@ if (type==='int') {
                         />
                       </div>
                     </div>
-
-                         
+                   
                     <div className="col-md-10 ">
                       <select
                         className="input-style"
-                        onChange={(e) => setcountry(e.target.value)}
+                        onChange={(e) => setstate(e.target.value)}
                       >
                         <option value="" selected="">
-                          Select Country *
+                          Select State *
                         </option>
 
-                        {countries}
+                        {states}
                        
                       </select>
                     </div>
 
                     <div className="col-md-10 ">
-                      {/* <label> State </label> */}
+                      <select
+                        className="input-style"
+                        onChange={(e) => settown(e.target.value)}
+                      >
+                        <option value="" selected="">
+                          Select City *
+                        </option>
 
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className=" input-style"
-                          placeholder="Enter State *"
-                          onChange={(e) => setstate(e.target.value)}
-                          value={state}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-md-10 ">
-                      {/* <label> City </label> */}
-
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className=" input-style"
-                          placeholder="Enter City *"
-                          onChange={(e) => settown(e.target.value)}
-                          value={town}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-md-10 ">
-                      {/* <label> Zip Code </label> */}
-
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className=" input-style"
-                          placeholder="Zip Code *"
-                          onChange={(e) => setzip(e.target.value)}
-                          value={zip}
-                        />
-                      </div>
+                        {cities}
+                       
+                      </select>
                     </div>
 
                     <div className="col-md-10 ">
@@ -551,7 +502,7 @@ if (type==='int') {
                         <input
                           type="text"
                           className=" input-style"
-                          placeholder="Package Name*"
+                          placeholder="Package Name *"
                           onChange={(e) => setpackagename(e.target.value)}
                           value={packagename}
                         />
@@ -559,63 +510,20 @@ if (type==='int') {
                     </div>
 
                     <div className="col-md-10 ">
-                      <label>Cargo Shipment ? * </label>
 
-                      <select
-                        className="input-style"
-                        onChange={(e) => setiscargo(e.target.value)}
-                      >
-                        {/* <option value="" selected="">
-                         Cargo Shipment ? *
-                        </option> */}
-                        <option value="1" >
-                          Yes
-                        </option> 
-                        <option value="0" selected>
-                          No
-                        </option>
-                       
-                      </select>
-                    </div>
-
-
-                  {iscargo=="1" ?
-                  (
-                    <>
-                      <div className="col-md-10 ">
                       <div className="input-group">
                         <input
-                          type="number"
+                          type="text"
                           className=" input-style"
-                          placeholder="Enter Weight (kg) *"
+                          placeholder="Enter Weight *"
                           onChange={(e) => setweight(e.target.value)}
                           value={weight}
                         />
                       </div>
                     </div>
-</>
-
-                  ) : (
-                    <>
-                       <div className="col-md-10 ">
-                      <select
-                        className="input-style"
-                        onChange={(e) => setweight(e.target.value)}
-                      >
-                        <option value="" selected="">
-                        Select Weight (kg) *
-                        </option>
-                        {weights}
-                       
-                      </select>
-                    </div>
-
-                    </>
-                  ) 
-             
-             }
 
                   </div>
+
                 </div>
 
                 {/* Package Details  */}
@@ -628,21 +536,6 @@ if (type==='int') {
                   <h5 className="text-center"> Means Info </h5>
 
                   <div className="row justify-content-center">
-
-                  <div className="col-md-10 ">
-                      {/* <label> Worth </label> */}
-
-                      <div className="input-group">
-                        <input
-                          type="number"
-                          className=" input-style"
-                          placeholder="Worth (₦)*"
-                          onChange={(e) => setworth(e.target.value)}
-                          value={worth}
-                        />
-                      </div>
-                    </div>
-
                     <div className="col-md-10 ">
                       <div className="input-group">
                         <textarea
@@ -655,6 +548,18 @@ if (type==='int') {
                       </div>
                     </div>
 
+                    <div className="col-md-10 ">
+                      <select
+                        className="input-style"
+                        onChange={(e) => setonforwardingtownid(e.target.value)}
+                      >
+                        <option value="" selected="">
+                        Onforwarding *
+                        </option>
+                        {onforward}
+                       
+                      </select>
+                    </div>
                   </div>
                 </div>
 
@@ -717,4 +622,4 @@ if (type==='int') {
   );
 };
 
-export default SendPackageInt;
+export default AdCreateLocal;
