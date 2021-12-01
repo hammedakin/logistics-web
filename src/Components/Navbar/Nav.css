@@ -11,6 +11,9 @@
   /* height: 7rem ; */
 }
 
+.usernav .navbar-brand {
+  /* display: none !important; */
+}
 
 .usernav .active1 {
   border-right: #15df02 5px solid;
