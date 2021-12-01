@@ -60,7 +60,10 @@ section {
 }
 
 /* Modal Props */
-
+.modal section {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
 
 .modal-dialog .modal-content {
 border-radius: 1.5rem !important;
@@ -192,7 +195,7 @@ border:transparent solid 1px !important;
 .showcase {
   margin: 0;
   padding: 0;
-  background: linear-gradient(#0000008c, #0000008c), url(./Components/HomePage/img/showcase.png) no-repeat;
+  background: linear-gradient(#0000008c, #0000008c), url(../Components/HomePage/img/showcase.png) no-repeat;
   background-size: cover;
 
   width: 100vw;

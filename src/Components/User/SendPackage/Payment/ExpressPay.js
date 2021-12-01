@@ -38,7 +38,17 @@ const ExpressPay = (props) => {
                     </h4>
                     <h1 className="bolder-text">₦ {props.expressth}</h1>
                   </div>
-                  {props.status === "paid" ? (
+
+                  {props.express === "0" ? (
+                    <div className="mx-3 text-center">
+
+                     <Alert color="success">
+                     Sorry!, Express Payment is not avialable for this order.
+                     </Alert>
+                     </div>
+                  ) : (
+                    <>
+  {props.status === "paid" ? (
                     <>
                     <div className="mx-3 text-center">
                     <Alert color="success">
@@ -66,6 +76,9 @@ const ExpressPay = (props) => {
                   </div>
                     </>
                   )}
+                    </>
+                  )}
+                
 
     
       {/* Pay With Wallet Modal */}

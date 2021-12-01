@@ -4,21 +4,21 @@ import axios from "axios";
 import img from "./img/icons.png";
 import { Link } from "react-router-dom";
 
-const InvoiceHistory = () => {
+const FoodHistory = () => {
   
-  const [allinvoice, setallinvoice] = useState([]);
-  const [usertoken, setusertoken] = useState("");
+  const [allfood, setallfood] = useState([]);
+  const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
   const [count, setcount] = useState(0);
 
   const [isloading, setisloading] = useState(true);
 
-  const fetchinvoice = () => {
+  const fetchfood = () => {
     const data = new FormData();
     data.append("apptoken", "T9H1E6KUYM");
-    data.append("usertoken", localStorage.getItem("usertoken"));
+    data.append("usertoken", usertoken);
 
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-orders`, data, {
+      .post(`https://test.api.eclipse.com.ng/v1/get-food-order-history`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -28,7 +28,7 @@ const InvoiceHistory = () => {
           console.log(response.data);
           setisloading(false);
         } else {
-          setallinvoice(response.data);
+          setallfood(response.data);
           setisloading(false);
 
           console.log(response.data);
@@ -41,34 +41,34 @@ const InvoiceHistory = () => {
       });
   };
   useEffect(() => {
-    fetchinvoice();
+    fetchfood();
   }, [count]);
 
-  const invoice = allinvoice
+  const food = allfood
     .map((item, i) => {
       return (
         <>
- <Link to={`/send-package/invoice/${item.trackid}`}>
-   <div className="first mt-3 black-text">
+ <Link to={`/food/invoice/${item.oid}`}>
+   <div className="first mt-3 black-text" key={item.fid}>
             <div className="row ">
               <div className="col-7 mr-auto ">
-                <p className="bold-text">{item.packagename}</p>
+                <p className="bold-text">{item.title}</p>
               </div>
               <div className="col-4 ml-auto">
                 <p className="bold-text" className="float-right">
-                  ₦ {item.price}
+                  ₦ {item.price_th}
                 </p>
               </div>
             </div>
             <div className="row mt-0">
               <div className="col-8 mr-auto">
                 <div className="row mt-0 float-left">
-                  <div className="col-5 mr-auto">
-                    <p className="">
-                      <small> {item.trackid}  </small>
+                  <div className="col-12 mr-auto">
+                    <p className="grey-text">Order ID: 
+                      <span className="black-text"> {item.oid}  </span>
                     </p>
                   </div>
-                  <div className="col-7 mr-auto">
+                  {/* <div className="col-7 mr-auto">
                     <p>
                       <small>
                         {item.paidstatus == "paid" ? (
@@ -82,14 +82,14 @@ const InvoiceHistory = () => {
                         )}
                       </small>
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
               <div className="col-4 ml-auto">
                 <p className="grey-text float-right">
                   <small>
-                    <i> {item.timestamp}</i>
+                    <i> {item.timeago}</i>
                   </small>
                 </p>
               </div>
@@ -114,7 +114,7 @@ const InvoiceHistory = () => {
               </div>
             ) : (
               <>
-                {invoice == "" ? (
+                {food == "" ? (
                   <>
                     <div className="mt-5 text-center">
                       <img src={img} width="100px" />
@@ -127,7 +127,7 @@ const InvoiceHistory = () => {
                     </div>
                   </>
                 ) : (
-                  <>{invoice}</>
+                  <>{food}</>
                 )}
               </>
             )}
@@ -138,4 +138,4 @@ const InvoiceHistory = () => {
   );
 };
 
-export default InvoiceHistory;
+export default FoodHistory;

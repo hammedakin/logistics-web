@@ -10,8 +10,7 @@ const HomeShowcase = () => {
             <div class=" animated fadeInUp content col-md-8 ml-auto mr-auto ">
               <h1 class="text-center ">
                 {" "}
-                SEND GOODS TO ANY PLACE IN THE COUNTRY
-              </h1>
+                SIMPLIFYING DELIVERIES FOR AFRICAN MERCHANTS               </h1>
             </div>
 
           </div>

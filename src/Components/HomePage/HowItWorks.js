@@ -9,13 +9,9 @@ const HowItWorks = () => {
       <section class="howitworks">
         <div class="container">
           <div class="text-center mb-5 ">
-            {/* <h3>
-              {" "}
-              How <span class="abulesowo"> Abulesowo </span>{" "}
-              <span class="works"> works</span>{" "}
-            </h3> */}
+         
             <h6 class="   ml-auto mr-auto ">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor magna dolor
+            Express Shipping Locally and Internationally to Over 200 Countries Worldwide 
             </h6>
           </div>
 
@@ -27,10 +23,10 @@ const HowItWorks = () => {
                 <img src={img1} alt="" class="shadow" width="100%" />
               </div>
               <div class="col-md-4 align-self-center ml-auto mr-auto text-center p-5 ">
-                <h5>Lorem ipsum dolor</h5>
-                <p class="my-5 ">
+                <h5>Mail Distribution </h5>
+                {/* <p class="my-5 ">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor magna dolor
-                </p>
+                </p> */}
 
                 <div
                   class=""
@@ -47,10 +43,10 @@ const HowItWorks = () => {
           <div class="card2">
             <div class="row">
               <div class="col-md-4 align-self-center ml-auto mr-auto text-center p-5 ">
-                <h5>Consectetur adipiscing</h5>
-                <p class="my-5 ">
+                <h5>E-commerce/ Food Deliveries </h5>
+                {/* <p class="my-5 ">
                 Cras sit amet urna diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
+                </p> */}
 
                 <div
                   class=""
@@ -74,10 +70,10 @@ const HowItWorks = () => {
                 <img src={img3} alt="" class="shadow" width="100%" />
               </div>
               <div class="col-md-4 align-self-center ml-auto mr-auto text-center p-5 ">
-                <h5>Curabitur </h5>
-                <p class="my-5 ">
+                <h5>Air / Sea Freight / Food Export. </h5>
+                {/* <p class="my-5 ">
                 Vestibulum feugiat lacus sed vehicula interdum. Pellentesque ornare eleifend dolor
-                </p>
+                </p> */}
 
                 <div
                   class=""

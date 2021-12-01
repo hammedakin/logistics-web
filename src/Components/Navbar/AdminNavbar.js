@@ -1,11 +1,10 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import "./Nav.css";
 import UserNavLinks from "./UserNavLinks";
 import UserSideNav from './UserSideNav'
 
 const UserNavbar = () => {
-  
   let history = useHistory();
 
 
@@ -22,49 +21,17 @@ const UserNavbar = () => {
     localStorage.removeItem("trackid");
   };
 
-
-  // Open Navbar z
-  const openNav = (e) => {
-    document.getElementById("mySidenav").style.width = "300px";
-  };
-  const closeNav = (e) => {
-    document.getElementById("mySidenav").style.width = "0";
-  };
-
   return (
     <>
     <div className="usernav">
+    <div className="adminnav">
       <nav
         class="navbar navbar-expand-sm navbar-light fixed-top"
         id="navbar main"
       >
         <div class="container" id="logo">
-        <a
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#basicExampleNav"
-            aria-controls="basicExampleNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-
-          >
-            <span
-              class="navbar-toggler-icon toggler"
-              onClick={(e) => openNav(e)}
-
-            >
-              <box-icon
-                class="box-icon"
-                size="2rem"
-                color=" #096b00"
-                name="menu"
-                type="logo"
-              ></box-icon>
-            </span>
-          </a>
-          <Link to="/dashboard" className="navbar-brand">
-            <h5> ECLIPSE </h5>
+          <Link to="/admin" className="navbar-brand">
+            <h5> ECLIPSE Admin</h5>
           </Link>
 
           {/* <ul class="navbar-nav ml-auto nav-flex-icons"> */}
@@ -92,23 +59,39 @@ const UserNavbar = () => {
               <div class="">
                 <p> Jane Doe</p>
                 <button class="btn btn-red" onClick={HandleLogout}>Logout</button>
-
               </div>
             </div>
           </li>
         {/* </ul> */}
-     
+          {/* <a
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#basicExampleNav"
+            aria-controls="basicExampleNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
 
+          >
+            <span
+              class="navbar-toggler-icon toggler"
 
-          
-          {/* <div class="collapse navbar-collapse" id="basicExampleNav">
-            <NavLinks />
-          </div> */}
+            >
+              <box-icon
+                class="box-icon"
+                size="2rem"
+                color=" #096b00"
+                name="menu"
+                type="logo"
+              ></box-icon>
+            </span>
+          </a> */}
+
         </div>
       </nav>
 
-      <UserSideNav/>
 
+      </div>
       </div>
     </>
   );

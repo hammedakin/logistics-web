@@ -9,12 +9,6 @@ const [name, setname] = useState(localStorage.getItem('fullname'));
 const [count, setcount] = useState(0);
 let history = useHistory();
 
-// function Reload() {
-//   window.location.reload(true);
-// }
-//  useEffect(() => {
-//   Reload();
-// }, [count]);
 
 return (
     <>
@@ -63,7 +57,7 @@ return (
             </div>
 
             <div className="col-md-3 col" >
-            <NavLink to="/track/"  >
+            <a href="#">
               <div className="third">
               <box-icon
                       class="box-icon"
@@ -74,7 +68,7 @@ return (
                     ></box-icon>
                 <h6>Track</h6>
               </div>
-              </NavLink>
+              </a>
             </div>
 
           </div>

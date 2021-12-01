@@ -36,25 +36,19 @@ const UserRegister = () => {
       data.append("apptoken", "T9H1E6KUYM");
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/register`, data, {})
+        .post(`https://test.api.eclipse.com.ng/v1/register`, data, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
         .then((res) => {
           console.log(res.data);
 
           if (res.data.success === true) {
             setshowalert(true);
-            setname("");
-            setpword("");
-            setmail("");
-            setphone("");
-            setstate("");
-            settown("");
-            setarea("");
             setalert(res.data.message);
-
             setissending(false);
-
           history.push("/auth")
-
           } else {
             setshowalert(true);
             setalert(res.data.message);
@@ -84,6 +78,7 @@ function myInput() {
     x.type = "password"
   }
 }
+
 
   return (
     <>
@@ -124,21 +119,7 @@ function myInput() {
                         </div>
                       </div>
 
-                      <div className="col-md-12 ">
-                        <label> E-mail </label>
-
-                        <div className="input-group">
-                          <input
-                            type="email"
-                            className=" input-style"
-                            placeholder="Enter e-mail"
-                            onChange={(e) => setmail(e.target.value)}
-                            value={mail}
-                            required
-                          />
-                        </div>
-                      </div>
-
+                  
                       <div className="col-md-12 ">
                         <label> Phone Number </label>
 
@@ -199,6 +180,22 @@ function myInput() {
                         </div>
                       </div>
                       
+
+                      <div className="col-md-12 ">
+                        <label> E-mail </label>
+
+                        <div className="input-group">
+                          <input
+                            type="email"
+                            className=" input-style"
+                            placeholder="Enter e-mail"
+                            onChange={(e) => setmail(e.target.value)}
+                            value={mail}
+                            required
+                          />
+                        </div>
+                      </div>
+
 
                       <div className="col-md-12 ">
                         <label> Password </label>

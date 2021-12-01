@@ -11,6 +11,7 @@ const ExPayWithWallet = (props) => {
   const [type, settype] = useState(props.type);
   const [amount, setamount] = useState(props.price);
   const [walletbalance_th, setwalletbalance_th] = useState("");
+  const [walletbalance, setwalletbalance] = useState("");
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
@@ -36,7 +37,7 @@ const ExPayWithWallet = (props) => {
         },
       })
       .then((response) => {
-        if (response.data.response === true) {
+        if (response.data.success === true) {
           settrackid(response.data.trackid);
           setamount(response.data.amount);
           settype(response.data.type);
@@ -45,7 +46,7 @@ const ExPayWithWallet = (props) => {
           setissending(false);
           console.log(response.data);
           history.push({
-        pathname: `/send-package/invoice/${response.data.trackid}`,
+        pathname: `/send-package/invoice/${trackid}`,
         state: response.data,
           });
           window.location.reload(true);
@@ -151,12 +152,14 @@ const ExPayWithWallet = (props) => {
           </section>
         </Modal.Body>
         <Modal.Footer>
-          <div class="ml-auto mr-auto">
-            {props.amount < walletbalance_th ? (
+          <div class="ml-auto mr-auto text-center">
+            {props.amount < walletbalance ? (
               <>
+              <Link to="/dashboard/fund-wallet">
                 <button type="button" class="btn btn-danger  btn my-0">
                   Fund Wallet
                 </button>
+                </Link>
               </>
             ) : (
               <>
@@ -179,7 +182,7 @@ const ExPayWithWallet = (props) => {
                       class="btn btn-success my-0"
                       onClick={(e) => WalletPayment(e)}
                     >
-                      pay ₦ {props.amount}
+                      pay ₦ {props.amountth}
                     </button>
                     <button onClick={props.onHide} class="btn btn-red"> Close</button>
                   </>

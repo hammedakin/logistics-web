@@ -26,11 +26,10 @@ const Footer = () => {
                           type="solid"
                         ></box-icon>
                       </span>
-                      26, Washington Street, New Jersey.{" "}
-                    </a>
+                      No 5 Beside Commodore Guest House, Elebu, Oluyole Extension, Ibadan.                    </a>
                   </li>
                   <li>
-                    <a href="tel:+23480">
+                    <a href="tel:+2348187154281">
                       <span class="mr-2">
                         {" "}
                         <box-icon
@@ -41,7 +40,7 @@ const Footer = () => {
                           type="solid"
                         ></box-icon>
                       </span>
-                      +234 801 234 5678{" "}
+                      +234 818 7154 281
                     </a>
                   </li>
 
@@ -73,16 +72,16 @@ const Footer = () => {
 
                 <ul class="list-unstyled">
                   <li>
-                    <Link to="/properties/houses">Track Order</Link>
+                    <Link to="/track">Track Order</Link>
                   </li>
                   <li>
-                    <Link to="/properties/rents">Request Shipment</Link>
+                    <Link to="/send-package">Request Shipment</Link>
                   </li>
                   <li>
-                    <Link to="/properties/lands">Our Rates</Link>
+                    <Link to="/food">Buy Food</Link>
                   </li>
                   <li>
-                    <Link to="/consulting">Contact Us</Link>
+                    <Link to="/register">Sign Up</Link>
                   </li>
                
                 </ul>

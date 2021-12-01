@@ -11,10 +11,11 @@ const PayWithWallet = (props) => {
   const [type, settype] = useState(props.type);
   const [amount, setamount] = useState(props.price);
   const [walletbalance_th, setwalletbalance_th] = useState("");
+  const [walletbalance, setwalletbalance] = useState("");
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
-  const [alert, setalert] = useState("");
+  const [alertt, setalertt] = useState("");
   let history = useHistory();
 
 
@@ -36,12 +37,12 @@ const PayWithWallet = (props) => {
         },
       })
       .then((response) => {
-        if (response.data.response === true) {
+        if (response.data.success === true) {
           settrackid(response.data.trackid);
           setamount(response.data.amount);
           settype(response.data.type);
           setshowalert(true);
-          setalert(response.data.message);
+          setalertt(response.data.message);
           setissending(false);
           console.log(response.data);
           history.push({
@@ -53,7 +54,7 @@ const PayWithWallet = (props) => {
 
         } else {
           setshowalert(true);
-          setalert(response.data.message);
+          setalertt(response.data.message);
           setissending(false);
           console.log(response.data);
           }
@@ -61,12 +62,12 @@ const PayWithWallet = (props) => {
       .catch((error) => {
         console.log(error);
         setshowalert(true);
-        setalert(error.name, "Check your Network Connection!!!");
+        setalertt(error.name, "Check your Network Connection!!!");
         setissending(false);
       });
   } else {
     setshowalert(true);
-    // setalert("Try Again!!!");
+    // setalertt("Try Again!!!");
     setissending(false);
     }
     e.preventDefault();
@@ -75,7 +76,7 @@ const PayWithWallet = (props) => {
   const fetchBal = () => {
     const data = {
       apptoken: "T9H1E6KUYM",
-      usertoken: localStorage.getItem("usertoken"),
+      usertoken: usertoken,
     };
     axios
       .get(`https://test.api.eclipse.com.ng/v1/get-wallet-balance`, {
@@ -135,13 +136,13 @@ const PayWithWallet = (props) => {
                 <Alert color="warning">
                   Account Balance : ₦ {walletbalance_th}
                 </Alert>
-                {props.amountth} {props.trackid} {props.type} {usertoken}
+                {props.amount} {props.trackid} {props.type} {usertoken}
               </div>
 
               <div class="text-center h5">
                 {showalert ? (
                   <>
-                    <Alert color="success">{alert}</Alert>
+                    <Alert color="success">{alertt}</Alert>
                   </>
                 ) : (
                   <></>
@@ -151,12 +152,14 @@ const PayWithWallet = (props) => {
           </section>
         </Modal.Body>
         <Modal.Footer>
-          <div class="ml-auto mr-auto">
-            {props.amount < walletbalance_th ? (
+          <div class="ml-auto mr-auto text-center">
+            {props.amount < walletbalance ? (
               <>
+              <Link to="/dashboard/fund-wallet">
                 <button type="button" class="btn btn-danger  btn my-0">
                   Fund Wallet
                 </button>
+                </Link>
               </>
             ) : (
               <>
@@ -179,7 +182,7 @@ const PayWithWallet = (props) => {
                       class="btn btn-success my-0"
                       onClick={(e) => WalletPayment(e)}
                     >
-                      pay ₦ {props.amount}
+                      pay ₦ {props.amountth}
                     </button>
                     <button onClick={props.onHide} class="btn btn-red"> Close</button>
                   </>

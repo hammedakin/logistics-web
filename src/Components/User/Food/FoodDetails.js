@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import UserNavbar from "../../Navbar/UserNavbar";
-import PayWithPayStack from "../SendPackage/Payment/PayWithPayStack";
-import PayWithWallet from "../SendPackage/Payment/PayWithWallet";
+import FoodPayWithPayStack from "../Food/FoodPayWithPayStack";
+import FoodPayWithWallet from "../Food/FoodPayWithWallet";
+import { Alert } from "reactstrap";
 
 const FoodDetails = (props) => {
   const [id, setid] = useState("");
@@ -12,16 +13,15 @@ const FoodDetails = (props) => {
   const [resloc, setresloc] = useState("");
   const [dfee, setdfee] = useState("");
   const [price, setprice] = useState("");
+  const [priceth, setpriceth] = useState("");
   const [amount, setamount] = useState("");
+  const [fill, setfill] = useState(false);
 
+  const [phone, setphone] = useState(localStorage.getItem('phone'));
+  const [address, setaddress] = useState("");
 
   const fetchFoodDetails = () => {
-    // const data = {
-    //   apptoken: "T9H1E6KUYM",
-    //   fid: props.match.params.id
-    // };
-    // axios
-    //   .get(`https://test.api.eclipse.com.ng/v1/get-food-data`, { params: data })
+ 
     const data = new FormData();
     data.append("apptoken", "T9H1E6KUYM");
     data.append("id", props.match.params.id);
@@ -37,11 +37,13 @@ const FoodDetails = (props) => {
           console.log(response.data);
         } else {
           settitle(response.data.title);
+          setid(response.data.fid);
           setdes(response.data.description);
           setresname(response.data.resname);
           setresloc(response.data.reslocation);
           setdfee(response.data.dfee);
-          setprice(response.data.price_th);
+          setpriceth(response.data.price_th);
+          setprice(response.data.price);
           setamount(response.data.amount);
 
           console.log(response.data);
@@ -52,16 +54,25 @@ const FoodDetails = (props) => {
       fetchFoodDetails();
     }, 0);
 
+    // Fill Error
+    const Fill = () => {
+      if (address == ""){
+        setfill(true)
+      } else {
+        setfill(false)
+      }
+    }
+    // Fill Error
 
   // pay with wallet modal
   const [showremove, setShowremove] = useState(false);
   const handleCloseremove = () => setShowremove(false);
   const handleShowremove = () => setShowremove(true);
-  const [foodid, setfoodid] = useState("");
+  // const [id, setid] = useState("");
 
   function workModal(token) {
     // console.log(token)
-    setfoodid(token);
+    setid(token);
     handleShowremove();
   }
 
@@ -72,7 +83,7 @@ const FoodDetails = (props) => {
 
   function workModal1(token) {
     // console.log(token)
-    setfoodid(token);
+    setid(token);
     handleShowremove1();
   }
 
@@ -82,9 +93,10 @@ const FoodDetails = (props) => {
       <div className="send-package">
         <div className="food-details">
           <div className="container">
+            <h5> FOOD DETAILS </h5>
             <div className="row justify-content-center">
               {/* Image */}
-              <div className="col-md-6 curve mb-4">
+              <div className="col-md-6 curve mb-4 align-self-center">
                 <div className="card h-100">
                   <img
                     src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80"
@@ -98,23 +110,31 @@ const FoodDetails = (props) => {
               {/* Details */}
               <div className="col-md-6 curve mb-4">
                 <div className="card h-100">
-                  <div class="container mt-4">
-                    <h6>Title: {title}</h6>
+                  <div class="container mt-4 details">
+                    <h6>Name:
+                      <span class="font-weight-bold"> {title} </span> </h6>
                     <hr />
-                    <h6>Description: {des} </h6>
+                    <h6>Description:
+                       <span class="font-weight-bold"> {des} </span>  </h6>
                     <hr />
-                    <h6>price: ₦ {price}</h6>
+                    <h6>Price: 
+                     <span class="font-weight-bold"> ₦{priceth} </span> </h6>
                     <hr />
-                    <h6>Restaurant: {resname}</h6>
+                    <h6>Restaurant:
+                    <span class="font-weight-bold">
+                      {resname} </span> </h6>
                     <hr />
-                    <h6>Location: {resloc}</h6>
+                    <h6>Location:
+                    <span class="font-weight-bold">  {resloc} </span></h6>
                     <hr />
-                    <h6>Delivery Fee: ₦ {dfee}</h6>
+                    <h6>Delivery Fee:<span class="font-weight-bold"> {dfee} </span></h6>
                     <hr />
                   </div>
                 </div>
               </div>
               {/* Details */}
+
+              <h5 className="mt-4"> MAKE AN ORDER </h5>
 
               {/* Delivery Details */}
 
@@ -131,8 +151,9 @@ const FoodDetails = (props) => {
                               type="tel"
                               className=" input-style"
                               placeholder="Enter Phone Number *"
-                              // onChange={(e) => setsendermail(e.target.value)}
-                              // value={sendermail}
+                              onChange={(e) => setphone(e.target.value)}
+                              value={phone}
+                              required
                             />
                           </div>
                         </div>
@@ -144,8 +165,9 @@ const FoodDetails = (props) => {
                               type="text"
                               className=" input-style"
                               placeholder="Enter Address *"
-                              // onChange={(e) => setsendermail(e.target.value)}
-                              // value={sendermail}
+                              onChange={(e) => setaddress(e.target.value)}
+                              value={address}
+                              required
                             />
                           </div>
                         </div>
@@ -157,18 +179,52 @@ const FoodDetails = (props) => {
               {/* Delivery Details */}
 
               {/* Payment */}
-
+              {address == "" ? (
+                <>
               <div className="col-md-6 curve mb-4">
                 <div className="card h-100">
                   <div className="card-header">
-                    <h6 className="font-weight-bold">PAYMENT DETAILS </h6>
+                    <h6 className="font-weight-bold text-center">PAYMENT DETAILS </h6>
                   </div>
                   <div className="card-body text-center">
                     <h4 className="mb-4">
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
-                    <h1 className="bolder-text">₦ {price} </h1>
+                    <h1 className="bolder-text">₦ {priceth}</h1>
                   </div>
+                  <div className="text-center px-3">
+                  {fill ? (
+                  <Alert color="success"> Input Phone and Address </Alert>
+                  ): (
+                    <> </>
+                  )} </div>
+                  <div className="text-center invoice-btn">
+                    <button class="btn w-75" onClick={Fill}>
+                      {" "}
+                      pay with paystack
+                    </button>
+                    <button class="btn w-75" onClick={Fill}>
+                      {" "}
+                      pay with wallet
+                    </button>
+                  </div>
+                </div>
+              </div>
+                </>
+              ) : (
+                <>
+              <div className="col-md-6 curve mb-4">
+                <div className="card h-100">
+                  <div className="card-header">
+                    <h6 className="font-weight-bold text-center">PAYMENT DETAILS </h6>
+                  </div>
+                  <div className="card-body text-center">
+                    <h4 className="mb-4">
+                      <span className="bolder-text h6">Amount: </span>
+                    </h4>
+                    <h1 className="bolder-text">₦ {priceth}</h1>
+                  </div>
+                 
                   <div className="text-center invoice-btn">
                     <button class="btn w-75" onClick={(e) => workModal1(id)}>
                       {" "}
@@ -180,33 +236,45 @@ const FoodDetails = (props) => {
                     </button>
                   </div>
                 </div>
-
-                {/* Payment */}
               </div>
+                </>
+              )}
+
+            
+                {/* Payment */}
+
             </div>
           </div>
         </div>
       </div>
 
       {/* Pay With Wallet Modal */}
-      <PayWithPayStack
+      <FoodPayWithPayStack
         show={showremove1}
         onHide={handleCloseremove1}
         animation={false}
-        id={foodid}
-        trackid={title}
-        amountth={price}
+        id={id}
+        title={title}
+        price={price}
+        priceth={priceth}
+        phone={phone}
+        address={address}
+        resname={resname}
       />
       {/* Pay With Wallet Modal */}
 
       {/* Pay With Wallet Modal */}
-      <PayWithWallet
+      <FoodPayWithWallet
         show={showremove}
         onHide={handleCloseremove}
         animation={false}
-        id={foodid}
-        trackid={title}
-        amountth={price}
+        id={id}
+        title={title}
+        price={price}
+        priceth={priceth}
+        phone={phone}
+        address={address}
+        resname={resname}
       />
       {/* Pay With Wallet Modal */}
     </>

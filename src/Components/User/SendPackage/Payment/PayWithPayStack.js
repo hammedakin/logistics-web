@@ -119,12 +119,11 @@ const PayWithPayStack = (props) => {
                 {props.amountth} {props.trackid} {props.type} {usertoken}
               </div>
 
-              <div class="text-center h5"></div>
             </div>
           </section>
         </Modal.Body>
         <Modal.Footer>
-          <div class="ml-auto mr-auto">
+          <div class="ml-auto mr-auto text-center">
             <PaystackHookExample />
             <button onClick={props.onHide} class="btn btn-red"> Close</button>
           </div>

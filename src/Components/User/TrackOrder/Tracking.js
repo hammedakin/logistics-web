@@ -35,7 +35,6 @@ const Tracking = () => {
             setshowalert(true);
             setalert(res.data.message);
             console.log(res.data.message);
-          
           } else {
 
             const result = JSON.stringify(res.data);
@@ -50,7 +49,7 @@ const Tracking = () => {
               pathname: `/track/${trackid}`,
               state: {results: res.data},
             });
-
+            window.location.reload(true);
           }
         })
         .catch((error) => {

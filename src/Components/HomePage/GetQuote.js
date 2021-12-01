@@ -170,9 +170,7 @@ const GetQuote = () => {
               <h4 className="text-center"> GET QUOTE</h4>
               <h6 className="text-center">
                 {" "}
-                Using State and City details provided by the customer to show
-                the shipping rates and estimates saves you and your customers
-                valuable time.
+                Use Country, State and City Details to get your shipping rates and save valuable time.
               </h6>
             </div>
             <hr className="white" />

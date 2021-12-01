@@ -295,7 +295,7 @@ if (type==='int') {
                 {/* Sender Details  */}
                 {/* Sender Details  */}
 
-                <div className="col-md-10 ml-auto mr-auto">
+                <div className="col-md-11 ml-auto mr-auto">
                       <div className="input-group">
                         <input
                           type="text"
@@ -515,7 +515,7 @@ if (type==='int') {
 
                       <div className="input-group">
                         <input
-                          type="number"
+                          type="text"
                           className=" input-style"
                           placeholder="Zip Code *"
                           onChange={(e) => setzip(e.target.value)}
@@ -658,23 +658,6 @@ if (type==='int') {
                       </div>
                     </div>
 
-                    <div className="col-md-10 ">
-                      <select
-                        className="input-style"
-                        onChange={(e) => setonforwardingtownid(e.target.value)}
-                      >
-                        <option value="" selected="">
-                        Onforwarding *
-                        </option>
-                        <option value="1" selected="">
-                          Yes
-                        </option> 
-                        <option value="0" selected="">
-                          No
-                        </option>
-                       
-                      </select>
-                    </div>
                   </div>
                 </div>
 

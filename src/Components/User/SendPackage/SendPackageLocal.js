@@ -256,7 +256,7 @@ const SendPackageLocal = () => {
                 {/* Sender Details  */}
                 {/* Sender Details  */}
 
-                <div className="col-md-10 ml-auto mr-auto">
+                <div className="col-md-11 ml-auto mr-auto">
                       <div className="input-group">
                         <input
                           type="text"

@@ -1,7 +1,8 @@
 import React from 'react';
-import "./App.css";
-import "./User.css";
-import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import "./Styles/App.css";
+import "./Styles/User.css";
+import "./Styles/Admin.css"
+import { BrowserRouter, Route, Switch} from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
 import Homepage from "./Pages/Homepage";
 import GetQuote from './Components/HomePage/GetQuote';
@@ -21,8 +22,24 @@ import Invoice from './Components/User/SendPackage/Invoice';
 import TrackOrder from './Pages/UserArea/TrackOrder';
 import Food from './Pages/UserArea/Food';
 import FoodDetails from './Components/User/Food/FoodDetails'
+import FoodInvoice from './Components/User/Food/FoodInvoice';
 
 // User 
+
+// Admin
+import ProtectAdmin from './protectAdmin';
+import AdminLogin from './Components/Admin/AdminLogin';
+import AdminDashboard from './Pages/AdminArea/AdminDashboard';
+import NavButton from './Components/Admin/AdminDashboard/NavButton';
+import AllOrder from './Components/Admin/Order/AllOrder';
+import EachOrder from './Components/Admin/Order/EachOrder';
+import UploadFood from './Components/Admin/AdminFood/UploadFood';
+import AdminFood from './Pages/AdminArea/AdminFood';
+
+
+// Admin
+
+
 
 function App() {
   return (
@@ -75,11 +92,43 @@ function App() {
         
         <ProtectUser exact path="/food/:id" component={FoodDetails} />
 
+        <ProtectUser exact path="/food/invoice/:orderid" component={FoodInvoice} />
+
+
         {/* Food */}
 
 
-        <ProtectUser exact path="/dashboard" component={User} />             
+        <ProtectUser exact path="/dashboard" component={User} />  
+
         {/* User Area  */}
+
+        {/* Admin Area  */}
+        {/* Log In*/}
+        <Route exact path="/admin-login" component={AdminLogin} />
+        {/* Log In*/}
+
+        {/* Admin Dashboard */}
+        <ProtectAdmin exact path="/admin" component={AdminDashboard} />
+
+        {/* Admin Orders */}
+
+        <ProtectAdmin exact path="/admin/order" component={AllOrder} />
+
+        <ProtectAdmin exact path="/admin/order/package" component={EachOrder} />
+
+        {/* Admin Orders */}
+
+        {/* Admin Food */}
+        <ProtectAdmin exact path="/admin/addfood" component={AdminFood} />
+
+
+        {/* Admin Food */}
+
+        {/* Admin Dashboard */}
+
+
+        {/* Admin Area  */}
+
 
 
       <Route exact path="*" component={PageNotFound}/>

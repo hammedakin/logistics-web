@@ -18,8 +18,7 @@ const UserSideNav = () => {
         onClick={(e) => closeNav(e)}
         
       >
-        &times;
-      </a>
+<box-icon name='x-circle' color="white" size="1.5rem"></box-icon>      </a>
 
       <UserNavLinks />
 

@@ -19,96 +19,104 @@ const UserNavLinks = () => {
 
   function RemoveTrack() {
     localStorage.removeItem("results");
-    localStorage.removeItem("trackid");  
+    localStorage.removeItem("trackid");
   }
 
   return (
     <>
-      <ul class="navbar-nav ml-auto mr-auto">
+      {" "}
+      <div class=" my-2">
+        <Link to="/dashboard" className="navbar-brand">
+          <h5 class="name text-center" > ECLIPSE </h5>
+        </Link>
+      </div>
+<hr style={{ backgroundColor: "whitesmoke"}} class="m-1" />
+
+      <ul class="navbar-nav ml-auto mr-auto mt-3">
         <li class="nav-item">
-        <box-icon
-        class="box-icon"
-        size="1.1rem"
-        color=" #fff"
-        name="home"
-        type="logo"
-        ></box-icon>
+          <box-icon
+            class="box-icon"
+            size="1.1rem"
+            color=" #fff"
+            name="home"
+            type="logo"
+          ></box-icon>
           <NavLink
             // onClick={(e) => closeNav(e)}
             tag={Link}
             activeClassName="active1 "
             to="/dashboard"
             onClick={RemoveTrack}
-
-          >Home
+          >
+            Home
           </NavLink>
         </li>
 
         <li class="nav-item">
-        <box-icon
-        class="box-icon"
-        size="1.1rem"
-        color=" #fff"
-        name="gift"
-        type="logo"
-        ></box-icon>
+          <box-icon
+            class="box-icon"
+            size="1.1rem"
+            color=" #fff"
+            name="gift"
+            type="logo"
+          ></box-icon>
           <NavLink
             // onClick={(e) => closeNav(e)}
             tag={Link}
             activeClassName="active1"
             to="/send-package"
             onClick={RemoveTrack}
-
-          >Send Package
+          >
+            Send Package
           </NavLink>
         </li>
 
         <li class="nav-item ">
-        <box-icon
-        class="box-icon"
-        size="1.1rem"
-        color=" #fff"
-        name="paper-plane"
-        type="logo"
-        ></box-icon>
+          <box-icon
+            class="box-icon"
+            size="1.1rem"
+            color=" #fff"
+            name="paper-plane"
+            type="logo"
+          ></box-icon>
           <NavLink
             // onClick={(e) => closeNav(e)}
             tag={Link}
             activeClassName="active1"
             to="/track/"
             onClick={RemoveTrack}
-
-          >Track
+          >
+            Track
           </NavLink>
         </li>
 
         <li class="nav-item ">
-        <box-icon
-        class="box-icon"
-        size="1.1rem"
-        color=" #fff"
-        name="dish"
-        type="logo"
-        ></box-icon>
+          <box-icon
+            class="box-icon"
+            size="1.1rem"
+            color=" #fff"
+            name="dish"
+            type="logo"
+          ></box-icon>
           <NavLink
             // onClick={(e) => closeNav(e)}
             tag={Link}
             activeClassName="active1"
             to="/food"
             onClick={RemoveTrack}
-
-          >Food
+          >
+            Food
           </NavLink>
         </li>
       </ul>
-      <ul class="navbar-nav text-center"> 
-          <li>
-            <a onClick={HandleLogout}>
-              <button type="btn" class="btn shadow ">
-                logout
-              </button>
-            </a>
-          </li>
+      <ul class="navbar-nav text-center">
+        <li>
+          <a onClick={HandleLogout}>
+            <button type="btn" class="btn shadow ">
+              logout
+            </button>
+          </a>
+        </li>
       </ul>
     </>
   );

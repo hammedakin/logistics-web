@@ -4,8 +4,9 @@
   background-color: #fafafa!important;
   transition: 0.5s ease!important;
   padding: .5rem 1rem !important;
-  z-index: 1002 !important;
+  z-index: 1001 !important;
   text-align: left !important;
+  /* box-shadow: none !important; */
 
   /* height: 7rem ; */
 }
@@ -71,7 +72,7 @@ background: none;
   /* border: none !important ; */
   background: white !important;
   text-align: center !important;
-  border-radius: .5rem !important;
+  border-radius: .3rem !important;
   font-size: x-small;
 }
 
@@ -80,33 +81,24 @@ background: none;
   padding: 0.8rem 1rem !important;
   width: 7rem !important;
 }
-/* 
-nav .btn {
- 
-  text-transform: uppercase!important;
-  padding: 0.8rem 1.3rem !important;
-  border: #000 solid 2px !important;
-  border-radius: 5px;
-  color: #000;
-}
-nav .btn:hover {
-  background-color: #000 !important;
-  transition: 0.55s ease!important;
-  color: #fafafa !important;
+/* Admin Nav  */
+/* .usernav .adminnav {
+
 } */
+/* Admin Nav  */
 
 /* Navbar */
 .sidenav {
     height: 100%;
     width: 200px ;
     position: fixed;
-    top: 3rem;
-    padding-top: 3rem;
+    top: 0rem;
+    /* padding-top: 3rem; */
     left: 0;
     background-color: #096b00;
     overflow-x: hidden;
     transition: 0.3s ease;
-    z-index: 1001 !important;
+    z-index: 1002 !important;
   }
   
   .sidenav ul li {
@@ -138,11 +130,20 @@ nav .btn:hover {
 
   .sidenav .closebtn {
     position: absolute;
-    top: 0;
-    right: 25px;
+    /* top: 25px; */
+    right: 15px;
     font-size: 36px;
     margin-left: 50px;
     display: none;
+    /* background-color: red; */
+    border-radius: 2rem;
+    /* border: 1px white solid; */
+  }
+
+  .name {
+    text-align: center !important;
+    margin-left: 0.5rem !important;
+
   }
 
   .sidenav h5 {
@@ -178,13 +179,17 @@ nav .btn:hover {
   /* Navbar */
 .sidenav {
   width: 0 ;
-  padding-top: 3rem;
+  /* padding-top: 3rem; */
 }
 
 .sidenav .closebtn {
 display: block !important;
 }
+h5.name {
+  text-align: right !important;
+  margin-left: 0.5rem !important;
 
+}
 }
      
   

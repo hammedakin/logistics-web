@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
-const ProtectUser =({component:Component, ...rest}) =>{
+const ProtectAdmin =({component:Component, ...rest}) =>{
  
 
     
@@ -10,14 +10,14 @@ const ProtectUser =({component:Component, ...rest}) =>{
             {...rest}
             render={
             (props)=>{
-                if(localStorage.getItem('usertoken')){
+                if(localStorage.getItem('admintoken')){
                    return <Component {...props}/>
                 }
                 else{
-                    alert("Unauthorized Access, Please Login or Sign up")
+                    alert("Unauthorized Admin Access, Please Login or Sign up")
                    return <Redirect to={
                        {
-                           pathname:"/login"
+                           pathname:"/admin-login"
                        }
                     }/>
 
@@ -27,4 +27,4 @@ const ProtectUser =({component:Component, ...rest}) =>{
     )
 }
 
-export default ProtectUser;
+export default ProtectAdmin;

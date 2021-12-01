@@ -1,0 +1,25 @@
+.nav-button {
+    /* background-color: #272626; */
+    border: #272626 solid 1px;
+    border-radius: 1rem;
+    padding: 2rem 1rem;
+}
+
+.nav-button .first {
+    background-color: #fcfff8;
+    padding: 1rem 1rem;
+    text-align: center !important;
+    border-radius: 1rem;
+    color: black !important;
+    margin-bottom: 1rem;
+}
+
+.nav-button .first a{
+    color: black !important;
+}
+
+.admin {
+    margin-top: 4rem !important;
+}
+
+  

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
 import img from "./img/bicycle.png";
+import Navbar from '../Navbar/Navbar'
 // import { Link } from "react-router-dom";
 
 const UserAuth = () => {
@@ -59,6 +60,7 @@ const UserAuth = () => {
 
   return (
     <>
+    <Navbar />
       <main className="login animated fadeInRight">
         <div className="row">
           {/* Auth Form  */}

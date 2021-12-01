@@ -20,7 +20,7 @@ const WhatWeDo = () => {
               </div>
               <div className="content">
                 <h5> SEND PACKAGE</h5>
-                <p> Move local and international delivery in real time. </p>
+                <p> Ship Bulk and Single Items Locally and Internationally. </p>
               </div>
             </div>
 
@@ -30,7 +30,7 @@ const WhatWeDo = () => {
               </div>
               <div className="content">
                 <h5> TRACK PACKAGE</h5>
-                <p> Move local and international delivery in real time.  </p>
+                <p>Track your local and International Deliveries in Real Time.  </p>
               </div>
             </div>
 
@@ -40,7 +40,7 @@ const WhatWeDo = () => {
               </div>
               <div className="content">
                 <h5> BUY FOOD</h5>
-                <p> Move local and international delivery in real time. </p>
+                <p> Order Food from your Favorite Restaurants. </p>
               </div>
             </div>
           </div>
