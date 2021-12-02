@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 const AdCreateInt = () => {
 
 // Sender 
-  const [usertoken, setusertoken] = useState("");
+  const [usertoken, setusertoken] = useState("ADMIN");
   const [pickstate, setpickstate] = useState("");
   const [picktown, setpicktown] = useState("");
   const [sendermail, setsendermail] = useState("");
@@ -21,7 +21,7 @@ const AdCreateInt = () => {
   const [rmail, setrmail] = useState("");
   const [rphone, setrphone] = useState("");
   const [des_area, setdes_area] = useState("");
-  const [rname, setrname] = useState("GG");
+  const [rname, setrname] = useState("");
   const [country, setcountry] = useState("");
   const [zip, setzip] = useState("");
 
@@ -32,6 +32,7 @@ const AdCreateInt = () => {
   const [description, setdescription] = useState("");
   const [iscargo, setiscargo] = useState("");
   const [type, settype] = useState('int');
+  const [paid_type, setpaid_type] = useState("");
 
 // States and cities 
   const [allcountries, setallcountries] = useState([]);
@@ -45,40 +46,12 @@ const AdCreateInt = () => {
   const [showalert, setshowalert] = useState(false);
   const [alert, setalert] = useState("");
 
-  const [trackid, settrackid] = useState("");
   let history = useHistory(); 
-
-  // useEffect(() => {
-  //   settype(localStorage.getItem('type'))
-  //   },[localStorage.getItem('type')]
-  //   )
-
 
   // Function for to process the form
   function SendLocalPackage(e) {
     if (
-      (
-      pickstate,
-      picktown,
-      sendermail,
-      loc_area,
-      senderphone,
-      sendername,
-      country,
-      zip,
-      state,
-      town,
-      rmail,
-      rphone,
-      des_area,
-      rname,
-      packagename,
-      weight,
-      worth,
-      description,
-      iscargo,
-      type
-      )
+      ( pickstate, picktown, sendermail, loc_area, senderphone, sendername, country, zip, state, town, rmail, rphone, des_area, rname, packagename, weight, worth, description, iscargo, type, paid_type )
     ) {
       setissending(true);
       const data = new FormData();
@@ -102,7 +75,8 @@ const AdCreateInt = () => {
       data.append("description", description);
       data.append("iscargo", iscargo);
       data.append("type", type);
-      data.append("usertoken", localStorage.getItem('usertoken'));
+      data.append("paid_type", paid_type);
+      data.append("usertoken", usertoken);
       data.append("apptoken", "T9H1E6KUYM");
 
       axios
@@ -117,28 +91,28 @@ const AdCreateInt = () => {
           setshowalert(true);
           setalert(res.data.message);
           setissending(false);
-          setusertoken((localStorage.getItem('usertoken')))
           history.push({
-            pathname:`/send-package/invoice/${res.data.trackid}`, 
-            state:res.data
+            pathname: `/admin/order/invoice/${res.data.trackid}`,
+            state: res.data,
             })
 
 
         } else {
           setshowalert(true);
-          setalert(res.data.message);
+          setalert(res.data.message, "error");
           setissending(false);
         }
       })
       .catch((error) => {
         console.log(error);
         setshowalert(true);
-        setalert(error.name);
+        setalert("Check your Network Connection!!!");
         setissending(false);
       });
   } else {
     setshowalert(true);
     setalert("Empty fields");
+    setissending(false);
   }
   e.preventDefault();
 }
@@ -655,6 +629,26 @@ if (type==='int') {
                       </div>
                     </div>
 
+                    <div className="col-md-10 ">
+                      <select
+                        className="input-style"
+                        onChange={(e) => setpaid_type(e.target.value)}
+                      >
+                        <option value="" selected="">
+                          Payment Type *
+                        </option>
+                        <option value="POS" selected="">
+                          POS
+                        </option>
+                        <option value="Cash" selected="">
+                          CASH
+                        </option>
+                        <option value="Transfer" selected="">
+                          TRANSFER
+                        </option>
+
+                      </select>
+                    </div>
                   </div>
                 </div>
 

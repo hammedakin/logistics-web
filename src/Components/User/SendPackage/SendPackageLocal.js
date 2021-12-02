@@ -56,25 +56,7 @@ const SendPackageLocal = () => {
   // Function for to process the form
   function SendLocalPackage(e) {
     if (
-      (
-      pickstate,
-      picktown,
-      sendermail,
-      loc_area,
-      senderphone,
-      sendername,
-      state,
-      town,
-      rmail,
-      rphone,
-      des_area,
-      rname,
-      packagename,
-      weight,
-      description,
-      onforwardingtownid,
-      type
-      )
+      ( pickstate, picktown, sendermail, loc_area, senderphone, sendername, state, town, rmail, rphone, des_area, rname, packagename, weight, description, onforwardingtownid, type )
     ) {
       setissending(true);
       const data = new FormData();
@@ -110,7 +92,6 @@ const SendPackageLocal = () => {
           setshowalert(true);
           setalert(res.data.message);
           setissending(false);
-          setusertoken((localStorage.getItem('usertoken')))
           history.push({
             pathname:`/send-package/invoice/${res.data.trackid}`, 
             state:res.data
@@ -126,12 +107,14 @@ const SendPackageLocal = () => {
       .catch((error) => {
         console.log(error);
         setshowalert(true);
-        setalert(error.name);
+        setalert("Check your Network Connection!!!");
         setissending(false);
       });
   } else {
     setshowalert(true);
     setalert("Empty fields");
+    setissending(false);
+
   }
   e.preventDefault();
 }
@@ -218,6 +201,8 @@ const SendPackageLocal = () => {
       })
       .catch((error) => {
         console.log(error.response);
+    setissending(false);
+
       });
   };
   useEffect(() => {
@@ -234,7 +219,8 @@ const SendPackageLocal = () => {
    // Function for to call all onforward
    const fetchonforward = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
+      apptoken: "T9H1E6KUYM",
+      citycode: town
     }
     axios
       .get(`https://test.api.eclipse.com.ng/v1/getOnforwarding`, {params:data})

@@ -57,28 +57,7 @@ const SendPackageInt = () => {
   // Function for to process the form
   function SendLocalPackage(e) {
     if (
-      (
-      pickstate,
-      picktown,
-      sendermail,
-      loc_area,
-      senderphone,
-      sendername,
-      country,
-      zip,
-      state,
-      town,
-      rmail,
-      rphone,
-      des_area,
-      rname,
-      packagename,
-      weight,
-      worth,
-      description,
-      iscargo,
-      type
-      )
+      ( pickstate, picktown, sendermail, loc_area, senderphone, sendername, country, zip, state, town, rmail, rphone, des_area, rname, packagename, weight, worth, description, iscargo, type )
     ) {
       setissending(true);
       const data = new FormData();
@@ -117,7 +96,6 @@ const SendPackageInt = () => {
           setshowalert(true);
           setalert(res.data.message);
           setissending(false);
-          setusertoken((localStorage.getItem('usertoken')))
           history.push({
             pathname:`/send-package/invoice/${res.data.trackid}`, 
             state:res.data
@@ -126,19 +104,21 @@ const SendPackageInt = () => {
 
         } else {
           setshowalert(true);
-          setalert(res.data.message);
+          setalert(res.data.message, "error");
           setissending(false);
         }
       })
       .catch((error) => {
         console.log(error);
         setshowalert(true);
-        setalert(error.name);
+        setalert("Check your Network Connection!!!");
         setissending(false);
       });
   } else {
     setshowalert(true);
     setalert("Empty fields");
+    setissending(false);
+
   }
   e.preventDefault();
 }

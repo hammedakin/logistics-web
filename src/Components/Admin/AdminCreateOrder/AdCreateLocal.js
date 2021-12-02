@@ -2,14 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
-import Invoice from "./AdOrderInvoice";
-
-
 
 const AdCreateLocal = () => {
-
-// Sender 
-  const [usertoken, setusertoken] = useState("");
+  // Sender
+  const [usertoken, setusertoken] = useState("ADMIN");
   const [pickstate, setpickstate] = useState("");
   const [picktown, setpicktown] = useState("");
   const [sendermail, setsendermail] = useState("");
@@ -17,64 +13,39 @@ const AdCreateLocal = () => {
   const [senderphone, setsenderphone] = useState("");
   const [sendername, setsendername] = useState("");
 
-  // Receiver 
+  // Receiver
   const [state, setstate] = useState("");
-  const [town, settown] = useState("");
+  const [town, settown] = useState("ABV");
   const [rmail, setrmail] = useState("");
   const [rphone, setrphone] = useState("");
   const [des_area, setdes_area] = useState("");
   const [rname, setrname] = useState("");
 
-  // Items Details 
+  // Items Details
   const [packagename, setpackagename] = useState("");
   const [weight, setweight] = useState("");
   const [description, setdescription] = useState("");
   const [onforwardingtownid, setonforwardingtownid] = useState("");
+  const [paid_type, setpaid_type] = useState("");
   const [type, settype] = useState("local");
 
-// States and cities 
+  // States and cities
   const [sendstates, setsendstates] = useState([]);
   const [allstates, setallstates] = useState([]);
   const [allcities, setallcities] = useState([]);
   const [allonforward, setallonforward] = useState([]);
-  const [count, setcount] = useState(0)
-
+  const [count, setcount] = useState(0);
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
   const [alert, setalert] = useState("");
 
-  const [trackid, settrackid] = useState("");
-  let history = useHistory(); 
-
-
-  // useEffect(() => {
-  // settype(localStorage.getItem('type'))
-  // },[localStorage.getItem('type')]
-  // )
+  let history = useHistory();
 
   // Function for to process the form
   function SendLocalPackage(e) {
     if (
-      (
-      pickstate,
-      picktown,
-      sendermail,
-      loc_area,
-      senderphone,
-      sendername,
-      state,
-      town,
-      rmail,
-      rphone,
-      des_area,
-      rname,
-      packagename,
-      weight,
-      description,
-      onforwardingtownid,
-      type
-      )
+      (pickstate, picktown, sendermail, loc_area, senderphone, sendername, state, town, rmail, rphone, des_area, rname, packagename, weight, description, onforwardingtownid, type, paid_type)
     ) {
       setissending(true);
       const data = new FormData();
@@ -95,62 +66,60 @@ const AdCreateLocal = () => {
       data.append("description", description);
       data.append("onforwardingtownid", onforwardingtownid);
       data.append("type", type);
-      data.append("usertoken", localStorage.getItem('usertoken'));
+      data.append("paid_type", paid_type);
+      data.append("usertoken", usertoken);
       data.append("apptoken", "T9H1E6KUYM");
 
       axios
-      .post(`https://test.api.eclipse.com.ng/v1/make-order`, data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.success === true) {
+        .post(`https://test.api.eclipse.com.ng/v1/make-order`, data, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.success === true) {
+            setshowalert(true);
+            setalert(res.data.message);
+            setissending(false);
+            history.push({
+              pathname: `/admin/order/invoice/${res.data.trackid}`,
+              state: res.data,
+            });
+          } else {
+            setshowalert(true);
+            setalert(res.data.message, "error");
+            setissending(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
           setshowalert(true);
-          setalert(res.data.message);
+          setalert("Check your Network Connection!!!");
           setissending(false);
-          setusertoken((localStorage.getItem('usertoken')))
-          history.push({
-            pathname:`/admin/order/invoicee`, 
-            state:res.data
-            })
-
-
-        } else {
-          setshowalert(true);
-          setalert(res.data.message);
-          setissending(false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setshowalert(true);
-        setalert(error.name);
-        setissending(false);
-      });
-  } else {
-    setshowalert(true);
-    setalert("Empty fields");
+        });
+    } else {
+      setshowalert(true);
+      setalert("Empty fields");
+      setissending(false);
+    }
+    e.preventDefault();
   }
-  e.preventDefault();
-}
   // Function for to process the form
 
   // Function for to call sender states
   const fetchsendstates = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
-    }
+      apptoken: "T9H1E6KUYM",
+    };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
+      .get(`https://test.api.eclipse.com.ng/v1/get-states`, { params: data })
       .then((response) => {
         if (response.data.success === false) {
-
-        console.log(response.data);
-        }else {
-        setsendstates(response.data);
-        console.log(response.data);
+          console.log(response.data);
+        } else {
+          setsendstates(response.data);
+          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -162,26 +131,25 @@ const AdCreateLocal = () => {
   }, [count]);
 
   const sendstate = sendstates.map((item, i) => {
-   return (
-    <option value={`${item.id}`}> {item.state} </option>
-   );
- });
+    return <option value={`${item.id}`}> {item.state} </option>;
+  });
   // Function for to call Sender states
 
   // Function for to call all states
   const fetchstates = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
-    }
+      apptoken: "T9H1E6KUYM",
+    };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states-all`, {params:data})
+      .get(`https://test.api.eclipse.com.ng/v1/get-states-all`, {
+        params: data,
+      })
       .then((response) => {
         if (response.data.success === false) {
-
-        console.log(response.data);
-        }else {
-        setallstates(response.data);
-        console.log(response.data);
+          console.log(response.data);
+        } else {
+          setallstates(response.data);
+          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -193,27 +161,25 @@ const AdCreateLocal = () => {
   }, [count]);
 
   const states = allstates.map((item, i) => {
-   return (
-    <option value={`${item.id}`}> {item.state} </option>
-   );
- });
+    return <option value={`${item.id}`}> {item.state} </option>;
+  });
   // Function for to call all states
 
-
-
-   // Function for to call all cities
-   const fetchcities = () => {
+  // Function for to call all cities
+  const fetchcities = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
-    }
+      apptoken: "T9H1E6KUYM",
+    };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-cities-fedex`, {params:data})
+      .get(`https://test.api.eclipse.com.ng/v1/get-cities-fedex`, {
+        params: data,
+      })
       .then((response) => {
         if (response.data.success === false) {
-        console.log(response.data);
-        }else {
-        setallcities(response.data);
-        console.log(response.data);
+          console.log(response.data);
+        } else {
+          setallcities(response.data);
+          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -225,25 +191,26 @@ const AdCreateLocal = () => {
   }, [count]);
 
   const cities = allcities.map((item, i) => {
-   return (
-    <option value={`${item.CityCode}`}> {item.CityName} </option>
-   );
- });
+    return <option value={`${item.CityCode}`}> {item.CityName} </option>;
+  });
   // Function for to call all cities
-
-   // Function for to call all onforward
-   const fetchonforward = () => {
+  console.log(town);
+  // Function for to call all onforward
+  const fetchonforward = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
-    }
+      apptoken: "T9H1E6KUYM",
+      citycode: town,
+    };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/getOnforwarding`, {params:data})
+      .get(`https://test.api.eclipse.com.ng/v1/getOnforwarding`, {
+        params: data,
+      })
       .then((response) => {
         if (response.data.success === false) {
-        console.log(response.data);
-        }else {
-        setallonforward(response.data);
-        console.log(response.data);
+          console.log(response.data);
+        } else {
+          setallonforward(response.data);
+          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -255,27 +222,21 @@ const AdCreateLocal = () => {
   }, [count]);
 
   const onforward = allonforward.map((item, i) => {
-   return (
-    <option value={`${item.id}`}> {item.name} </option>
-   );
- });
+    return <option value={`${item.id}`}> {item.name} </option>;
+  });
   // Function for to call all onforward
 
-        // item.hotdeals
-        let types
-        if (type=='local') {
-          types = 'LOCAL';
-        } 
-        else if (type=== 'int') {
-          types = 'INTERNATIONAL';
-        } else {
-          types = 'Select Type Above';
-          
-        }
-
+  // item.hotdeals
+  let types;
+  if (type == "local") {
+    types = "LOCAL";
+  } else if (type === "int") {
+    types = "INTERNATIONAL";
+  } else {
+    types = "Select Type Above";
+  }
 
   return (
-
     <>
       <section className="send">
         <div className="container">
@@ -288,25 +249,23 @@ const AdCreateLocal = () => {
                 {/* Sender Details  */}
 
                 <div className="col-md-11 ml-auto mr-auto">
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className=" input-style"
-                          placeholder="Type"
-                          onChange={(e) => settype(e.target.value)}
-                          value={types}
-                          disabled
-                        />
-                      </div>
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      className=" input-style"
+                      placeholder="Type"
+                      onChange={(e) => settype(e.target.value)}
+                      value={types}
+                      disabled
+                    />
+                  </div>
                 </div>
 
                 <div className="col-md-6">
                   <h5 className="text-center"> Sender's Details </h5>
 
                   <div className="row justify-content-center">
-                   
-
-                  <div className="col-md-10 ">
+                    <div className="col-md-10 ">
                       {/* <label> Name </label> */}
 
                       <div className="input-group">
@@ -358,7 +317,6 @@ const AdCreateLocal = () => {
                         </option>
 
                         {sendstate}
-                       
                       </select>
                     </div>
 
@@ -372,7 +330,6 @@ const AdCreateLocal = () => {
                         </option>
 
                         {cities}
-                       
                       </select>
                     </div>
 
@@ -387,7 +344,6 @@ const AdCreateLocal = () => {
                         ></textarea>
                       </div>
                     </div>
-                  
                   </div>
                 </div>
 
@@ -401,8 +357,7 @@ const AdCreateLocal = () => {
                   <h5 className="text-center"> Receiver's Details </h5>
 
                   <div className="row justify-content-center">
-
-                  <div className="col-md-10 ">
+                    <div className="col-md-10 ">
                       {/* <label> Name </label> */}
 
                       <div className="input-group">
@@ -443,7 +398,7 @@ const AdCreateLocal = () => {
                         />
                       </div>
                     </div>
-                   
+
                     <div className="col-md-10 ">
                       <select
                         className="input-style"
@@ -454,7 +409,6 @@ const AdCreateLocal = () => {
                         </option>
 
                         {states}
-                       
                       </select>
                     </div>
 
@@ -468,7 +422,6 @@ const AdCreateLocal = () => {
                         </option>
 
                         {cities}
-                       
                       </select>
                     </div>
 
@@ -483,7 +436,6 @@ const AdCreateLocal = () => {
                         ></textarea>
                       </div>
                     </div>
-
                   </div>
                 </div>
 
@@ -510,7 +462,6 @@ const AdCreateLocal = () => {
                     </div>
 
                     <div className="col-md-10 ">
-
                       <div className="input-group">
                         <input
                           type="text"
@@ -521,9 +472,19 @@ const AdCreateLocal = () => {
                         />
                       </div>
                     </div>
-
+                    
+                    <div className="col-md-10 ">
+                      <select
+                        className="input-style"
+                        onChange={(e) => setonforwardingtownid(e.target.value)}
+                      >
+                        <option value="" selected="">
+                          Onforwarding *
+                        </option>
+                        {onforward}
+                      </select>
+                    </div>
                   </div>
-
                 </div>
 
                 {/* Package Details  */}
@@ -551,13 +512,21 @@ const AdCreateLocal = () => {
                     <div className="col-md-10 ">
                       <select
                         className="input-style"
-                        onChange={(e) => setonforwardingtownid(e.target.value)}
+                        onChange={(e) => setpaid_type(e.target.value)}
                       >
                         <option value="" selected="">
-                        Onforwarding *
+                          Payment Type *
                         </option>
-                        {onforward}
-                       
+                        <option value="POS" selected="">
+                          POS
+                        </option>
+                        <option value="Cash" selected="">
+                          CASH
+                        </option>
+                        <option value="Transfer" selected="">
+                          TRANSFER
+                        </option>
+
                       </select>
                     </div>
                   </div>
@@ -567,57 +536,48 @@ const AdCreateLocal = () => {
                 {/* Means Details  */}
 
                 <div class="col-md-12">
-                        {showalert ? (
-                          <>
-                            <Alert color="success">{alert}</Alert>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
+                  {showalert ? (
+                    <>
+                      <Alert color="success">{alert}</Alert>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
 
                 <div class="col-md-10  mx-auto text-center">
                   <div class="user-btn mb-4 mr-auto text-center">
-                   
-                  {issending ? (
-                <>
-                  <button
-                    type="button"
-                    class="btn shadow waves-effect"
-                    action="submit"              
-                  >
-                  <strong>     
-                      processing <Spinner color="light" />
-                    </strong>
-                  </button>
-                </>
-              ) : (
-                <>
-                         
-                  <button
-                    type="button"
-                    class="btn shadow waves-effect"
-                    action="submit"
-                    onClick={(e) => SendLocalPackage(e)}
-                  >
-                    
-                    <strong> submit </strong>
-                  </button>
-                </>
-              )}
-
+                    {issending ? (
+                      <>
+                        <button
+                          type="button"
+                          class="btn shadow waves-effect"
+                          action="submit"
+                        >
+                          <strong>
+                            processing <Spinner color="light" />
+                          </strong>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          class="btn shadow waves-effect"
+                          action="submit"
+                          onClick={(e) => SendLocalPackage(e)}
+                        >
+                          <strong> submit </strong>
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
-
-                
-
-
               </div>
             </form>
           </div>
         </div>
       </section>
-
     </>
   );
 };

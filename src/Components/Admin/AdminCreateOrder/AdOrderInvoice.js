@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
 import AdminNavbar from "../../Navbar/AdminNavbar";
-// import Payment from "./Payment/Payment";
 import { useHistory } from "react-router";
-
+import BackButton from "../../BackButton";
 
 const AdOrderInvoice = (props) => {
-
   const [trackid, settrackid] = useState("");
   const [date, setdate] = useState("");
   const [status, setstatus] = useState("");
@@ -48,16 +46,15 @@ const AdOrderInvoice = (props) => {
   const [alert, setalert] = useState("");
 
   let history = useHistory();
-
   const fetchInvoice = () => {
-     const data = new FormData();
+    const data = new FormData();
     data.append("apptoken", "T9H1E6KUYM");
     data.append("trackid", props.match.params.trackid);
     axios
       .post(`https://test.api.eclipse.com.ng/v1/get-invoice-data`, data, {
         headers: {
           "content-type": "multipart/form-data",
-        }
+        },
       })
       .then((response) => {
         if (response.data.success == false) {
@@ -93,38 +90,46 @@ const AdOrderInvoice = (props) => {
           setexpressth(response.data.price_express_th);
           setalert(response.data.message);
           console.log(response.data);
-                  
-          history.push({
-            state: response.data
-          });
 
+          history.push({
+            state: response.data,
+          });
         }
       });
-    };
-    useEffect(() => {
-      fetchInvoice();
-    }, 0);
-  
- 
-  let statuss
+  };
+  useEffect(() => {
+    fetchInvoice();
+  }, 0);
+
+  let statuss;
   if (status === "paid") {
-  statuss =  <span class="ml-4 px-2 h6 green white-text"><span> Paid </span></span>
+    statuss = (
+      <span class="ml-4 px-2 h6 green white-text">
+        <span> Paid </span>
+      </span>
+    );
   } else if (status === "unpaid") {
-   statuss = <span class="ml-2 px-2 h6 yellow"><span> Unpaid </span></span>
+    statuss = (
+      <span class="ml-2 px-2 h6 yellow">
+        <span> Unpaid </span>
+      </span>
+    );
   } else {
-    <span class="ml-4 px-2 h6 red white-text"><span> Cancelled </span></span>
+    <span class="ml-4 px-2 h6 red white-text">
+      <span> Cancelled </span>
+    </span>;
   }
 
   return (
     <>
-      <AdminNavbar /> 
+      <AdminNavbar />
       <div className="send-package admin-create-order">
         <div className="invoice">
-          {/* <button div class="btn"> back</button> */}
           <div className="container">
+        <BackButton/>
+
             <div className="mb-4">
               <h5 className="">
-                
                 Invoice - {packagename}
                 {statuss}
               </h5>
@@ -149,28 +154,31 @@ const AdOrderInvoice = (props) => {
                     <h6 className="font-weight-bold">SENDER DETAILS </h6>
                   </div>
                   <div className="card-body">
-                    <h6>Name: 
-                      <span className="bolder-text">
-                      {sendername}
-                         </span>
+                    <h6>
+                      Name:
+                      <span className="bolder-text">{sendername}</span>
                     </h6>
-                    <hr/>
+                    <hr />
 
                     <h6>
                       City: <span className="bolder-text"> {sendertown} </span>
                     </h6>
-                    <hr/>
-                    <h6>Email: 
-                      <span className="bolder-text">{sendermail} </span> 
+                    <hr />
+                    <h6>
+                      Email:
+                      <span className="bolder-text">{sendermail} </span>
                     </h6>
-                    <hr/>
-                    <h6>Phone: <span className="bolder-text"> {senderphone}</span> 
+                    <hr />
+                    <h6>
+                      Phone: <span className="bolder-text"> {senderphone}</span>
                     </h6>
-                    <hr/>
-                    <h6> Address: <span className="bolder-text">{senderaddress}
-                      </span>
+                    <hr />
+                    <h6>
+                      {" "}
+                      Address:{" "}
+                      <span className="bolder-text">{senderaddress}</span>
                     </h6>
-                    <hr/>
+                    <hr />
                   </div>
                 </div>
               </div>
@@ -181,44 +189,45 @@ const AdOrderInvoice = (props) => {
                     <h6 className="font-weight-bold">RECEIVER DETAILS </h6>
                   </div>
                   <div className="card-body">
-                    <h6>Name: <span className="bolder-text">{receiver_name}</span>
-                      
+                    <h6>
+                      Name: <span className="bolder-text">{receiver_name}</span>
                     </h6>
-                    <hr/>
+                    <hr />
                     {/* <h6>
                       <span className="bolder-text">State: </span>
                       {destination_state}
                     </h6>
                     <hr/> */}
-                    <h6>City:
+                    <h6>
+                      City:
                       <span className="bolder-text"> {destination_town}</span>
-                      
                     </h6>
-                    <hr/>
-                    <h6>Email: 
+                    <hr />
+                    <h6>
+                      Email:
                       <span className="bolder-text"> {receiver_mail}</span>
-                      
                     </h6>
-                    <hr/>
-                    <h6>Phone:
+                    <hr />
+                    <h6>
+                      Phone:
                       <span className="bolder-text"> {receiver_phone} </span>
-                      
                     </h6>
-                    <hr/>
-                    <h6>Address:
-                      <span className="bolder-text"> {des_area}</span> 
+                    <hr />
+                    <h6>
+                      Address:
+                      <span className="bolder-text"> {des_area}</span>
                     </h6>
-                    <hr/>
+                    <hr />
 
                     {country === "" ? (
                       <></>
                     ) : (
                       <>
-                        <h6>Country:
+                        <h6>
+                          Country:
                           <span className="bolder-text"> {country}</span>
-                          
                         </h6>
-                        <hr/>
+                        <hr />
                       </>
                     )}
                   </div>
@@ -233,51 +242,52 @@ const AdOrderInvoice = (props) => {
                   <div className="card-body">
                     <h6>
                       Type:
-                      <span className="text-uppercase bolder-text"> {type} </span>
+                      <span className="text-uppercase bolder-text">
+                        {" "}
+                        {type}{" "}
+                      </span>
                     </h6>
-                    <hr/>
-                    <h6>Package Name:
+                    <hr />
+                    <h6>
+                      Package Name:
                       <span className="bolder-text"> {packagename}</span>
-                      
                     </h6>
-                    <hr/>
-                    <h6>Weight:
-                      <span className="bolder-text"> {weight} kg</span> 
+                    <hr />
+                    <h6>
+                      Weight:
+                      <span className="bolder-text"> {weight} kg</span>
                     </h6>
-                    <hr/>
+                    <hr />
 
-                    <h6>Onforwarding:
+                    <h6>
+                      Onforwarding:
                       <span className="bolder-text"> {onforward} </span>
-                      
                     </h6>
-                    <hr/>
+                    <hr />
 
                     {country === "" ? (
                       <></>
                     ) : (
                       <>
-                        <h6>Cargo:
-                          <span className="bolder-text"> {cargo}</span> 
+                        <h6>
+                          Cargo:
+                          <span className="bolder-text"> {cargo}</span>
                         </h6>
-                        <hr/>
-                        <h6>Worth: 
+                        <hr />
+                        <h6>
+                          Worth:
                           <span className="bolder-text"> ₦ {worth}</span>
                         </h6>
-                        <hr/>
+                        <hr />
                       </>
                     )}
 
-                    <h6>Description:
+                    <h6>
+                      Description:
                       <span className="bolder-text"> {description} </span>
-                      
                     </h6>
-                    <hr/>
+                    <hr />
                   </div>
-                  {/* <div className="text-left ml-2 invoice-btn">
-                    <Link to="/track">
-                      <button class="btn w-75"> TRACK ORDER</button>
-                    </Link>
-                  </div> */}
                 </div>
               </div>
 
@@ -286,16 +296,23 @@ const AdOrderInvoice = (props) => {
                   <div className="card-header">
                     <h6 className="font-weight-bold">PAYMENT DETAILS </h6>
                   </div>
-                  {/* <Payment trackid={trackid} price={price} priceth={priceth} type={type} status={status} express={express} expressth={expressth} /> */}
 
+                  <div className="card-body text-center">
+                    <h4 className="mb-4">
+                      <span className="bolder-text h6">Amount: </span>
+                    </h4>
+                    <h1 className="bolder-text green-text">₦ {priceth}</h1>
+                  </div>
+                  <div className="mx-3 text-center">
+                    <Alert color="success">{status}</Alert>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-   </>
+    </>
   );
 };
 

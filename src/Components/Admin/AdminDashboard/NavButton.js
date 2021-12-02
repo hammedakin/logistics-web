@@ -104,6 +104,14 @@ const NavButton = () => {
             </Link>
           </div>
           <div className="col-md-4 ">
+            <Link to="/admin/transactions">
+              <div className="first navb shadow ">
+                <img src={history} width="30px" />
+                <h6> Transaction Log </h6>
+              </div>
+            </Link>
+          </div>
+          <div className="col-md-4 ">
             {/* <Link to="/admin/restaurant"> */}
             <div className="first navb shadow ">
               <img src={setting} width="30px" />

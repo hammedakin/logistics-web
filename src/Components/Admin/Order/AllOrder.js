@@ -48,7 +48,7 @@ const AllOrder = () => {
       <>
         <div className="second" key={i}>
          {item.id} <Alert color="success">
-          <Link to="/admin/order/package">  <span className="font-weight-bold" > {item.trackid} </span> </Link> -
+          <Link to={`/admin/order/invoice/${item.trackid}`}>  <span className="font-weight-bold" > {item.trackid} </span> </Link> -
             {item.packagename}
             <br />
             <span className=""> {item.timestamp}</span>

@@ -17,7 +17,6 @@ import UserDashboard from './Pages/UserArea/UserDashboard';
 import UserLogin from './Components/User/UserLogin';
 import UserRegister from './Components/User/UserRegister';
 import UserAuth from './Components/User/UserAuth';
-import FundWallet from './Components/User/Dashboard/FundWallet';
 import Invoice from './Components/User/SendPackage/Invoice';
 import TrackOrder from './Pages/UserArea/TrackOrder';
 import Food from './Pages/UserArea/Food';
@@ -31,12 +30,12 @@ import ProtectAdmin from './protectAdmin';
 import AdminLogin from './Components/Admin/AdminLogin';
 import AdminDashboard from './Pages/AdminArea/AdminDashboard';
 import AllOrder from './Components/Admin/Order/AllOrder';
-import EachOrder from './Components/Admin/Order/EachOrder';
 import AdminFood from './Pages/AdminArea/AdminFood';
 import AdminRestaurant from './Pages/AdminArea/AdminRestaurant';
 import UserList from './Components/Admin/Account/UserList';
 import AdCreateOrder from './Pages/AdminArea/AdCreateOrder';
 import AdOrderInvoice from './Components/Admin/AdminCreateOrder/AdOrderInvoice';
+import AllTransactions from './Components/Admin/Account/AllTransactions';
 
 
 // Admin
@@ -116,11 +115,9 @@ function App() {
 
         <ProtectAdmin exact path="/admin/order" component={AllOrder} />
 
-        <ProtectAdmin exact path="/admin/order/invoice" component={EachOrder} />
-
         <ProtectAdmin exact path="/admin/create-order" component={AdCreateOrder} />
 
-        <ProtectAdmin exact path="/admin/order/invoicee" component={AdOrderInvoice} />
+        <ProtectAdmin exact path="/admin/order/invoice/:trackid" component={AdOrderInvoice} />
 
 
 
@@ -135,6 +132,9 @@ function App() {
 
         {/* Account */}
         <ProtectAdmin exact path="/admin/userlist" component={UserList} />
+
+        <ProtectAdmin exact path="/admin/transactions" component={AllTransactions} />
+
 
 
         {/* Account */}
