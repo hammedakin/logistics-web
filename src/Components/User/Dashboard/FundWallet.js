@@ -20,7 +20,7 @@ const FundWallet = () => {
 
   const config = {
     reference: new Date().getTime().toString(),
-    email: localStorage.getItem('email'),
+    email: localStorage.getItem('eclemail'),
     amount: Number(amount) * 100,
     publicKey: "pk_test_e7c207ebc76888253b867c7f9bf43a5042459bf0",
   };
@@ -29,7 +29,7 @@ const FundWallet = () => {
   const onSuccess = (reference) => {
       if(usertoken, amount){
         const data = new FormData();
-        data.append("usertoken", localStorage.getItem('usertoken'));
+        data.append("usertoken", localStorage.getItem('eclusertoken'));
         data.append("amount", amount);
         data.append("apptoken", "T9H1E6KUYM");
   

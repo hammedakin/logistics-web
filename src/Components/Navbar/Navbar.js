@@ -68,7 +68,7 @@ const Navbar = () => {
             <ul className="navbar-nav text-center">
 
 
-              {localStorage.getItem('usertoken') == null ? (
+              {localStorage.getItem('eclusertoken') == null ? (
                 <>
               <Link to="/login">
                 <li className="">

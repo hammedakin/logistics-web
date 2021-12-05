@@ -105,18 +105,18 @@ const AdOrderInvoice = (props) => {
   if (status === "paid") {
     statuss = (
       <span class="ml-4 px-2 h6 green white-text">
-        <span> Paid </span>
+        <span>Paid </span>
       </span>
     );
   } else if (status === "unpaid") {
     statuss = (
       <span class="ml-2 px-2 h6 yellow">
-        <span> Unpaid </span>
+        <span>Unpaid </span>
       </span>
     );
   } else {
     <span class="ml-4 px-2 h6 red white-text">
-      <span> Cancelled </span>
+      <span>Cancelled </span>
     </span>;
   }
 
@@ -126,14 +126,28 @@ const AdOrderInvoice = (props) => {
       <div className="send-package admin-create-order">
         <div className="invoice">
           <div className="container">
-        <BackButton/>
+            <BackButton />
 
-            <div className="mb-4">
+            <div className="mb-4 first">
+              <h5> Tracking ID: {trackid} </h5>
               <h5 className="">
-                Invoice - {packagename}
+                Status:
                 {statuss}
               </h5>
-              <h5> Tracking ID : {trackid} </h5>
+              <h5 className="">Type: {type}</h5>
+              {express === 1 ? (
+                <>
+                  <h5 className="">
+                    <span class="px-2 h5 black white-text">
+                      Express Delivery
+                    </span>
+                  </h5>
+                </>
+              ) : (
+                <h5 className="">
+                  <span class="px-2 h5 black white-text">Normal Delivery </span>
+                </h5>
+              )}
               <p class="grey-text mt-0 pt-0">
                 <i>Created on : {date} </i>
               </p>
@@ -301,7 +315,16 @@ const AdOrderInvoice = (props) => {
                     <h4 className="mb-4">
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
-                    <h1 className="bolder-text green-text">₦ {priceth}</h1>
+                    <h1 className="bolder-text green-text">₦ 
+                    {express === 1 ? (
+                <>
+                  {expressth}
+                </>
+              ) : ( <>
+                {priceth} </>
+              )}
+                    
+                    </h1>
                   </div>
                   <div className="mx-3 text-center">
                     <Alert color="success">{status}</Alert>

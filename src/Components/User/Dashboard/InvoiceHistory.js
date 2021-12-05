@@ -15,7 +15,7 @@ const InvoiceHistory = () => {
   const fetchinvoice = () => {
     const data = new FormData();
     data.append("apptoken", "T9H1E6KUYM");
-    data.append("usertoken", localStorage.getItem("usertoken"));
+    data.append("usertoken", localStorage.getItem("eclusertoken"));
 
     axios
       .post(`https://test.api.eclipse.com.ng/v1/get-orders`, data, {

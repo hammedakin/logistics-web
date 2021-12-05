@@ -17,7 +17,7 @@ const FoodDetails = (props) => {
   const [amount, setamount] = useState("");
   const [fill, setfill] = useState(false);
 
-  const [phone, setphone] = useState(localStorage.getItem('phone'));
+  const [phone, setphone] = useState(localStorage.getItem('eclphone'));
   const [address, setaddress] = useState("");
 
   const fetchFoodDetails = () => {

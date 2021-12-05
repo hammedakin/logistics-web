@@ -1,6 +1,22 @@
 /* Admin Dashboard  */
 /* Admin Dashboard  */
 
+/* Dashboard  */
+.welcome-admin {
+    padding: 1rem 2rem;
+    border-radius: 1rem; 
+    margin-bottom: 2rem;
+    background-color: #272626;
+    color: #fff;
+}
+
+.welcome-admin .first {
+  padding: 1.5rem 0rem;
+
+}
+/* Dashboard  */
+
+
 /* Nav Buttons  */
 
 .nav-button {
@@ -49,3 +65,17 @@ background-color: #dfdfdf;
     margin-top: 2rem !important;
   }
 /* Create Order  */
+
+
+@media screen and (max-width: 580px) {
+/* Admin Dashboard  */
+/*  Dashboard  */
+.welcome-admin h6 {
+text-align: center !important;
+}
+/*  Dashboard  */
+/* Admin Dashboard  */
+
+
+
+}

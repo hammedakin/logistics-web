@@ -124,13 +124,26 @@ const Invoice = (props) => {
         <div className="invoice">
           {/* <button div class="btn"> back</button> */}
           <div className="container">
-            <div className="mb-4">
+          <div className="mb-4 first">
+              <h5> Tracking ID: {trackid} </h5>
               <h5 className="">
-                
-                Invoice - {packagename}
+                Status:
                 {statuss}
               </h5>
-              <h5> Tracking ID : {trackid} </h5>
+              <h5 className="">Type: {type}</h5>
+              {express === 1 ? (
+                <>
+                  <h5 className="">
+                    <span class="px-2 h5 black white-text">
+                      Express Delivery
+                    </span>
+                  </h5>
+                </>
+              ) : (
+                <h5 className="">
+                  <span class="px-2 h5 black white-text">Normal Delivery </span>
+                </h5>
+              )}
               <p class="grey-text mt-0 pt-0">
                 <i>Created on : {date} </i>
               </p>

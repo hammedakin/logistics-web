@@ -43,10 +43,10 @@ const UserLogin = () => {
         console.log(res.data);
      
         if (res.data.success === true) {
-          localStorage.setItem("usertoken", res.data.usertoken)
-          localStorage.setItem("email", res.data.email)
-          localStorage.setItem("fullname", res.data.fullname)
-          localStorage.setItem("phone", res.data.phone)
+          localStorage.setItem("eclusertoken", res.data.usertoken)
+          localStorage.setItem("eclemail", res.data.email)
+          localStorage.setItem("eclfullname", res.data.fullname)
+          localStorage.setItem("eclphone", res.data.phone)
           setshowalert(true);
           setemail(res.data.email)
           setfullname(res.data.fullname)

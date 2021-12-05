@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Spinner } from "reactstrap";
 import axios from "axios";
-import { useHistory } from "react-router";
 
 
 
@@ -14,7 +13,7 @@ const AcctBal = () => {
   const fetchBal = () => {
     const data = {
       apptoken: "T9H1E6KUYM",
-      usertoken: localStorage.getItem('usertoken'),
+      usertoken: localStorage.getItem('eclusertoken'),
     };
     axios
     .get(`https://test.api.eclipse.com.ng/v1/get-wallet-balance`, { params: data })

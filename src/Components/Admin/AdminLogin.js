@@ -41,9 +41,9 @@ const AdminLogin = () => {
         console.log(alert);
      
         if (res.data.success === true) {
-          localStorage.setItem("admintoken", res.data.admintoken)
-          localStorage.setItem("adminmail", res.data.email)
-          localStorage.setItem("adminname", res.data.fullname)
+          localStorage.setItem("ecladmintoken", res.data.admintoken)
+          localStorage.setItem("ecladminmail", res.data.email)
+          localStorage.setItem("ecladminname", res.data.fullname)
           setshowalert(true);
           // setemail(res.data.email)
           // setfullname(res.data.fullname)

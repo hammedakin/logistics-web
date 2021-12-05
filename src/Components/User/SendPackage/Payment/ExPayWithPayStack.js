@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 const ExPayWithPayStack = (props) => {
 
   console.log(props)
-  const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
+  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
   const [trackid, settrackid] = useState(props.trackid);
   const [type, settype] = useState(props.type);
   const [amount, setamount] = useState(props.price);
@@ -20,7 +20,7 @@ const ExPayWithPayStack = (props) => {
 
   const config = {
     reference: new Date().getTime().toString(),
-    email: localStorage.getItem("email"),
+    email: localStorage.getItem("eclemail"),
     amount: Number(props.amount) * 100,
     publicKey: "pk_test_e7c207ebc76888253b867c7f9bf43a5042459bf0",
   };

@@ -5,20 +5,20 @@ import UserNavLinks from "./UserNavLinks";
 import UserSideNav from './UserSideNav'
 
 const UserNavbar = () => {
-const [name, setname] = useState(localStorage.getItem('adminname'));
+const [name, setname] = useState(localStorage.getItem('eclfullname'));
   
   let history = useHistory();
 
 
   const HandleLogout = () => {
     history.push("/home");
-    localStorage.removeItem("admintoken");
-    localStorage.removeItem("adminname");
-    localStorage.removeItem("adminmail");
-    localStorage.removeItem("usertoken");
-    localStorage.removeItem("fullname");
-    localStorage.removeItem("email");
-    localStorage.removeItem("phone");
+    localStorage.removeItem("ecladmintoken");
+    localStorage.removeItem("ecladminname");
+    localStorage.removeItem("ecladminmail");
+    localStorage.removeItem("eclusertoken");
+    localStorage.removeItem("eclfullname");
+    localStorage.removeItem("eclemail");
+    localStorage.removeItem("eclphone");
     localStorage.removeItem("results");
     localStorage.removeItem("trackid");
   };

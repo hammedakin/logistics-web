@@ -6,28 +6,34 @@
 }
 
 /* Dashboard Header  */
-
-.dash-header .first {
+.dash-header .welcome {
   margin: 0;
   padding: 0;
   background: linear-gradient(#096b00c2, #096b00c2),
-    url(../Components/User/Dashboard/img/pattern2.jpg) no-repeat;
+  url(../Components/User/Dashboard/img/pattern2.jpg) no-repeat;
   background-size: cover;
   overflow-x: hidden;
-  padding: 3rem 2rem;
   border-radius: 1rem;
   color: #ffffff !important;
+  padding: 1rem 2rem;
+
 }
 
-.dash-header .first .spin {
+.dash-header .balance {
+  padding: 1.5rem 0rem;
+
+}
+
+
+.dash-header .balance .spin {
   font-weight: 200 !important;
 }
 
-.dash-header .first h5 {
+.dash-header .balance h5 {
   font-weight: 100 !important;
 }
 
-.dash-header .first h3 {
+.dash-header .balance h3 {
   font-weight: 800 !important;
   font-family: "Righteous", cursive !important;
   font-size: xx-large;
@@ -282,6 +288,12 @@ border-radius: 10px!important;
 /* Invoice  */
 .send-package .invoice {
   margin-top: 5rem;
+}
+
+.send-package .invoice .first {
+  border: #096b00 solid 1px;
+  border-radius: 1rem; 
+  padding: 1.5rem 1rem;
 }
 
 .send-package .card-header{
@@ -550,6 +562,10 @@ border-radius: 2rem !important;
     height: max-content !important;
     padding-bottom: 3rem !important;
     padding-top: .1rem !important;
+  }
+
+  .dash-header .first {
+    text-align: center !important;
   }
 
   .dash-header .third h6 {

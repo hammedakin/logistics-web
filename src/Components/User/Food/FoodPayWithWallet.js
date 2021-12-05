@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 const FoodPayWithWallet = (props) => {
-  const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
+  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
   // const [oid, setoid] = useState("");
   // const [fid, setfid] = useState("");
   // const [price, setprice] = useState("");

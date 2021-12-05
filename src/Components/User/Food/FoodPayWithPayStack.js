@@ -5,7 +5,7 @@ import { usePaystackPayment } from "react-paystack";
 import { useHistory } from "react-router";
 
 const FoodPayWithPayStack = (props) => {
-  const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
+  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
   // const [oid, setoid] = useState("");
   // const [fid, setfid] = useState("");
   // const [price, setprice] = useState("");
@@ -20,7 +20,7 @@ const FoodPayWithPayStack = (props) => {
 
   const config = {
     reference: new Date().getTime().toString(),
-    email: localStorage.getItem("email"),
+    email: localStorage.getItem("eclemail"),
     amount: Number(props.amount) * 100,
     publicKey: "pk_test_e7c207ebc76888253b867c7f9bf43a5042459bf0",
   };

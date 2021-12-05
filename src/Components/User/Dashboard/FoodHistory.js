@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const FoodHistory = () => {
   
   const [allfood, setallfood] = useState([]);
-  const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
+  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
   const [count, setcount] = useState(0);
 
   const [isloading, setisloading] = useState(true);

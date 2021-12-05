@@ -10,10 +10,10 @@ const SendPackageInt = () => {
   const [usertoken, setusertoken] = useState("");
   const [pickstate, setpickstate] = useState("");
   const [picktown, setpicktown] = useState("");
-  const [sendermail, setsendermail] = useState(localStorage.getItem('email'));
+  const [sendermail, setsendermail] = useState(localStorage.getItem('eclemail'));
   const [loc_area, setloc_area] = useState("");
-  const [senderphone, setsenderphone] = useState(localStorage.getItem('phone'));
-  const [sendername, setsendername] = useState(localStorage.getItem('fullname'));
+  const [senderphone, setsenderphone] = useState(localStorage.getItem('eclphone'));
+  const [sendername, setsendername] = useState(localStorage.getItem('eclfullname'));
 
   // Receiver 
   const [state, setstate] = useState("");
@@ -48,12 +48,6 @@ const SendPackageInt = () => {
   const [trackid, settrackid] = useState("");
   let history = useHistory(); 
 
-  // useEffect(() => {
-  //   settype(localStorage.getItem('type'))
-  //   },[localStorage.getItem('type')]
-  //   )
-
-
   // Function for to process the form
   function SendLocalPackage(e) {
     if (
@@ -81,7 +75,7 @@ const SendPackageInt = () => {
       data.append("description", description);
       data.append("iscargo", iscargo);
       data.append("type", type);
-      data.append("usertoken", localStorage.getItem('usertoken'));
+      data.append("usertoken", localStorage.getItem('eclusertoken'));
       data.append("apptoken", "T9H1E6KUYM");
 
       axios

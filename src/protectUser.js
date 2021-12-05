@@ -10,7 +10,7 @@ const ProtectUser =({component:Component, ...rest}) =>{
             {...rest}
             render={
             (props)=>{
-                if(localStorage.getItem('usertoken')){
+                if(localStorage.getItem('eclusertoken')){
                    return <Component {...props}/>
                 }
                 else{

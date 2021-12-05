@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 const ExPayWithWallet = (props) => {
-  const [usertoken, setusertoken] = useState(localStorage.getItem("usertoken"));
+  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
   const [trackid, settrackid] = useState(props.trackid);
   const [type, settype] = useState(props.type);
   const [amount, setamount] = useState(props.price);
@@ -76,7 +76,7 @@ const ExPayWithWallet = (props) => {
   const fetchBal = () => {
     const data = {
       apptoken: "T9H1E6KUYM",
-      usertoken: localStorage.getItem("usertoken"),
+      usertoken: localStorage.getItem("eclusertoken"),
     };
     axios
       .get(`https://test.api.eclipse.com.ng/v1/get-wallet-balance`, {

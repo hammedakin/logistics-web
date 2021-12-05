@@ -10,7 +10,7 @@ const ProtectAdmin =({component:Component, ...rest}) =>{
             {...rest}
             render={
             (props)=>{
-                if(localStorage.getItem('admintoken')){
+                if(localStorage.getItem('ecladmintoken')){
                    return <Component {...props}/>
                 }
                 else{
