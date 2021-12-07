@@ -5,6 +5,8 @@ import img from "./img/icons.png";
 import { Link } from "react-router-dom";
 
 const InvoiceHistory = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
   
   const [allinvoice, setallinvoice] = useState([]);
   const [usertoken, setusertoken] = useState("");
@@ -14,11 +16,11 @@ const InvoiceHistory = () => {
 
   const fetchinvoice = () => {
     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    data.append("apptoken", apptoken);
     data.append("usertoken", localStorage.getItem("eclusertoken"));
 
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-orders`, data, {
+      .post(`${endpoint}/v1/get-orders`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },

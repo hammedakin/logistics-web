@@ -5,6 +5,8 @@ import img from "./img/icons.png";
 import { Link } from "react-router-dom";
 
 const FoodHistory = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
   
   const [allfood, setallfood] = useState([]);
   const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
@@ -14,11 +16,11 @@ const FoodHistory = () => {
 
   const fetchfood = () => {
     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    data.append("apptoken", apptoken);
     data.append("usertoken", usertoken);
 
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-food-order-history`, data, {
+      .post(`${endpoint}/v1/get-food-order-history`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },

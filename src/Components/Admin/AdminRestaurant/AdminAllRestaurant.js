@@ -5,6 +5,9 @@ import { Spinner } from "reactstrap";
 // import AdminDeleteProps from "./AdminDeleteProps";
 
 const AdminAllRestaurant = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [count, setcount] = useState(0);
   const [load, setload] = useState(false);
 
@@ -30,10 +33,10 @@ const AdminAllRestaurant = () => {
   const fetchrestaurant = () => {
     setload(true);
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/admin-list-restaurant`, {
+      .get(`${endpoint}/v1/admin-list-restaurant`, {
         params: data,
       })
       .then((response) => {
@@ -119,7 +122,7 @@ const AdminAllRestaurant = () => {
                   <tbody>
                     {load ? (
                       <div className="my-5 justify-content-center">
-                      <Spinner color="success"/> Loading restaurants
+                      <Spinner color="dark"/> Loading restaurants
                       </div>
                     ) : (
                       <>

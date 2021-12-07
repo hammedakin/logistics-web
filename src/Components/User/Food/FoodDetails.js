@@ -6,6 +6,9 @@ import FoodPayWithWallet from "../Food/FoodPayWithWallet";
 import { Alert } from "reactstrap";
 
 const FoodDetails = (props) => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [id, setid] = useState("");
   const [title, settitle] = useState("");
   const [des, setdes] = useState("");
@@ -23,11 +26,11 @@ const FoodDetails = (props) => {
   const fetchFoodDetails = () => {
  
     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    data.append("apptoken", apptoken);
     data.append("id", props.match.params.id);
 
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-food-data`, data, {
+      .post(`${endpoint}/v1/get-food-data`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },

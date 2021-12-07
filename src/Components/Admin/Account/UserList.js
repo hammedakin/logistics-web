@@ -5,6 +5,9 @@ import { Spinner } from "reactstrap";
 import AdminNavbar from '../../Navbar/AdminNavbar';
 
 const UserList = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [count, setcount] = useState(0);
   const [load, setload] = useState(false);
 
@@ -17,10 +20,10 @@ const UserList = () => {
   const fetchuser = () => {
     setload(true);
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/admin-user-list`, {
+      .get(`${endpoint}/v1/admin-user-list`, {
         params: data,
       })
       .then((response) => {
@@ -113,7 +116,7 @@ const UserList = () => {
                   <tbody>
                     {load ? (
                       <div className="my-5 justify-content-center">
-                      <Spinner color="success"/> Loading users
+                      <Spinner color="dark"/> Loading users
                       </div>
                     ) : (
                       <>

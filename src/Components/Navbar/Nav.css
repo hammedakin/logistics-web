@@ -6,6 +6,7 @@
   padding: .5rem 1rem !important;
   z-index: 1001 !important;
   text-align: left !important;
+  border-radius: 0 0 1.5rem 1.5rem !important;
   /* box-shadow: none !important; */
 
   /* height: 7rem ; */
@@ -100,7 +101,7 @@ background: none;
     left: 0;
     background-color: #096b00;
     overflow-x: hidden;
-    transition: 0.3s ease;
+    transition:cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s ;
     z-index: 1002 !important;
   }
   
@@ -180,6 +181,10 @@ background: none;
 
 @media screen and (max-width: 580px) {
   /* Navbar */
+.nav-name {
+  display: none !important;
+}
+
 .sidenav {
   width: 0 ;
   /* padding-top: 3rem; */
@@ -193,6 +198,7 @@ h5.name {
   margin-left: 0.5rem !important;
 
 }
+
 }
      
   

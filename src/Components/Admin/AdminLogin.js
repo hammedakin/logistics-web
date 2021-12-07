@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
-// import img from "./img/bicycle.png";
 import { Link } from "react-router-dom";
 
 const AdminLogin = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
 
   const [mail, setmail] = useState("");
   const [pword, setpword] = useState("");
-  // const [fullname, setfullname] = useState("");
-  // const [admintoken, setadmintoken] = useState("");
-  // const [email, setemail] = useState("");
-  // const [phone, setphone] = useState("");
 
 
   const [issending, setissending] = useState(false);
@@ -29,10 +27,10 @@ const AdminLogin = () => {
       const data = new FormData();
       data.append("email", mail);
       data.append("password", pword);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-      .post(`https://test.api.eclipse.com.ng/v1/admin-login`, data, {
+      .post(`${endpoint}}/v1/admin-login`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },

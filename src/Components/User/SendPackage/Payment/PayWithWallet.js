@@ -6,6 +6,9 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 const PayWithWallet = (props) => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
   const [trackid, settrackid] = useState(props.trackid);
   const [type, settype] = useState(props.type);
@@ -28,10 +31,10 @@ const PayWithWallet = (props) => {
       data.append("trackid", props.trackid);
       data.append("price", props.amount);
       data.append("shiptype", props.type);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-      .post(`https://test.api.eclipse.com.ng/v1/pay-order-wallet`, data, {
+      .post(`${endpoint}/v1/pay-order-wallet`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -75,11 +78,11 @@ const PayWithWallet = (props) => {
 
   const fetchBal = () => {
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
       usertoken: usertoken,
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-wallet-balance`, {
+      .get(`${endpoint}/v1/get-wallet-balance`, {
         params: data,
       })
       .then((response) => {

@@ -5,16 +5,11 @@ import { usePaystackPayment } from "react-paystack";
 import { useHistory } from "react-router";
 
 const FoodPayWithPayStack = (props) => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+  const [publickey, setpublickey] = useState(process.env.REACT_APP_PAYSTACK_PUBLICKEY);
+
   const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
-  // const [oid, setoid] = useState("");
-  // const [fid, setfid] = useState("");
-  // const [price, setprice] = useState("");
-  // const [phone, setphone] = useState("");
-  // const [address, setaddress] = useState("");
-  // const [message, setmessage] = useState("");
-  // const [status, setstatus] = useState("");
-  // const [ref, setref] = useState("");
-  // const [transaction, settransaction] = useState("");
 
   let history = useHistory();
 
@@ -22,7 +17,7 @@ const FoodPayWithPayStack = (props) => {
     reference: new Date().getTime().toString(),
     email: localStorage.getItem("eclemail"),
     amount: Number(props.amount) * 100,
-    publicKey: "pk_test_e7c207ebc76888253b867c7f9bf43a5042459bf0",
+    publicKey: publickey,
   };
 
   // you can call this function anything
@@ -34,27 +29,18 @@ const FoodPayWithPayStack = (props) => {
       data.append("price", props.amount);
       data.append("phone", props.phone);
       data.append("location", props.address);
-      // data.append("trxid", reference.transaction);
-      // data.append("ref", reference.ref);
-      data.append("apptoken", "T9H1E6KUYM");
+ 
+      data.append("apptoken", apptoken);
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/order-food`, data, {
+        .post(`${endpoint}/v1/order-food`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },
         })
         .then((res) => {
           console.log(res.data);
-          // setusertoken(res.data.usertoken);
-          // setfid(res.data.fid);
-          // setprice(res.data.price);
-          // setphone(res.data.phone);
-          // setaddress(res.data.location);
-          // setmessage(reference.message);
-          // setstatus(reference.status);
-          // settransaction(reference.transaction);
-          // setref(reference.reference);
+ 
 
           history.push({
             pathname: `/food/invoice/${res.data.orderid}`,

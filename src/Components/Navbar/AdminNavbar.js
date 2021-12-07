@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
+import BackButton from "../BackButton";
 import "./Nav.css";
 
 const UserNavbar = () => {
@@ -30,6 +31,7 @@ const [name, setname] = useState(localStorage.getItem('ecladminname'));
         id="navbar main"
       >
         <div class="container" id="logo">
+          <BackButton/>
           <Link to="/admin" className="navbar-brand">
             <h5> ECLIPSE Admin</h5>
           </Link>

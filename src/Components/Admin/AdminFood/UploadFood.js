@@ -3,6 +3,9 @@ import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 
 const UploadFood = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [title, settitle] = useState("");
   const [des, setdes] = useState("");
   const [resid, setresid] = useState("");
@@ -24,10 +27,10 @@ const UploadFood = () => {
       data.append("description", des);
       data.append("resid", resid);
       data.append("price", price);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/admin-add-food`, data, {
+        .post(`${endpoint}/v1/admin-add-food`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },
@@ -70,10 +73,10 @@ const UploadFood = () => {
   // Function for to call get Restaurants
   const fetchres = () => {
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/admin-list-restaurant`, {
+      .get(`${endpoint}/v1/admin-list-restaurant`, {
         params: data,
       })
       .then((response) => {
@@ -179,7 +182,7 @@ const UploadFood = () => {
                         <>
                           <button
                             type="button"
-                            class="btn shadow waves-effect"
+                            class="btn btn-dark shadow waves-effect"
                             action="submit"
                           >
                             <strong>
@@ -191,7 +194,7 @@ const UploadFood = () => {
                         <>
                           <button
                             type="button"
-                            class="btn shadow waves-effect"
+                            class="btn btn-dark shadow waves-effect"
                             action="submit"
                             onClick={(e) => FoodUpload(e)}
                           >

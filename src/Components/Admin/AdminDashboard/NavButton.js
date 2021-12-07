@@ -120,12 +120,12 @@ const NavButton = () => {
             {/* </Link> */}
           </div>
           <div className="col-md-4 ">
-            {/* <Link to="/admin/order"> */}
+            <Link to="/admin/setting">
             <div className="first navb shadow ">
               <img src={admin} width="30px" />
               <h6> Account Setting</h6>
             </div>
-            {/* </Link> */}
+            </Link>
           </div>
         </div>
       </div>

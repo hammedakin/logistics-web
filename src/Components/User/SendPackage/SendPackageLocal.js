@@ -7,6 +7,8 @@ import Invoice from "./Invoice";
 
 
 const SendPackageLocal = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
 // Sender 
   const [usertoken, setusertoken] = useState("");
@@ -73,10 +75,10 @@ const SendPackageLocal = () => {
       data.append("onforwardingtownid", onforwardingtownid);
       data.append("type", type);
       data.append("usertoken", localStorage.getItem('eclusertoken'));
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-      .post(`https://test.api.eclipse.com.ng/v1/make-order`, data, {
+      .post(`${endpoint}/v1/make-order`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -118,10 +120,10 @@ const SendPackageLocal = () => {
   // Function for to call sender states
   const fetchsendstates = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
+      apptoken: apptoken
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
+      .get(`${endpoint}/v1/get-states`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
 
@@ -149,10 +151,10 @@ const SendPackageLocal = () => {
   // Function for to call all states
   const fetchstates = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
+      apptoken: apptoken
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states-all`, {params:data})
+      .get(`${endpoint}/v1/get-states-all`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
 
@@ -182,10 +184,10 @@ const SendPackageLocal = () => {
    // Function for to call all cities
    const fetchcities = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
+      apptoken: apptoken
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-cities-fedex`, {params:data})
+      .get(`${endpoint}/v1/get-cities-fedex`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
         console.log(response.data);
@@ -214,11 +216,11 @@ const SendPackageLocal = () => {
    // Function for to call all onforward
    const fetchonforward = () => {
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
       citycode: town
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/getOnforwarding`, {params:data})
+      .get(`${endpoint}/v1/getOnforwarding`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
         console.log(response.data);

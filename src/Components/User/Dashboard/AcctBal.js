@@ -5,18 +5,22 @@ import axios from "axios";
 
 
 const AcctBal = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
 
   const [usertoken, setusertoken] = useState("");
   const [walletbalance_th, setwalletbalance_th] = useState("");
   const [issending, setissending] = useState(true);
-
+  console.log(endpoint)
+  console.log(apptoken)
   const fetchBal = () => {
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
       usertoken: localStorage.getItem('eclusertoken'),
     };
     axios
-    .get(`https://test.api.eclipse.com.ng/v1/get-wallet-balance`, { params: data })
+    .get(`${endpoint}/v1/get-wallet-balance`, { params: data })
       .then((response) => {
         if (response.data.success === false) {
           console.log(response.data);

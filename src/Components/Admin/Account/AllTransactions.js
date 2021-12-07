@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { Spinner } from "reactstrap";
 import AdminNavbar from "../../Navbar/AdminNavbar";
 
 const AllTransactions = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [count, setcount] = useState(0);
   const [load, setload] = useState(false);
 
@@ -17,10 +19,10 @@ const AllTransactions = () => {
   const fetchtransactions = () => {
     setload(true);
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/admin-transaction-log`, {
+      .get(`${endpoint}/v1/admin-transaction-log`, {
         params: data,
       })
       .then((response) => {
@@ -98,7 +100,7 @@ const AllTransactions = () => {
                   <tbody>
                     {load ? (
                       <div className="my-5 justify-content-center">
-                        <Spinner color="success" /> Loading transactionss
+                        <Spinner color="dark" /> Loading transactionss
                       </div>
                     ) : (
                       <>{transactions}</>

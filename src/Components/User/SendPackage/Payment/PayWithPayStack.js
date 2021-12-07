@@ -5,7 +5,10 @@ import { usePaystackPayment } from "react-paystack";
 import { useHistory } from "react-router";
 
 const PayWithPayStack = (props) => {
-
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+  const [publickey, setpublickey] = useState(process.env.REACT_APP_PAYSTACK_PUBLICKEY);
+  
   console.log(props)
   const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
   const [trackid, settrackid] = useState(props.trackid);
@@ -22,7 +25,7 @@ const PayWithPayStack = (props) => {
     reference: new Date().getTime().toString(),
     email: localStorage.getItem("eclemail"),
     amount: Number(props.amount) * 100,
-    publicKey: "pk_test_e7c207ebc76888253b867c7f9bf43a5042459bf0",
+    publicKey: publickey,
   };
 
   // you can call this function anything
@@ -34,10 +37,10 @@ const PayWithPayStack = (props) => {
       data.append("trxid", reference.transaction);
       data.append("price", props.amount);
       data.append("ref", reference.ref);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/pay-order-card`, data, {
+        .post(`${endpoint}/v1/pay-order-card`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },

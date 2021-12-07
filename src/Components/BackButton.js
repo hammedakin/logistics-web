@@ -1,16 +1,17 @@
 import React from 'react';
-
+import {useHistory} from "react-router-dom";
 
 const BackButton = () => {
+    const history = useHistory();
 
-    function goBack() {
-        window.history.back(true);
+    function gooBack() {
+        history.goBack();
       }
     return ( 
         <>
 
         <div class="back">
-            <button class="btn btn-black" onClick={goBack} > Back </button>
+            <a class="" onClick={gooBack} > <box-icon name='chevron-left' size="2.5rem" ></box-icon> </a>
         </div>
 
         </>

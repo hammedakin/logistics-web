@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
 
-const GetQuote = () => {
+const GetQuote = (props) => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   // Sender
   const [pickstate, setpickstate] = useState("");
   const [picktown, setpicktown] = useState("");
@@ -35,10 +36,10 @@ const GetQuote = () => {
       data.append("state", state);
       data.append("town", town);
       data.append("weight", weight);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/get-quote`, data, {
+        .post(`${endpoint}/v1/get-quote`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },
@@ -74,17 +75,17 @@ const GetQuote = () => {
   // Function for to call sender states
   const fetchsendstates = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
+      apptoken: apptoken
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
+      .get(`${endpoint}/v1/get-states`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
 
         console.log(response.data);
         }else {
         setsendstates(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         }
       })
       .catch((error) => {
@@ -105,16 +106,16 @@ const GetQuote = () => {
   // Function for to call all states
   const fetchstates = () => {
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states-all`, { params: data })
+      .get(`${endpoint}/v1/get-states-all`, { params: data })
       .then((response) => {
         if (response.data.success === false) {
           console.log(response.data);
         } else {
           setallstates(response.data);
-          console.log(response.data);
+          // console.log(response.data);
         }
       })
       .catch((error) => {
@@ -133,39 +134,46 @@ const GetQuote = () => {
   // Function for to call all cities
   const fetchcities = () => {
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-cities-fedex`, {
+      .get(`${endpoint}/v1/get-cities`, {
         params: data,
       })
       .then((response) => {
         if (response.data.success === false) {
           console.log(response.data);
         } else {
-          setallcities(response.data);
-          console.log(response.data);
+          setallcities(response.data.data);
+          console.log(response.data.data);
+          // console.log(response.data.data);
         }
       })
       .catch((error) => {
-        console.log(error.response);
+        // console.log(error.response);
       });
   };
   useEffect(() => {
     fetchcities();
   }, [count]);
 
-  const cities = allcities.map((item, i) => {
-    return <option value={`${item.CityCode}`}> {item.CityName} </option>;
+  const cities = allcities.filter(country => country.country === "Nigeria").map((item, i) => {
+    return <option value={`${item.cities}`} key={i}> {item.cities} </option>;
+
+    // <li key={i}> {item.cities}</li>
+    
   });
   // Function for to call all cities
 
+  console.log(cities);
+
   return (
     <>
-      {/* <Navbar /> */}
       <div className="get-quote mb-0">
         <div className="container">
           <div className="first ">
+      {cities}
+
             <div className="col-md-8 mx-auto mt-3">
               <h4 className="text-center"> GET QUOTE</h4>
               <h6 className="text-center">
@@ -174,6 +182,24 @@ const GetQuote = () => {
               </h6>
             </div>
             <hr className="white" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div className="row send mb-0 pb-5 mt-2 justify-content-center">
                 
               <div className="col-11 col-md-6 ">
@@ -214,7 +240,7 @@ const GetQuote = () => {
                               Select City *
                             </option>
 
-                            {cities}
+                            {/* {cities} */}
                           </select>
                         </div>
                         <div className="col-12">
@@ -242,7 +268,7 @@ const GetQuote = () => {
                               Select City *
                             </option>
 
-                            {cities}
+                            {/* {cities} */}
                           </select>
                         </div>
 

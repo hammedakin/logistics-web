@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import Navbar from '../Navbar/Navbar'
 
 const UserLogin = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
   const [mail, setmail] = useState("");
   const [pword, setpword] = useState("");
@@ -31,10 +33,10 @@ const UserLogin = () => {
       const data = new FormData();
       data.append("mail", mail);
       data.append("pword", pword);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-      .post(`https://test.api.eclipse.com.ng/v1/login`, data, {
+      .post(`${endpoint}/v1/login`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },

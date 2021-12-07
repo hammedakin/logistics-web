@@ -3,16 +3,19 @@ import { Spinner } from "reactstrap";
 import axios from "axios";
 
 const AdminHeader = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [name, setname] = useState(localStorage.getItem("ecladminname"));
   const [walletbalance_th, setwalletbalance_th] = useState("");
   const [issending, setissending] = useState(true);
 
   const fetchBal = () => {
     const data = {
-      apptoken: "T9H1E6KUYM",
+      apptoken: apptoken,
     };
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/admin-system-balance`, {
+      .get(`${endpoint}/v1/admin-system-balance`, {
         params: data,
       })
       .then((response) => {

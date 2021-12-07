@@ -4,7 +4,8 @@ import axios from "axios";
 import img from "./img/icons.png";
 
 const WalletHistory = () => {
-
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
   const [allwalhist, setallwalhist] = useState([]);
   const [count, setcount] = useState(0);
@@ -14,11 +15,11 @@ const WalletHistory = () => {
   // Wallet History
   const fetchwalhist = () => {
     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    data.append("apptoken", apptoken);
     data.append("usertoken", localStorage.getItem("eclusertoken"));
 
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-wallet-history`, data, {
+      .post(`${endpoint}/v1/get-wallet-history`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },

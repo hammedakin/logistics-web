@@ -1,30 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
+import AdminNavbar from "../../Navbar/AdminNavbar";
 
-const UploadRestaurant = () => {
+const AdminSetting = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
-  const [rest, setrest] = useState("");
-  const [location, setlocation] = useState("");
-
+  const [pword, setpword] = useState("");
+  const [npword, setnpword] = useState("");
+  const [cnpword, setcnpword] = useState("");
+  const [admintoken, setadmintoken] = useState(localStorage.getItem("ecladmintoken"));
+  const [adminname, setadminname] = useState(localStorage.getItem("ecladminname"));
+  const [adminmail, setadminmail] = useState(localStorage.getItem("ecladminmail"));
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
   const [alertt, setalert] = useState("");
 
-  function RestaurantUpload(e) {
-    if ((rest, location)) {
+  function ChangePword(e) {
+    if ((pword, npword, cnpword, admintoken)) {
       setissending(true);
 
       const data = new FormData();
-      data.append("rest", rest);
-      data.append("location", location);
+      data.append("pword", pword);
+      data.append("npword", npword);
+      data.append("cnpword", cnpword);
+      data.append("admintoken", admintoken);
       data.append("apptoken", apptoken);
 
       axios
-        .post(`${endpoint}/v1/admin-add-restaurant`, data, {
+        .post(`${endpoint}/v1/admin-change-password`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },
@@ -34,8 +40,7 @@ const UploadRestaurant = () => {
 
           if (res.data.success === true) {
             setshowalert(true);
-            setrest("");
-            setlocation("");
+            resetForm();
             setalert(res.data.message);
             setissending(false);
             window.location.reload(true);
@@ -61,13 +66,63 @@ const UploadRestaurant = () => {
     e.preventDefault();
   }
 
+  function resetForm() {
+    setpword("");
+    setnpword("");
+    setcnpword("");
+  }
+
   return (
     <>
-      <div className="add-food">
+      <AdminNavbar />
+      <section className="add-food">
         <div className="container">
+          <div className="text-center">
+            <h5> ADMIN SETTING</h5>
+          </div>
+          
           <div className="send">
             <div className="text-center">
-              <h5> UPLOAD FOOD </h5>
+              <h5> Account Details </h5>
+            </div>
+            <hr />
+            <div className="form">
+              <form>
+                <div className="row justify-content-center">
+                  <div className="col-md-10 ">
+                  <label> Name: </label>
+
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className=" input-style"
+                        placeholder="Name *"
+                        value={adminname}
+                        disabled
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-md-10 ">
+                    <label> Email: </label>
+
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="input-style"
+                        placeholder="Email *"
+                        value={adminmail}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="send mt-1">
+            <div className="text-center">
+              <h5> Change Password </h5>
             </div>
             <hr />
             <div className="form">
@@ -80,28 +135,41 @@ const UploadRestaurant = () => {
                       <input
                         type="text"
                         className=" input-style"
-                        placeholder="Restaurant Name *"
-                        onChange={(e) => setrest(e.target.value)}
-                        value={rest}
+                        placeholder="Old Password *"
+                        onChange={(e) => setpword(e.target.value)}
+                        value={pword}
                       />
                     </div>
                   </div>
-                 
+
                   <div className="col-md-10 ">
                     {/* <label> Name </label> */}
 
                     <div className="input-group">
-                  
-                        <textarea
+                      <input
                         type="text"
-                        className="input-style textarea-style"
-                        placeholder="Location *"
-                        onChange={(e) => setlocation(e.target.value)}
-                        value={location}
-                      ></textarea>
-                      
+                        className="input-style"
+                        placeholder="New Password *"
+                        onChange={(e) => setnpword(e.target.value)}
+                        value={npword}
+                      />
                     </div>
                   </div>
+
+                  <div className="col-md-10 ">
+                    {/* <label> Name </label> */}
+
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className=" input-style"
+                        placeholder="Confirm New Password *"
+                        onChange={(e) => setcnpword(e.target.value)}
+                        value={cnpword}
+                      />
+                    </div>
+                  </div>
+
                   <div class="col-md-10  mx-auto text-center">
                     {showalert ? (
                       <>
@@ -119,7 +187,7 @@ const UploadRestaurant = () => {
                             action="submit"
                           >
                             <strong>
-                              adding <Spinner color="light" />
+                              sending <Spinner color="light" />
                             </strong>
                           </button>
                         </>
@@ -129,9 +197,9 @@ const UploadRestaurant = () => {
                             type="button"
                             class="btn btn-dark shadow waves-effect"
                             action="submit"
-                            onClick={(e) => RestaurantUpload(e)}
+                            onClick={(e) => ChangePword(e)}
                           >
-                            <strong> ADD </strong>
+                            <strong> submit </strong>
                           </button>
                         </>
                       )}
@@ -143,9 +211,9 @@ const UploadRestaurant = () => {
             <hr />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };
 
-export default UploadRestaurant;
+export default AdminSetting;

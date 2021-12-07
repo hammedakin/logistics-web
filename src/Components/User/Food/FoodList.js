@@ -5,6 +5,9 @@ import img from "./img/icons.png";
 import { Link } from "react-router-dom";
 
 const FoodList = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [allfood, setallfood] = useState([]);
   const [count, setcount] = useState(0);
 
@@ -12,10 +15,10 @@ const FoodList = () => {
 
   const fetchfood = () => {
     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    data.append("apptoken", apptoken);
 
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-foodlist`, data, {
+      .post(`${endpoint}/v1/get-foodlist`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },

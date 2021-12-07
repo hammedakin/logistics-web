@@ -36,6 +36,7 @@ import UserList from './Components/Admin/Account/UserList';
 import AdCreateOrder from './Pages/AdminArea/AdCreateOrder';
 import AdOrderInvoice from './Components/Admin/AdminCreateOrder/AdOrderInvoice';
 import AllTransactions from './Components/Admin/Account/AllTransactions';
+import AdminSetting from './Components/Admin/Account/AdminSetting';
 
 
 // Admin
@@ -134,6 +135,9 @@ function App() {
         <ProtectAdmin exact path="/admin/userlist" component={UserList} />
 
         <ProtectAdmin exact path="/admin/transactions" component={AllTransactions} />
+
+        <ProtectAdmin exact path="/admin/setting" component={AdminSetting} />
+
 
 
 

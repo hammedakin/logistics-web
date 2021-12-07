@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
 import UserNavbar from "../../Navbar/UserNavbar";
@@ -8,8 +8,9 @@ import PayWithWallet from "./Payment/PayWithWallet";
 import Payment from "./Payment/Payment";
 import { useHistory } from "react-router";
 
-
 const Invoice = (props) => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
   const [trackid, settrackid] = useState("");
   const [date, setdate] = useState("");
@@ -52,14 +53,14 @@ const Invoice = (props) => {
   let history = useHistory();
 
   const fetchInvoice = () => {
-     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    const data = new FormData();
+    data.append("apptoken", apptoken);
     data.append("trackid", props.match.params.trackid);
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-invoice-data`, data, {
+      .post(`${endpoint}/v1/get-invoice-data`, data, {
         headers: {
           "content-type": "multipart/form-data",
-        }
+        },
       })
       .then((response) => {
         if (response.data.success == false) {
@@ -95,42 +96,70 @@ const Invoice = (props) => {
           setexpressth(response.data.price_express_th);
           setalert(response.data.message);
           console.log(response.data);
-                  
-          history.push({
-            state: response.data
-          });
 
+          history.push({
+            state: response.data,
+          });
         }
       });
-    };
-    useEffect(() => {
-      fetchInvoice();
-    }, 0);
-  
- 
-  let statuss
+  };
+  useEffect(() => {
+    fetchInvoice();
+  }, 0);
+
+  // Payment Status
+
+  let statuss;
   if (status === "paid") {
-  statuss =  <span class="ml-4 px-2 h6 green white-text"><span> Paid </span></span>
+    statuss = (
+      <span class="ml-4 px-2 h6 green white-text">
+        <span> Paid </span>
+      </span>
+    );
   } else if (status === "unpaid") {
-   statuss = <span class="ml-2 px-2 h6 yellow"><span> Unpaid </span></span>
+    statuss = (
+      <span class="ml-2 px-2 h6 yellow">
+        <span> Unpaid </span>
+      </span>
+    );
   } else {
-    <span class="ml-4 px-2 h6 red white-text"><span> Cancelled </span></span>
+    <span class="ml-4 px-2 h6 red white-text">
+      <span> Cancelled </span>
+    </span>;
   }
+  // Payment Status
+
+  // Shipment Type
+  let types;
+
+  if (type === "int") {
+    types = "INTERNATIONAL";
+  } else {
+    types = "NORMAL";
+  }
+  // Shipment Type
 
   return (
     <>
-      <UserNavbar /> 
+      <UserNavbar />
       <div className="send-package">
         <div className="invoice">
           {/* <button div class="btn"> back</button> */}
           <div className="container">
-          <div className="mb-4 first">
-              <h5> Tracking ID: {trackid} </h5>
+            <div className="mb-4 first">
+              <h5>
+                <span className="font-weight-light"> Tracking ID: </span>
+                {trackid}{" "}
+              </h5>
               <h5 className="">
-                Status:
+                <span className="font-weight-light"> Status: </span>
                 {statuss}
               </h5>
-              <h5 className="">Type: {type}</h5>
+              <h5 className="">
+                {" "}
+                <span className="font-weight-light"> Type: </span>
+                {types} SHIPMENT
+              </h5>
               {express === 1 ? (
                 <>
                   <h5 className="">
@@ -164,28 +193,31 @@ const Invoice = (props) => {
                     <h6 className="font-weight-bold">SENDER DETAILS </h6>
                   </div>
                   <div className="card-body">
-                    <h6>Name: 
-                      <span className="bolder-text">
-                      {sendername}
-                         </span>
+                    <h6>
+                      Name:
+                      <span className="bolder-text">{sendername}</span>
                     </h6>
-                    <hr/>
+                    <hr />
 
                     <h6>
                       City: <span className="bolder-text"> {sendertown} </span>
                     </h6>
-                    <hr/>
-                    <h6>Email: 
-                      <span className="bolder-text">{sendermail} </span> 
+                    <hr />
+                    <h6>
+                      Email:
+                      <span className="bolder-text">{sendermail} </span>
                     </h6>
-                    <hr/>
-                    <h6>Phone: <span className="bolder-text"> {senderphone}</span> 
+                    <hr />
+                    <h6>
+                      Phone: <span className="bolder-text"> {senderphone}</span>
                     </h6>
-                    <hr/>
-                    <h6> Address: <span className="bolder-text">{senderaddress}
-                      </span>
+                    <hr />
+                    <h6>
+                      {" "}
+                      Address:{" "}
+                      <span className="bolder-text">{senderaddress}</span>
                     </h6>
-                    <hr/>
+                    <hr />
                   </div>
                 </div>
               </div>
@@ -196,44 +228,45 @@ const Invoice = (props) => {
                     <h6 className="font-weight-bold">RECEIVER DETAILS </h6>
                   </div>
                   <div className="card-body">
-                    <h6>Name: <span className="bolder-text">{receiver_name}</span>
-                      
+                    <h6>
+                      Name: <span className="bolder-text">{receiver_name}</span>
                     </h6>
-                    <hr/>
+                    <hr />
                     {/* <h6>
                       <span className="bolder-text">State: </span>
                       {destination_state}
                     </h6>
                     <hr/> */}
-                    <h6>City:
+                    <h6>
+                      City:
                       <span className="bolder-text"> {destination_town}</span>
-                      
                     </h6>
-                    <hr/>
-                    <h6>Email: 
+                    <hr />
+                    <h6>
+                      Email:
                       <span className="bolder-text"> {receiver_mail}</span>
-                      
                     </h6>
-                    <hr/>
-                    <h6>Phone:
+                    <hr />
+                    <h6>
+                      Phone:
                       <span className="bolder-text"> {receiver_phone} </span>
-                      
                     </h6>
-                    <hr/>
-                    <h6>Address:
-                      <span className="bolder-text"> {des_area}</span> 
+                    <hr />
+                    <h6>
+                      Address:
+                      <span className="bolder-text"> {des_area}</span>
                     </h6>
-                    <hr/>
+                    <hr />
 
                     {country === "" ? (
                       <></>
                     ) : (
                       <>
-                        <h6>Country:
+                        <h6>
+                          Country:
                           <span className="bolder-text"> {country}</span>
-                          
                         </h6>
-                        <hr/>
+                        <hr />
                       </>
                     )}
                   </div>
@@ -248,45 +281,51 @@ const Invoice = (props) => {
                   <div className="card-body">
                     <h6>
                       Type:
-                      <span className="text-uppercase bolder-text"> {type} </span>
+                      <span className="text-uppercase bolder-text">
+                        {" "}
+                        {type}{" "}
+                      </span>
                     </h6>
-                    <hr/>
-                    <h6>Package Name:
+                    <hr />
+                    <h6>
+                      Package Name:
                       <span className="bolder-text"> {packagename}</span>
-                      
                     </h6>
-                    <hr/>
-                    <h6>Weight:
-                      <span className="bolder-text"> {weight} kg</span> 
+                    <hr />
+                    <h6>
+                      Weight:
+                      <span className="bolder-text"> {weight} kg</span>
                     </h6>
-                    <hr/>
+                    <hr />
 
-                    <h6>Onforwarding:
+                    <h6>
+                      Onforwarding:
                       <span className="bolder-text"> {onforward} </span>
-                      
                     </h6>
-                    <hr/>
+                    <hr />
 
                     {country === "" ? (
                       <></>
                     ) : (
                       <>
-                        <h6>Cargo:
-                          <span className="bolder-text"> {cargo}</span> 
+                        <h6>
+                          Cargo:
+                          <span className="bolder-text"> {cargo}</span>
                         </h6>
-                        <hr/>
-                        <h6>Worth: 
+                        <hr />
+                        <h6>
+                          Worth:
                           <span className="bolder-text"> ₦ {worth}</span>
                         </h6>
-                        <hr/>
+                        <hr />
                       </>
                     )}
 
-                    <h6>Description:
+                    <h6>
+                      Description:
                       <span className="bolder-text"> {description} </span>
-                      
                     </h6>
-                    <hr/>
+                    <hr />
                   </div>
                   <div className="text-left ml-2 invoice-btn">
                     <Link to="/track">
@@ -301,16 +340,22 @@ const Invoice = (props) => {
                   <div className="card-header">
                     <h6 className="font-weight-bold">PAYMENT DETAILS </h6>
                   </div>
-                  <Payment trackid={trackid} price={price} priceth={priceth} type={type} status={status} express={express} expressth={expressth} />
-
+                  <Payment
+                    trackid={trackid}
+                    price={price}
+                    priceth={priceth}
+                    type={type}
+                    status={status}
+                    express={express}
+                    expressth={expressth}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-   </>
+    </>
   );
 };
 

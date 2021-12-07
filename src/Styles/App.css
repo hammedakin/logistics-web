@@ -29,7 +29,7 @@ h5 {
 /* Scrollbar  */
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
   border: none;
@@ -90,6 +90,9 @@ button.close span {
 }
 /* Modal Props */
 
+/* Back Button  */
+
+/* Back Button  */
 
 /* Global */
 /* Global */
@@ -481,6 +484,9 @@ footer .boxicons .box-icon:hover {
 
 @media screen and (max-width: 780px) {
 
+ 
+
+
   /* Login  */
   .login {
     height: max-content !important;
@@ -506,6 +512,11 @@ footer .boxicons .box-icon:hover {
 
 
 @media screen and (max-width: 580px) {
+   /* Global */
+   .back {
+    display: none !important;
+  }
+  /* Global */
   .hide {
     display: contents !important;
   }

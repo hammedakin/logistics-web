@@ -7,6 +7,9 @@ import Navbar from '../Navbar/Navbar'
 // import { Link } from "react-router-dom";
 
 const UserAuth = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [token, settoken] = useState("");
 
   const [issending, setissending] = useState(false);
@@ -21,10 +24,10 @@ const UserAuth = () => {
 
       const data = new FormData();
       data.append("token", token);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/activate-user`, data, {
+        .post(`${endpoint}/v1/activate-user`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },

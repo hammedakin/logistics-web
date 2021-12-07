@@ -7,6 +7,10 @@ import { Spinner, Alert } from "reactstrap";
 
 
 const FundWallet = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+  const [publickey, setpublickey] = useState(process.env.REACT_APP_PAYSTACK_PUBLICKEY);
+
   const [usertoken, setusertoken] = useState("");
   const [amount, setamount] = useState("");
   const [message, setmessage] = useState("");
@@ -22,7 +26,7 @@ const FundWallet = () => {
     reference: new Date().getTime().toString(),
     email: localStorage.getItem('eclemail'),
     amount: Number(amount) * 100,
-    publicKey: "pk_test_e7c207ebc76888253b867c7f9bf43a5042459bf0",
+    publicKey: publickey,
   };
   
   // you can call this function anything
@@ -31,10 +35,10 @@ const FundWallet = () => {
         const data = new FormData();
         data.append("usertoken", localStorage.getItem('eclusertoken'));
         data.append("amount", amount);
-        data.append("apptoken", "T9H1E6KUYM");
+        data.append("apptoken", apptoken);
   
         axios
-        .post(`https://test.api.eclipse.com.ng/v1/fund-wallet`, data, {
+        .post(`${endpoint}/v1/fund-wallet`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },

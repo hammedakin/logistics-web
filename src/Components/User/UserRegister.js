@@ -7,6 +7,9 @@ import Navbar from '../Navbar/Navbar'
 import img from "./img/truck.png";
 
 const UserRegister = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [name, setname] = useState("");
   const [pword, setpword] = useState("");
   const [mail, setmail] = useState("");
@@ -33,10 +36,10 @@ const UserRegister = () => {
       data.append("state", state);
       data.append("town", town);
       data.append("area", area);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/register`, data, {
+        .post(`${endpoint}/v1/register`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },

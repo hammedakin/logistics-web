@@ -7,6 +7,9 @@ import AdminNavbar from "../../Navbar/AdminNavbar";
 import { Alert } from "reactstrap";
 
 const AllOrder = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [allorder, setallorder] = useState([]);
   const [count, setcount] = useState(0);
 
@@ -14,10 +17,10 @@ const AllOrder = () => {
 
   const fetchorder = () => {
     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    data.append("apptoken", apptoken);
 
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/admin-get-orders`, data, {
+      .post(`${endpoint}/v1/admin-get-orders`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -47,7 +50,7 @@ const AllOrder = () => {
     return (
       <>
         <div className="second" key={i}>
-         {item.id} <Alert color="success">
+         {item.id} <Alert color="dark">
           <Link to={`/admin/order/invoice/${item.trackid}`}>  <span className="font-weight-bold" > {item.trackid} </span> </Link> -
             {item.packagename}
             <br />
@@ -71,7 +74,7 @@ const AllOrder = () => {
           <div className="justify-content-center">
             {isloading ? (
               <div className="text-center my-5">
-                <Spinner color="success" /> loading orders
+                <Spinner color="dark" /> loading orders
               </div>
             ) : (
               <>

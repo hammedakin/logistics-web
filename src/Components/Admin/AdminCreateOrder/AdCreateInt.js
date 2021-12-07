@@ -5,6 +5,9 @@ import { useHistory } from "react-router";
 
 
 const AdCreateInt = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
 
 // Sender 
   const [usertoken, setusertoken] = useState("ADMIN");
@@ -77,10 +80,10 @@ const AdCreateInt = () => {
       data.append("type", type);
       data.append("paid_type", paid_type);
       data.append("usertoken", usertoken);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-      .post(`https://test.api.eclipse.com.ng/v1/make-order`, data, {
+      .post(`${endpoint}/v1/make-order`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -122,10 +125,10 @@ const AdCreateInt = () => {
    // Function for to call all countries
    const fetchcountries = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
+      apptoken: apptoken
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-countries`, {params:data})
+      .get(`${endpoint}/v1/get-countries`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
         console.log(response.data);
@@ -152,10 +155,10 @@ const AdCreateInt = () => {
   // Function for to call all states
   const fetchstates = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
+      apptoken: apptoken
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-states`, {params:data})
+      .get(`${endpoint}/v1/get-states`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
 
@@ -183,10 +186,10 @@ const AdCreateInt = () => {
    // Function for to call all cities
    const fetchcities = () => {
     const data = {
-      apptoken: "T9H1E6KUYM"
+      apptoken: apptoken
     }
     axios
-      .get(`https://test.api.eclipse.com.ng/v1/get-cities-fedex`, {params:data})
+      .get(`${endpoint}/v1/get-cities-fedex`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
         console.log(response.data);
@@ -214,10 +217,10 @@ const AdCreateInt = () => {
 // Function for to call all weights for country
 const fetchweight = () => {
   const data = {
-    apptoken: "T9H1E6KUYM"
+    apptoken: apptoken
   }
   axios
-    .get(`https://test.api.eclipse.com.ng/v1/get-country-weights`, {params:data})
+    .get(`${endpoint}/v1/get-country-weights`, {params:data})
     .then((response) => {
       if (response.data.success === false) {
       console.log(response.data);
@@ -672,7 +675,7 @@ if (type==='int') {
                 <>
                   <button
                     type="button"
-                    class="btn shadow waves-effect"
+                    class="btn btn-dark shadow waves-effect"
                     action="submit"              
                   >
                   <strong>     
@@ -685,7 +688,7 @@ if (type==='int') {
                          
                   <button
                     type="button"
-                    class="btn shadow waves-effect"
+                    class="btn btn-dark shadow waves-effect"
                     action="submit"
                     onClick={(e) => SendLocalPackage(e)}
                   >

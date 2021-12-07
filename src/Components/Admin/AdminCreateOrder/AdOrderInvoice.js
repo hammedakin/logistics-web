@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
 import AdminNavbar from "../../Navbar/AdminNavbar";
 import { useHistory } from "react-router";
-import BackButton from "../../BackButton";
 
 const AdOrderInvoice = (props) => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [trackid, settrackid] = useState("");
   const [date, setdate] = useState("");
   const [status, setstatus] = useState("");
@@ -48,10 +50,10 @@ const AdOrderInvoice = (props) => {
   let history = useHistory();
   const fetchInvoice = () => {
     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    data.append("apptoken", apptoken);
     data.append("trackid", props.match.params.trackid);
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-invoice-data`, data, {
+      .post(`${endpoint}/v1/get-invoice-data`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -101,6 +103,7 @@ const AdOrderInvoice = (props) => {
     fetchInvoice();
   }, 0);
 
+  // Payment Status
   let statuss;
   if (status === "paid") {
     statuss = (
@@ -119,6 +122,17 @@ const AdOrderInvoice = (props) => {
       <span>Cancelled </span>
     </span>;
   }
+  // Payment Status
+
+  // Shipment Type
+  let types;
+
+  if (type === "int") {
+    types = "INTERNATIONAL";
+  } else {
+    types = "NORMAL";
+  }
+  // Shipment Type
 
   return (
     <>
@@ -126,15 +140,19 @@ const AdOrderInvoice = (props) => {
       <div className="send-package admin-create-order">
         <div className="invoice">
           <div className="container">
-            <BackButton />
-
             <div className="mb-4 first">
-              <h5> Tracking ID: {trackid} </h5>
+              <h5>
+                <span className="font-weight-light"> Tracking ID: </span>{" "}
+                {trackid}{" "}
+              </h5>
               <h5 className="">
-                Status:
+                <span className="font-weight-light"> Status: </span>
                 {statuss}
               </h5>
-              <h5 className="">Type: {type}</h5>
+              <h5 className="">
+                <span className="font-weight-light"> Type: </span>
+                {types} SHIPMENT
+              </h5>
               {express === 1 ? (
                 <>
                   <h5 className="">
@@ -315,15 +333,8 @@ const AdOrderInvoice = (props) => {
                     <h4 className="mb-4">
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
-                    <h1 className="bolder-text green-text">₦ 
-                    {express === 1 ? (
-                <>
-                  {expressth}
-                </>
-              ) : ( <>
-                {priceth} </>
-              )}
-                    
+                    <h1 className="bolder-text green-text">
+                      ₦{express === 1 ? <>{expressth}</> : <>{priceth} </>}
                     </h1>
                   </div>
                   <div className="mx-3 text-center">

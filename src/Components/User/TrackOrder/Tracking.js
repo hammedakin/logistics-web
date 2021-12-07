@@ -4,6 +4,9 @@ import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
 
 const Tracking = () => {
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [trackid, settrackid] = useState("");
   const [results, setresults] = useState([]);
 
@@ -19,10 +22,10 @@ const Tracking = () => {
 
       const data = new FormData();
       data.append("trackid", trackid);
-      data.append("apptoken", "T9H1E6KUYM");
+      data.append("apptoken", apptoken);
 
       axios
-        .post(`https://test.api.eclipse.com.ng/v1/track-order`, data, {
+        .post(`${endpoint}/v1/track-order`, data, {
           headers: {
             "content-type": "multipart/form-data",
           },

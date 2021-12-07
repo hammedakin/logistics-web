@@ -3,7 +3,9 @@ import axios from 'axios'
 import UserNavbar from "../../Navbar/UserNavbar";
 
 const FoodInvoice = (props) => {
-  // console.log(props)
+  const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
+  const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
+
   const [oid, setoid] = useState(props.match.params.orderid);
   const [id, setid] = useState("");
   const [title, settitle] = useState("");
@@ -21,11 +23,11 @@ const FoodInvoice = (props) => {
   const fetchFoodDetails = () => {
  
     const data = new FormData();
-    data.append("apptoken", "T9H1E6KUYM");
+    data.append("apptoken", apptoken);
     data.append("oid", oid);
 
     axios
-      .post(`https://test.api.eclipse.com.ng/v1/get-food-order-detail`, data, {
+      .post(`${endpoint}/v1/get-food-order-detail`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -55,29 +57,6 @@ const FoodInvoice = (props) => {
     useEffect(() => {
       fetchFoodDetails();
     }, 0);
-
-  // // pay with wallet modal
-  // const [showremove, setShowremove] = useState(false);
-  // const handleCloseremove = () => setShowremove(false);
-  // const handleShowremove = () => setShowremove(true);
-  // // const [id, setid] = useState("");
-
-  // function workModal(token) {
-  //   // console.log(token)
-  //   setid(token);
-  //   handleShowremove();
-  // }
-
-  // // pay with paystack modal
-  // const [showremove1, setShowremove1] = useState(false);
-  // const handleCloseremove1 = () => setShowremove1(false);
-  // const handleShowremove1 = () => setShowremove1(true);
-
-  // function workModal1(token) {
-  //   // console.log(token)
-  //   setid(token);
-  //   handleShowremove1();
-  // }
 
   return (
     <>
@@ -140,9 +119,7 @@ const FoodInvoice = (props) => {
               <div className="col-md-12 curve mb-4">
                 <div className="card h-100">
                   <div class="container mt-4 details">
-                    {/* <h6>Name:
-                      <span class="font-weight-bold"> {title} </span> </h6>
-                    <hr /> */}
+                  
                     <h6>Location:
                        <span class="font-weight-bold"> {address} </span>  </h6>
                     <hr />
