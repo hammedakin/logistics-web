@@ -48,7 +48,7 @@ const Invoice = (props) => {
   const [expressth, setexpressth] = useState("");
 
   const [showalert, setshowalert] = useState(true);
-  const [alert, setalert] = useState("");
+  const [alertt, setalert] = useState("");
 
   let history = useHistory();
 
@@ -135,9 +135,24 @@ const Invoice = (props) => {
   if (type === "int") {
     types = "INTERNATIONAL";
   } else {
-    types = "NORMAL";
+    types = "LOCAL";
   }
   // Shipment Type
+
+  // Copy to Clipboard Function
+  function Copy() {
+    var content = document.getElementById("textArea").innerHTML;
+
+    navigator.clipboard.writeText(content).then(() => {
+        console.log("Text copied to clipboard...");
+        alert( `${trackid} Copied!`);
+      })
+      .catch((err) => {
+        console.log("Something went wrong", err);
+      });
+  }
+  // Copy to Clipboard Function
+  
 
   return (
     <>
@@ -149,30 +164,41 @@ const Invoice = (props) => {
             <div className="mb-4 first">
               <h5>
                 <span className="font-weight-light"> Tracking ID: </span>
-                {trackid}{" "}
+                <span id="textArea"> {trackid}</span>{" "}
+                <a onClick={Copy}>
+                  {" "}
+                  <box-icon name="copy" size="1.2rem" color="grey"></box-icon>
+                </a>
               </h5>
-              <h5 className="">
-                <span className="font-weight-light"> Status: </span>
-                {statuss}
-              </h5>
+
               <h5 className="">
                 {" "}
                 <span className="font-weight-light"> Type: </span>
                 {types} SHIPMENT
               </h5>
-              {express === 1 ? (
-                <>
-                  <h5 className="">
-                    <span class="px-2 h5 black white-text">
-                      Express Delivery
-                    </span>
-                  </h5>
-                </>
+              {type === "int" ? (
+                <> </>
               ) : (
-                <h5 className="">
-                  <span class="px-2 h5 black white-text">Normal Delivery </span>
-                </h5>
+                <>
+                  {express === 1 ? (
+                    <>
+                      <h5 className="">
+                        <span class="font-weight-light">Mode:</span> Express
+                        Delivery
+                      </h5>
+                    </>
+                  ) : (
+                    <h5 className="">
+                      <span class="font-weight-light">Mode:</span> Normal
+                      Delivery
+                    </h5>
+                  )}
+                </>
               )}
+              <h5 className="">
+                <span className="font-weight-light"> Status: </span>
+                {statuss}
+              </h5>
               <p class="grey-text mt-0 pt-0">
                 <i>Created on : {date} </i>
               </p>
@@ -180,7 +206,7 @@ const Invoice = (props) => {
             <div class="text-center">
               {showalert ? (
                 <>
-                  <Alert color="success">{alert}</Alert>
+                  <Alert color="success">{alertt}</Alert>
                 </>
               ) : (
                 <></>

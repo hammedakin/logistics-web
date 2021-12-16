@@ -14,7 +14,6 @@ body {
   /* font: 400 15px/28px "Poppins", sans-serif!important; */
   /* font-family: 400 15px/28px "Montserrat", sans-serif !important; */
   font-family: "Poppins", sans-serif !important;
-
   overflow-x: hidden !important;
 }
 
@@ -377,7 +376,7 @@ border:transparent solid 1px !important;
     background-color: #7c4d4d;
     overflow-x: hidden !important;
     overflow-y: hidden !important;
-    z-index: 2000 !important;
+    z-index: 900 !important;
 
 }
 
@@ -513,7 +512,7 @@ footer .boxicons .box-icon:hover {
 
 @media screen and (max-width: 580px) {
    /* Global */
-   .back {
+   .userback {
     display: none !important;
   }
   /* Global */

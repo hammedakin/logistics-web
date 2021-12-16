@@ -4,40 +4,39 @@ import { useHistory } from "react-router";
 import { usePaystackPayment } from "react-paystack";
 import { Spinner, Alert } from "reactstrap";
 
-
-
 const FundWallet = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
-  const [publickey, setpublickey] = useState(process.env.REACT_APP_PAYSTACK_PUBLICKEY);
+  const [publickey, setpublickey] = useState(
+    process.env.REACT_APP_PAYSTACK_PUBLICKEY
+  );
+
+  const [load, setload] = useState(false);
 
   const [usertoken, setusertoken] = useState("");
   const [amount, setamount] = useState("");
-  const [message, setmessage] = useState("");
-  const [status, setstatus] = useState("");
-  const [reference, setreference] = useState("");
-  const [transaction, settransaction] = useState("");
-  const [alert, setalert] = useState("");
+  const [alertt, setalert] = useState("");
   const [showalert, setshowalert] = useState(false);
-  let history = useHistory() 
-
+  let history = useHistory();
 
   const config = {
     reference: new Date().getTime().toString(),
-    email: localStorage.getItem('eclemail'),
+    email: localStorage.getItem("eclemail"),
     amount: Number(amount) * 100,
     publicKey: publickey,
   };
-  
+
   // you can call this function anything
   const onSuccess = (reference) => {
-      if(usertoken, amount){
-        const data = new FormData();
-        data.append("usertoken", localStorage.getItem('eclusertoken'));
-        data.append("amount", amount);
-        data.append("apptoken", apptoken);
-  
-        axios
+    if ((usertoken, amount)) {
+      setload(true);
+
+      const data = new FormData();
+      data.append("usertoken", localStorage.getItem("eclusertoken"));
+      data.append("amount", amount);
+      data.append("apptoken", apptoken);
+
+      axios
         .post(`${endpoint}/v1/fund-wallet`, data, {
           headers: {
             "content-type": "multipart/form-data",
@@ -45,28 +44,33 @@ const FundWallet = () => {
         })
         .then((res) => {
           console.log(res.data);
-          setusertoken(res.data.usertoken)
-          setamount(res.data.amount)
-          setmessage(res.data.message)
-          setstatus(res.data.status)
-          settransaction(res.data.transaction)
-          setreference(res.data.reference)
-          history.push("/dashboard")
-          setshowalert(true);
-          window.location.reload(true);
+          if (res.data.success === true) {
+            setload(false);
+            history.push("/dashboard");
+            setshowalert(true);
+            window.location.reload(true);
+            alert(res.data.message);
+          } else {
+            setload(false);
+          }
         })
-      }else{
-         setshowalert(true)
-       }
+        .catch((error) => {
+          console.log(error);
+          setload(false);
+        });
+    } else {
+      setshowalert(true);
+      setload(false);
+    }
     console.log(reference);
   };
   // you can call this function anything
   const onClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
     console.log("closed");
-  
+    window.location.reload(true);
   };
-  
+
   const PaystackHookExample = () => {
     const initializePayment = usePaystackPayment(config);
     return (
@@ -86,20 +90,33 @@ const FundWallet = () => {
   return (
     <>
       <section className="fundwallet">
-      <div className="col-md-10 py-4 white ml-auto mr-auto shadow" style={{borderRadius: "1rem"}}>
+        <div
+          className="col-md-10 py-4 white ml-auto mr-auto shadow"
+          style={{ borderRadius: "1rem" }}
+        >
+          <div className="container">
+            <h5 className="text-center "> FUND WALLET</h5>
 
-        <div className="container">
-          <h5 className="text-center "> FUND WALLET</h5>
-          <div className="form">
-          {showalert ? (
-                <>
-                  <Alert color="success">{alert}</Alert>
-                </>
-              ) : (
-                <></>
-              )}
+            {load ? (
+              <div className="text-center">
+                <Spinner color="success" />
+                <h5 className="font-weight-light">
+                  Please wait for your transaction is processing{" "}
+                </h5>
+                <h6> Do not refresh page!!! </h6>
+              </div>
+            ) : (
+              <>
+                <div className="form">
+                  {showalert ? (
+                    <>
+                      <Alert color="success">{alertt}</Alert>
+                    </>
+                  ) : (
+                    <></>
+                  )}
 
-          <form>
+                  <form>
                     <div className="row justify-content-center">
                       <div className="col-md-6 text-center">
                         <label> Amount </label>
@@ -116,16 +133,15 @@ const FundWallet = () => {
                           />
                         </div>
                       </div>
-
-                      </div>
-
-               
+                    </div>
                   </form>
-                  </div>
+                </div>
 
-          <div className="text-center">
-            <PaystackHookExample />
-          </div>
+                <div className="text-center">
+                  <PaystackHookExample />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>

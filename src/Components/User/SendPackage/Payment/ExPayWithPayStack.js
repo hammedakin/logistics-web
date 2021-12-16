@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import { usePaystackPayment } from "react-paystack";
-import { useHistory } from "react-router";
+import { Spinner } from "reactstrap";
 
 const ExPayWithPayStack = (props) => {
 
@@ -11,16 +11,9 @@ const ExPayWithPayStack = (props) => {
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
   const [publickey, setpublickey] = useState(process.env.REACT_APP_PAYSTACK_PUBLICKEY);
 
-  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
-  const [trackid, settrackid] = useState(props.trackid);
-  const [type, settype] = useState(props.type);
-  const [amount, setamount] = useState(props.price);
-  const [message, setmessage] = useState("");
-  const [status, setstatus] = useState("");
-  const [ref, setref] = useState("");
-  const [transaction, settransaction] = useState("");
+  const [load, setload] = useState(false);
 
-  let history = useHistory();
+  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
 
   const config = {
     reference: new Date().getTime().toString(),
@@ -37,6 +30,7 @@ const ExPayWithPayStack = (props) => {
       data.append("trackid", props.trackid);
       data.append("trxid", reference.transaction);
       data.append("price", props.amount);
+      data.append("type", props.type);
       data.append("ref", reference.ref);
       data.append("apptoken", apptoken);
 
@@ -48,24 +42,20 @@ const ExPayWithPayStack = (props) => {
         })
         .then((res) => {
           console.log(res.data);
-          setusertoken(res.data.usertoken);
-          setamount(res.data.amount);
-          setmessage(reference.message);
-          setstatus(reference.status);
-          settransaction(reference.transaction);
-          setref(reference.reference);
-          settrackid(res.data.trackid);
-          // setamount(res.data.amount);
-          settype(res.data.type);
-        
-          history.push({
-            pathname: `/send-package/invoice/${res.data.trackid}`,
-            state: res.data,
-          });
+          if (res.data.success === true) {
+            setload(false);
           window.location.reload(true);
           alert(res.data.message);
+          } else {
+            setload(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setload(false);
         });
     } else {
+      setload(false);
     }
     console.log(reference);
   };
@@ -106,21 +96,32 @@ const ExPayWithPayStack = (props) => {
           <section class=" ">
             <div class="container">
               <div class="text-center">
-                <h6 className="font-weight-light">
-                  You are about to make an express payment for this invoice
-                </h6>
-                <h5>
-                  <span class=" font-weight-bold green-text">
-                    {props.trackid}
-                  </span>
-                </h5>
+              {load ? (
+                  <>
+                  <Spinner color="success"/>
+                    <h5 className="font-weight-light">
+                      Please wait for your transaction is processing{" "}
+                    </h5>
+                    <h6> Do not refresh page!!! </h6>
+                  </>
+                ) : (
+                  <>
+                    <h6 className="font-weight-light">
+                      You are about to make payment for this invoice
+                    </h6>
+                    <h5>
+                      <span class=" font-weight-bold green-text">
+                        {props.trackid}
+                      </span>
+                    </h5>
 
-                <h6 className="font-weight-light"> Amount :</h6>
-                <h1 className="font-weight-bold green-text">
-                  {" "}
-                  ₦ {props.amountth}
-                </h1>
-                {props.amountth} {props.trackid} {props.type} {usertoken}
+                    <h6 className="font-weight-light"> Amount :</h6>
+                    <h1 className="font-weight-bold green-text">
+                      {" "}
+                      ₦ {props.amountth}
+                    </h1>
+                  </>
+                )}
               </div>
 
             </div>

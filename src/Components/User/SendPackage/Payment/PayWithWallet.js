@@ -139,7 +139,7 @@ const PayWithWallet = (props) => {
                 <Alert color="warning">
                   Account Balance : ₦ {walletbalance_th}
                 </Alert>
-                {props.amount} {props.trackid} {props.type} {usertoken}
+                {/* {props.amount} {props.trackid} {props.type} {usertoken} */}
               </div>
 
               <div class="text-center h5">
@@ -168,7 +168,6 @@ const PayWithWallet = (props) => {
               <>
                 {issending ? (
                   <>
-                    <Link to="/">
                       <button
                         type="button"
                         class="btn btn-success btn my-0"
@@ -176,7 +175,6 @@ const PayWithWallet = (props) => {
                       >
                         processing <Spinner color="light" />
                       </button>
-                    </Link>
                   </>
                 ) : (
                   <>

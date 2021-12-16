@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import BackButton from "../BackButton";
+import UserBackButton from "../UserBackButton";
 import "./Nav.css";
 import UserNavLinks from "./UserNavLinks";
 import UserSideNav from './UserSideNav'
@@ -69,7 +69,7 @@ const [name, setname] = useState(localStorage.getItem('eclfullname'));
             <h5> ECLIPSE </h5>
           </Link>
           <li class="list-unstyled mr-auto ml-5">
-          <BackButton/>
+          <UserBackButton/>
              </li>
 
           {/* <ul class="navbar-nav ml-auto nav-flex-icons"> */}

@@ -108,6 +108,24 @@ const UserNavLinks = () => {
             Food
           </NavLink>
         </li>
+        <li class="nav-item ">
+          <box-icon
+            class="box-icon"
+            size="1.1rem"
+            color=" #fff"
+            name="user"
+            type="logo"
+          ></box-icon>
+          <NavLink
+            // onClick={(e) => closeNav(e)}
+            tag={Link}
+            activeClassName="active1"
+            to="/profile"
+            onClick={RemoveTrack}
+          >
+            Profile
+          </NavLink>
+        </li>
       </ul>
       <ul class="navbar-nav text-center">
         <li>

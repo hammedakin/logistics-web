@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Spinner } from "reactstrap";
 import axios from "axios";
-import img from "./img/icons.png";
 import { Link } from "react-router-dom";
 import AdminNavbar from "../../Navbar/AdminNavbar";
-import { Alert } from "reactstrap";
 
 const AllOrder = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
@@ -13,7 +11,7 @@ const AllOrder = () => {
   const [allorder, setallorder] = useState([]);
   const [count, setcount] = useState(0);
 
-  const [isloading, setisloading] = useState(true);
+  const [load, setload] = useState(true);
 
   const fetchorder = () => {
     const data = new FormData();
@@ -28,10 +26,10 @@ const AllOrder = () => {
       .then((response) => {
         if (response.data.success === false) {
           console.log(response.data);
-          setisloading(false);
+          setload(false);
         } else {
           setallorder(response.data);
-          setisloading(false);
+          setload(false);
 
           console.log(response.data);
         }
@@ -39,7 +37,7 @@ const AllOrder = () => {
 
       .catch((error) => {
         console.log(error.response);
-        setisloading(false);
+        setload(false);
       });
   };
   useEffect(() => {
@@ -49,14 +47,30 @@ const AllOrder = () => {
   const order = allorder.map((item, i) => {
     return (
       <>
-        <div className="second" key={i}>
-         {item.id} <Alert color="dark">
-          <Link to={`/admin/order/invoice/${item.trackid}`}>  <span className="font-weight-bold" > {item.trackid} </span> </Link> -
-            {item.packagename}
-            <br />
-            <span className=""> {item.timestamp}</span>
-          </Alert>
-        </div>
+        <tr key={i}>
+          <td class="pt-3-half">{item.trackid}</td>
+          <td class="pt-3-half">{item.packagename}</td>
+          <td class="pt-3-half">
+            {" "}
+            <small>{item.timestamp}</small>
+          </td>
+          <td class="pt-3-half">
+            <span class="table-up">
+              <Link to={`/admin/order/invoice/${item.trackid}`}>
+                {" "}
+                <span className="font-weight-bold">
+                  {" "}
+                  <button
+                    type="button"
+                    class="btn btn-success btn-rounded btn-sm my-0"
+                  >
+                    View
+                  </button>{" "}
+                </span>{" "}
+              </Link>
+            </span>
+          </td>
+        </tr>
       </>
     );
   });
@@ -64,39 +78,41 @@ const AllOrder = () => {
   return (
     <>
       <AdminNavbar />
-      <section class="all-order admin">
-        <div className="container">
-          <div className="text-center">
-            <h5> ORDERS </h5>
-          </div>
-          <hr />
-
-          <div className="justify-content-center">
-            {isloading ? (
-              <div className="text-center my-5">
-                <Spinner color="dark" /> loading orders
+      <section className="orderlist">
+        <div className="mt-3 container-fluid">
+          <div className="card">
+            <h5 className="card-header text-center font-weight-bold text-uppercase py-4">
+              ALL Orders
+            </h5>
+            <div className="card-body">
+              <div id="table" className="table-editable">
+                <span className="table-add float-right mb-3 mr-2">
+                  <a href="#!" className="text-success">
+                    <i className="fas fa-plus fa-2x" aria-hidden="true"></i>
+                  </a>
+                </span>
+                <table className="table table-bordered table-responsive-sm table-striped text-center">
+                  <thead>
+                    <tr>
+                      <th className="text-center">Track ID</th>
+                      <th className="text-center">Package Name</th>
+                      <th className="text-center">Date Created</th>
+                      <th className="text-center">View Order</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {load ? (
+                      <div className="my-5 justify-content-center">
+                        <Spinner color="dark" /> Loading Orders
+                      </div>
+                    ) : (
+                      <>{order}</>
+                    )}
+                  </tbody>
+                </table>
               </div>
-            ) : (
-              <>
-                {order == "" ? (
-                  <>
-                    <div className="mt-5 text-center">
-                      <img src={img} width="100px" />
-                      <h5
-                        class="mt-3 font-weight-normal mb-5"
-                        style={{ color: "#CCCCCC" }}
-                      >
-                        Order list is empty ...
-                      </h5>
-                    </div>
-                  </>
-                ) : (
-                  <>{order}</>
-                )}
-              </>
-            )}
+            </div>
           </div>
-          <div className="first"></div>
         </div>
       </section>
     </>

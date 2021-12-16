@@ -139,7 +139,7 @@ const ExPayWithWallet = (props) => {
                 <Alert color="warning">
                   Account Balance : ₦ {walletbalance_th}
                 </Alert>
-                {props.amountth} {props.trackid} {props.type} {usertoken}
+                {/* {props.amountth} {props.trackid} {props.type} {usertoken} */}
               </div>
 
               <div class="text-center h5">
@@ -168,7 +168,6 @@ const ExPayWithWallet = (props) => {
               <>
                 {issending ? (
                   <>
-                    <Link to="/">
                       <button
                         type="button"
                         class="btn btn-success btn my-0"
@@ -176,7 +175,6 @@ const ExPayWithWallet = (props) => {
                       >
                         processing <Spinner color="light" />
                       </button>
-                    </Link>
                   </>
                 ) : (
                   <>

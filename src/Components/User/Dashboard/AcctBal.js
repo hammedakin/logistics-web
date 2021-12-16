@@ -9,15 +9,14 @@ const AcctBal = () => {
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
 
-  const [usertoken, setusertoken] = useState("");
+  const [usertoken, setusertoken] = useState(localStorage.getItem('eclusertoken'));
   const [walletbalance_th, setwalletbalance_th] = useState("");
   const [issending, setissending] = useState(true);
-  console.log(endpoint)
-  console.log(apptoken)
+
   const fetchBal = () => {
     const data = {
       apptoken: apptoken,
-      usertoken: localStorage.getItem('eclusertoken'),
+      usertoken: usertoken,
     };
     axios
     .get(`${endpoint}/v1/get-wallet-balance`, { params: data })

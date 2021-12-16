@@ -24,9 +24,6 @@ const AdminAllFood = () => {
     handleShowremove();
   }
 
-  useEffect(() => {
-    fetchfood();
-  }, [count]);
 
   const [allfood, setallfood] = useState([]);
 

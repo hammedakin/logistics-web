@@ -22,6 +22,8 @@ import TrackOrder from './Pages/UserArea/TrackOrder';
 import Food from './Pages/UserArea/Food';
 import FoodDetails from './Components/User/Food/FoodDetails'
 import FoodInvoice from './Components/User/Food/FoodInvoice';
+import UserResetPassword from './Components/User/UserResetPassword';
+
 
 // User 
 
@@ -34,9 +36,19 @@ import AdminFood from './Pages/AdminArea/AdminFood';
 import AdminRestaurant from './Pages/AdminArea/AdminRestaurant';
 import UserList from './Components/Admin/Account/UserList';
 import AdCreateOrder from './Pages/AdminArea/AdCreateOrder';
-import AdOrderInvoice from './Components/Admin/AdminCreateOrder/AdOrderInvoice';
+import AdOrderInvoice from './Components/Admin/Order/AdminCreateOrder/AdOrderInvoice';
 import AllTransactions from './Components/Admin/Account/AllTransactions';
 import AdminSetting from './Components/Admin/Account/AdminSetting';
+import AllFoodOrder from './Components/Admin/AdminFood/AllFoodOrder';
+import UpdateSetting from './Components/Admin/Account/UpdateSetting';
+import CountryAndZone from './Components/Admin/Order/ManageCountries/CountryAndZone';
+import AdminStates from './Pages/AdminArea/AdminStates';
+import AdminTown from './Pages/AdminArea/AdminTown';
+import AdminFranchise from './Pages/AdminArea/AdminFranchise';
+import AdminTrack from './Components/Admin/Order/AdminTrack';
+import UserSettings from './Pages/UserArea/UserSettings';
+import EditStates from './Components/Admin/Order/ManageStates/EditStates';
+import EditTown from './Components/Admin/Order/ManageTown/EditTown';
 
 
 // Admin
@@ -69,6 +81,9 @@ function App() {
 
         <Route exact path="/login" component={UserLogin} />
 
+        <Route exact path="/forget-password" component={UserResetPassword} />
+
+
         {/* Log In, Sign Up and Auth */}
 
         {/* Send Package */}
@@ -96,8 +111,13 @@ function App() {
 
         <ProtectUser exact path="/food/invoice/:orderid" component={FoodInvoice} />
 
-
         {/* Food */}
+
+        {/* Profile */}
+        <ProtectUser exact path="/profile" component={UserSettings} />
+
+        {/* Profile */}
+
 
 
         <ProtectUser exact path="/dashboard" component={User} />  
@@ -116,10 +136,21 @@ function App() {
 
         <ProtectAdmin exact path="/admin/order" component={AllOrder} />
 
+        <ProtectAdmin exact path="/admin/track" component={AdminTrack} />
+
         <ProtectAdmin exact path="/admin/create-order" component={AdCreateOrder} />
 
         <ProtectAdmin exact path="/admin/order/invoice/:trackid" component={AdOrderInvoice} />
 
+        <ProtectAdmin exact path="/admin/countries" component={CountryAndZone} />
+
+        <ProtectAdmin exact path="/admin/states" component={AdminStates} />
+
+        <ProtectAdmin exact path="/admin/edit-states/:id" component={EditStates} />
+
+        <ProtectAdmin exact path="/admin/town" component={AdminTown} />
+
+        <ProtectAdmin exact path="/admin/edit-town/:id" component={EditTown} />
 
 
         {/* Admin Orders */}
@@ -129,14 +160,21 @@ function App() {
 
         <ProtectAdmin exact path="/admin/restaurant" component={AdminRestaurant} />
 
+        <ProtectAdmin exact path="/admin/food-order" component={AllFoodOrder} />
+
         {/* Admin Food */}
 
         {/* Account */}
         <ProtectAdmin exact path="/admin/userlist" component={UserList} />
 
+        <ProtectAdmin exact path="/admin/franchise" component={AdminFranchise} />
+
         <ProtectAdmin exact path="/admin/transactions" component={AllTransactions} />
 
-        <ProtectAdmin exact path="/admin/setting" component={AdminSetting} />
+        <ProtectAdmin exact path="/admin/account" component={AdminSetting} />
+
+        <ProtectAdmin exact path="/admin/setting" component={UpdateSetting} />
+
 
 
 

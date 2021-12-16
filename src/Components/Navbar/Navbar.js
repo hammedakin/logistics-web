@@ -8,10 +8,13 @@ const Navbar = () => {
   
   const HandleLogout = () => {
     history.push("/home");
-    localStorage.removeItem("usertoken");
-    localStorage.removeItem("fullname");
-    localStorage.removeItem("email");
-    localStorage.removeItem("phone");
+    localStorage.removeItem("ecladmintoken");
+    localStorage.removeItem("ecladminname");
+    localStorage.removeItem("ecladminmail");
+    localStorage.removeItem("eclusertoken");
+    localStorage.removeItem("eclfullname");
+    localStorage.removeItem("eclemail");
+    localStorage.removeItem("eclphone");
     localStorage.removeItem("results");
     localStorage.removeItem("trackid");
   };
@@ -48,22 +51,7 @@ const Navbar = () => {
 
           <div className="collapse navbar-collapse" id="basicExampleNav">
             <ul className="navbar-nav mr-auto text-center">
-              {/* <li className="nav-item">
-                <NavLink tag={Link} activeClassName="active1 " to="/home">
-                  HOME
-                </NavLink>
-              </li> */}
-
-             {/* <li className="nav-item">
-                <NavLink
-                  tag={Link}
-                  activeClassName="active1"
-                  to="/blog"
-
-                >
-                  BLOG
-                </NavLink>
-              </li> */}
+             
             </ul>
             <ul className="navbar-nav text-center">
 
@@ -94,9 +82,9 @@ const Navbar = () => {
                   </button>
                 </li>
               </Link>
-              <a onClick={HandleLogout}>
+              <a >
                 <li className="">
-                  <button type="btn" className="btn btn3 shadow">
+                  <button type="btn" className="btn btn3 shadow" onClick={HandleLogout}>
                     logout
                   </button>
                 </li>

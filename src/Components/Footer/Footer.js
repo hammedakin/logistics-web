@@ -45,7 +45,7 @@ const Footer = () => {
                   </li>
 
                   <li>
-                    <a href="mailto:info@eclipse.ng">
+                    <a href="mailto:info@eclipse.com.ng">
                       <span class="mr-2">
                         {" "}
                         <box-icon
@@ -56,7 +56,7 @@ const Footer = () => {
                           type="solid"
                         ></box-icon>
                       </span>
-                      info@eclipse.ng{" "}
+                      info@eclipse.com.ng{" "}
                     </a>
                   </li>
                 </ul>

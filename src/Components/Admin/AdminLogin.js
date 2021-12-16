@@ -30,7 +30,7 @@ const AdminLogin = () => {
       data.append("apptoken", apptoken);
 
       axios
-      .post(`${endpoint}}/v1/admin-login`, data, {
+      .post(`${endpoint}/v1/admin-login`, data, {
         headers: {
           "content-type": "multipart/form-data",
         },

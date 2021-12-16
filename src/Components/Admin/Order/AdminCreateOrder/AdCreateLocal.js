@@ -3,13 +3,12 @@ import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
 
-
-const AdCreateInt = () => {
+const AdCreateLocal = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
 
-// Sender 
+  // Sender
   const [usertoken, setusertoken] = useState("ADMIN");
   const [pickstate, setpickstate] = useState("");
   const [picktown, setpicktown] = useState("");
@@ -18,43 +17,39 @@ const AdCreateInt = () => {
   const [senderphone, setsenderphone] = useState("");
   const [sendername, setsendername] = useState("");
 
-  // Receiver 
+  // Receiver
   const [state, setstate] = useState("");
   const [town, settown] = useState("");
   const [rmail, setrmail] = useState("");
   const [rphone, setrphone] = useState("");
   const [des_area, setdes_area] = useState("");
   const [rname, setrname] = useState("");
-  const [country, setcountry] = useState("");
-  const [zip, setzip] = useState("");
 
-  // Items Details 
+  // Items Details
   const [packagename, setpackagename] = useState("");
   const [weight, setweight] = useState("");
-  const [worth, setworth] = useState("");
   const [description, setdescription] = useState("");
-  const [iscargo, setiscargo] = useState("");
-  const [type, settype] = useState('int');
+  const [onforwardingtownid, setonforwardingtownid] = useState("");
   const [paid_type, setpaid_type] = useState("");
+  const [type, settype] = useState("local");
 
-// States and cities 
-  const [allcountries, setallcountries] = useState([]);
+  // States and cities
+  const [sendstates, setsendstates] = useState([]);
   const [allstates, setallstates] = useState([]);
   const [allcities, setallcities] = useState([]);
-  const [allweight, setallweight] = useState([]);
-  const [count, setcount] = useState(0)
-
+  const [allonforward, setallonforward] = useState([]);
+  const [count, setcount] = useState(0);
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
   const [alert, setalert] = useState("");
 
-  let history = useHistory(); 
+  let history = useHistory();
 
   // Function for to process the form
   function SendLocalPackage(e) {
     if (
-      ( pickstate, picktown, sendermail, loc_area, senderphone, sendername, country, zip, state, town, rmail, rphone, des_area, rname, packagename, weight, worth, description, iscargo, type, paid_type )
+      (pickstate, picktown, sendermail, loc_area, senderphone, sendername, state, town, rmail, rphone, des_area, rname, packagename, weight, description, onforwardingtownid, type, paid_type)
     ) {
       setissending(true);
       const data = new FormData();
@@ -64,8 +59,6 @@ const AdCreateInt = () => {
       data.append("loc_area", loc_area);
       data.append("senderphone", senderphone);
       data.append("sendername", sendername);
-      data.append("country", country);
-      data.append("zip", zip);
       data.append("state", state);
       data.append("town", town);
       data.append("rmail", rmail);
@@ -74,67 +67,63 @@ const AdCreateInt = () => {
       data.append("rname", rname);
       data.append("packagename", packagename);
       data.append("weight", weight);
-      data.append("worth", worth);
       data.append("description", description);
-      data.append("iscargo", iscargo);
+      data.append("onforwardingtownid", onforwardingtownid);
       data.append("type", type);
       data.append("paid_type", paid_type);
       data.append("usertoken", usertoken);
       data.append("apptoken", apptoken);
 
       axios
-      .post(`${endpoint}/v1/make-order`, data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.success === true) {
+        .post(`${endpoint}/v1/make-order`, data, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.success === true) {
+            setshowalert(true);
+            setalert(res.data.message);
+            setissending(false);
+            history.push({
+              pathname: `/admin/order/invoice/${res.data.trackid}`,
+              state: res.data,
+            });
+          } else {
+            setshowalert(true);
+            setalert(res.data.message, "error");
+            setissending(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
           setshowalert(true);
-          setalert(res.data.message);
+          setalert("Check your Network Connection!!!");
           setissending(false);
-          history.push({
-            pathname: `/admin/order/invoice/${res.data.trackid}`,
-            state: res.data,
-            })
-
-
-        } else {
-          setshowalert(true);
-          setalert(res.data.message, "error");
-          setissending(false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setshowalert(true);
-        setalert("Check your Network Connection!!!");
-        setissending(false);
-      });
-  } else {
-    setshowalert(true);
-    setalert("Empty fields");
-    setissending(false);
+        });
+    } else {
+      setshowalert(true);
+      setalert("Empty fields");
+      setissending(false);
+    }
+    e.preventDefault();
   }
-  e.preventDefault();
-}
   // Function for to process the form
 
-
-   // Function for to call all countries
-   const fetchcountries = () => {
+  // Function for to call sender states
+  const fetchsendstates = () => {
     const data = {
-      apptoken: apptoken
-    }
+      apptoken: apptoken,
+    };
     axios
-      .get(`${endpoint}/v1/get-countries`, {params:data})
+      .get(`${endpoint}/v1/get-states`, { params: data })
       .then((response) => {
         if (response.data.success === false) {
-        console.log(response.data);
-        }else {
-        setallcountries(response.data);
-        console.log(response.data);
+          console.log(response.data);
+        } else {
+          setsendstates(response.data);
+          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -142,30 +131,29 @@ const AdCreateInt = () => {
       });
   };
   useEffect(() => {
-    fetchcountries();
+    fetchsendstates();
   }, [count]);
 
-  const countries = allcountries.map((item, i) => {
-   return (
-    <option value={`${item.country}`}> {item.country} </option>
-   );
- });
-  // Function for to call all countries
+  const sendstate = sendstates.map((item, i) => {
+    return <option value={`${item.id}`}> {item.state} </option>;
+  });
+  // Function for to call Sender states
 
   // Function for to call all states
   const fetchstates = () => {
     const data = {
-      apptoken: apptoken
-    }
+      apptoken: apptoken,
+    };
     axios
-      .get(`${endpoint}/v1/get-states`, {params:data})
+      .get(`${endpoint}/v1/get-states-all`, {
+        params: data,
+      })
       .then((response) => {
         if (response.data.success === false) {
-
-        console.log(response.data);
-        }else {
-        setallstates(response.data);
-        console.log(response.data);
+          console.log(response.data);
+        } else {
+          setallstates(response.data);
+          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -177,25 +165,25 @@ const AdCreateInt = () => {
   }, [count]);
 
   const states = allstates.map((item, i) => {
-   return (
-    <option value={`${item.id}`}> {item.state} </option>
-   );
- });
+    return <option value={`${item.id}`}> {item.state} </option>;
+  });
   // Function for to call all states
 
-   // Function for to call all cities
-   const fetchcities = () => {
+  // Function for to call all cities
+  const fetchcities = () => {
     const data = {
-      apptoken: apptoken
-    }
+      apptoken: apptoken,
+    };
     axios
-      .get(`${endpoint}/v1/get-cities-fedex`, {params:data})
+      .get(`${endpoint}/v1/admin-list-town`, {
+        params: data,
+      })
       .then((response) => {
         if (response.data.success === false) {
-        console.log(response.data);
-        }else {
-        setallcities(response.data);
-        console.log(response.data);
+          console.log(response.data);
+        } else {
+          setallcities(response.data);
+          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -207,61 +195,56 @@ const AdCreateInt = () => {
   }, [count]);
 
   const cities = allcities.map((item, i) => {
-   return (
-    <option value={`${item.CityCode}`}> {item.CityName} </option>
-   );
- });
+    return <option value={`${item.town}`}> {item.town} </option>;
+  });
   // Function for to call all cities
+  console.log(town);
+  // Function for to call all onforward
+  const fetchonforward = () => {
+    const data = {
+      apptoken: apptoken,
+      citycode: town,
+    };
+    axios
+      .get(`${endpoint}/v1/getOnforwarding`, {
+        params: data,
+      })
+      .then((response) => {
+        if (response.data.success === false) {
+          console.log(response.data);
+        } else {
+          setallonforward(response.data);
+          console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  useEffect(() => {
+    fetchonforward();
+  }, [count]);
 
+  const onforward = allonforward.map((item, i) => {
+    return <option value={`${item.id}`}> {item.name} </option>;
+  });
+  // Function for to call all onforward
 
-// Function for to call all weights for country
-const fetchweight = () => {
-  const data = {
-    apptoken: apptoken
+  // item.hotdeals
+  let types;
+  if (type == "local") {
+    types = "LOCAL";
+  } else if (type === "int") {
+    types = "INTERNATIONAL";
+  } else {
+    types = "Select Type Above";
   }
-  axios
-    .get(`${endpoint}/v1/get-country-weights`, {params:data})
-    .then((response) => {
-      if (response.data.success === false) {
-      console.log(response.data);
-      }else {
-      setallweight(response.data);
-      console.log(response.data);
-      }
-    })
-    .catch((error) => {
-      console.log(error.response);
-    });
-};
-useEffect(() => {
-  fetchweight();
-}, [count]);
-
-const weights = allweight.map((item, i) => {
- return (
-  <option value={`${item.id}`}> {item.kg} </option>
- );
-});
-// Function for to call all weights for country
-
-
-
-// item.hotdeals
-let types
-
-if (type==='int') {
-  types = 'INTERNATIONAL';
-} else {
-  types = 'Select Type Above';
-}
-
 
   return (
-
     <>
       <section className="send">
         <div className="container">
-          <h5 className="text-center"> SEND INTERNATIONAL PACKAGE </h5>
+          <h5 className="text-center"> SEND LOCAL PACKAGE </h5>
 
           <div className="form">
             <form>
@@ -270,25 +253,23 @@ if (type==='int') {
                 {/* Sender Details  */}
 
                 <div className="col-md-11 ml-auto mr-auto">
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className=" input-style"
-                          placeholder="Type"
-                          onChange={(e) => settype(e.target.value)}
-                          value={types}
-                          disabled
-                        />
-                      </div>
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      className=" input-style"
+                      placeholder="Type"
+                      onChange={(e) => settype(e.target.value)}
+                      value={types}
+                      disabled
+                    />
+                  </div>
                 </div>
 
                 <div className="col-md-6">
                   <h5 className="text-center"> Sender's Details </h5>
 
                   <div className="row justify-content-center">
-                   
-
-                  <div className="col-md-10 ">
+                    <div className="col-md-10 ">
                       {/* <label> Name </label> */}
 
                       <div className="input-group">
@@ -312,7 +293,6 @@ if (type==='int') {
                           placeholder="Enter Email *"
                           onChange={(e) => setsendermail(e.target.value)}
                           value={sendermail}
-                        
                         />
                       </div>
                     </div>
@@ -334,28 +314,13 @@ if (type==='int') {
                     <div className="col-md-10 ">
                       <select
                         className="input-style"
-                      >
-                        <option value="" selected="">
-                          Select Country *
-                        </option>
-
-                        <option> Nigeria </option>                       
-                      </select>
-                    </div>
-
-
-
-                    <div className="col-md-10 ">
-                      <select
-                        className="input-style"
                         onChange={(e) => setpickstate(e.target.value)}
                       >
                         <option value="" selected="">
                           Select State *
                         </option>
 
-                        {states}
-                       
+                        {sendstate}
                       </select>
                     </div>
 
@@ -369,7 +334,6 @@ if (type==='int') {
                         </option>
 
                         {cities}
-                       
                       </select>
                     </div>
 
@@ -384,7 +348,6 @@ if (type==='int') {
                         ></textarea>
                       </div>
                     </div>
-                  
                   </div>
                 </div>
 
@@ -398,8 +361,7 @@ if (type==='int') {
                   <h5 className="text-center"> Receiver's Details </h5>
 
                   <div className="row justify-content-center">
-
-                  <div className="col-md-10 ">
+                    <div className="col-md-10 ">
                       {/* <label> Name </label> */}
 
                       <div className="input-group">
@@ -441,61 +403,30 @@ if (type==='int') {
                       </div>
                     </div>
 
-                         
                     <div className="col-md-10 ">
                       <select
                         className="input-style"
-                        onChange={(e) => setcountry(e.target.value)}
+                        onChange={(e) => setstate(e.target.value)}
                       >
                         <option value="" selected="">
-                          Select Country *
+                          Select State *
                         </option>
 
-                        {countries}
-                       
+                        {states}
                       </select>
                     </div>
 
                     <div className="col-md-10 ">
-                      {/* <label> State </label> */}
+                      <select
+                        className="input-style"
+                        onChange={(e) => settown(e.target.value)}
+                      >
+                        <option value="" selected="">
+                          Select City *
+                        </option>
 
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className=" input-style"
-                          placeholder="Enter State *"
-                          onChange={(e) => setstate(e.target.value)}
-                          value={state}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-md-10 ">
-                      {/* <label> City </label> */}
-
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className=" input-style"
-                          placeholder="Enter City *"
-                          onChange={(e) => settown(e.target.value)}
-                          value={town}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-md-10 ">
-                      {/* <label> Zip Code </label> */}
-
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className=" input-style"
-                          placeholder="Zip Code *"
-                          onChange={(e) => setzip(e.target.value)}
-                          value={zip}
-                        />
-                      </div>
+                        {cities}
+                      </select>
                     </div>
 
                     <div className="col-md-10 ">
@@ -509,7 +440,6 @@ if (type==='int') {
                         ></textarea>
                       </div>
                     </div>
-
                   </div>
                 </div>
 
@@ -528,7 +458,7 @@ if (type==='int') {
                         <input
                           type="text"
                           className=" input-style"
-                          placeholder="Package Name*"
+                          placeholder="Package Name *"
                           onChange={(e) => setpackagename(e.target.value)}
                           value={packagename}
                         />
@@ -536,62 +466,28 @@ if (type==='int') {
                     </div>
 
                     <div className="col-md-10 ">
-                      <label>Cargo Shipment ? * </label>
-
-                      <select
-                        className="input-style"
-                        onChange={(e) => setiscargo(e.target.value)}
-                      >
-                        {/* <option value="" selected="">
-                         Cargo Shipment ? *
-                        </option> */}
-                        <option value="1" >
-                          Yes
-                        </option> 
-                        <option value="0" selected>
-                          No
-                        </option>
-                       
-                      </select>
-                    </div>
-
-
-                  {iscargo=="1" ?
-                  (
-                    <>
-                      <div className="col-md-10 ">
                       <div className="input-group">
                         <input
-                          type="number"
+                          type="text"
                           className=" input-style"
-                          placeholder="Enter Weight (kg) *"
+                          placeholder="Enter Weight *"
                           onChange={(e) => setweight(e.target.value)}
                           value={weight}
                         />
                       </div>
                     </div>
-</>
-
-                  ) : (
-                    <>
-                       <div className="col-md-10 ">
+                    
+                    <div className="col-md-10 ">
                       <select
                         className="input-style"
-                        onChange={(e) => setweight(e.target.value)}
+                        onChange={(e) => setonforwardingtownid(e.target.value)}
                       >
                         <option value="" selected="">
-                        Select Weight (kg) *
+                          Onforwarding *
                         </option>
-                        {weights}
-                       
+                        {onforward}
                       </select>
                     </div>
-
-                    </>
-                  ) 
-             
-             }
-
                   </div>
                 </div>
 
@@ -602,24 +498,9 @@ if (type==='int') {
                 {/* Means Details  */}
 
                 <div className="col-md-6">
-                  <h5 className="text-center"> Means Info </h5>
+                  <h5 className="text-center"> Item Description </h5>
 
                   <div className="row justify-content-center">
-
-                  <div className="col-md-10 ">
-                      {/* <label> Worth </label> */}
-
-                      <div className="input-group">
-                        <input
-                          type="number"
-                          className=" input-style"
-                          placeholder="Worth (₦)*"
-                          onChange={(e) => setworth(e.target.value)}
-                          value={worth}
-                        />
-                      </div>
-                    </div>
-
                     <div className="col-md-10 ">
                       <div className="input-group">
                         <textarea
@@ -659,59 +540,50 @@ if (type==='int') {
                 {/* Means Details  */}
 
                 <div class="col-md-12">
-                        {showalert ? (
-                          <>
-                            <Alert color="success">{alert}</Alert>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
+                  {showalert ? (
+                    <>
+                      <Alert color="success">{alert}</Alert>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
 
                 <div class="col-md-10  mx-auto text-center">
                   <div class="user-btn mb-4 mr-auto text-center">
-                   
-                  {issending ? (
-                <>
-                  <button
-                    type="button"
-                    class="btn btn-dark shadow waves-effect"
-                    action="submit"              
-                  >
-                  <strong>     
-                      processing <Spinner color="light" />
-                    </strong>
-                  </button>
-                </>
-              ) : (
-                <>
-                         
-                  <button
-                    type="button"
-                    class="btn btn-dark shadow waves-effect"
-                    action="submit"
-                    onClick={(e) => SendLocalPackage(e)}
-                  >
-                    
-                    <strong> submit </strong>
-                  </button>
-                </>
-              )}
-
+                    {issending ? (
+                      <>
+                        <button
+                          type="button"
+                          class="btn btn-dark shadow waves-effect"
+                          action="submit"
+                        >
+                          <strong>
+                            processing <Spinner color="light" />
+                          </strong>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          class="btn btn-dark shadow waves-effect"
+                          action="submit"
+                          onClick={(e) => SendLocalPackage(e)}
+                        >
+                          <strong> submit </strong>
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
-
-                
-
-
               </div>
             </form>
           </div>
         </div>
       </section>
-
     </>
   );
 };
 
-export default AdCreateInt;
+export default AdCreateLocal;

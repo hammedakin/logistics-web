@@ -50,7 +50,7 @@ const InvoiceHistory = () => {
     .map((item, i) => {
       return (
         <>
- <a href={`https://test.eclipse.com.ng/send-package/invoice/${item.trackid}`}>
+ <a href={`https://eclipse.com.ng/send-package/invoice/${item.trackid}`}>
    <div className="first mt-3 black-text">
             <div className="row ">
               <div className="col-7 mr-auto ">

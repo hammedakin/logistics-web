@@ -10,9 +10,6 @@ const AllTransactions = () => {
   const [count, setcount] = useState(0);
   const [load, setload] = useState(false);
 
-  useEffect(() => {
-    fetchtransactions();
-  }, [count]);
 
   const [alltransactions, setalltransactions] = useState([]);
 
@@ -77,7 +74,7 @@ const AllTransactions = () => {
         <div className="mt-3 container-fluid">
           <div className="card">
             <h5 className="card-header text-center font-weight-bold text-uppercase py-4">
-              ALL transactionss
+              ALL transactions
             </h5>
             <div className="card-body">
               <div id="table" className="table-editable">

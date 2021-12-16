@@ -86,16 +86,6 @@ function myInput() {
     x.type = "password"
   }
 }
-// function eyeChange() {
-//   var x = document.getElementById("eye");
-//   if (x.type === 'solid') {
-//     x.type = '';
-//   } else {
-//     x.type = 'solid'
-//   }
-// }
-
-
 
   return (
     <>
@@ -148,7 +138,6 @@ function myInput() {
                             <a class="bi bi-eye-slash bi-eye toggle-eye" id="togglePassword" onClick={myInput}>
                             <box-icon type='solid' name='show' id="eye"></box-icon>
                             </a>
-                          {/* <input type="checkbox" onClick={myInput} /> <p style={{fontSize: "smaller"}}> Show Password </p> */}
                         </div>
                       </div> 
 
@@ -196,13 +185,13 @@ function myInput() {
                   </form>
 
                   <div className="text-center">
-                        <h6> Dont have an account? <Link to="/register"> Join free today </Link>
+                        <h6> Don't have an account? <Link to="/register"> Join free today </Link>
                         </h6>
                      </div>
                      <hr/>
 
                      <div className="text-center">
-                     <h6 class="ml-auto pr-3">Forget Password? <Link to=""> Click Here</Link> </h6>     
+                     <h6 class="ml-auto pr-3">Forget Password? <Link to="/forget-password"> Click Here</Link> </h6>     
                      </div>
                 </div>
               </div>

@@ -24,10 +24,6 @@ const AdminAllRestaurant = () => {
     handleShowremove();
   }
 
-  useEffect(() => {
-    fetchrestaurant();
-  }, [count]);
-
   const [allrestaurant, setallrestaurant] = useState([]);
 
   const fetchrestaurant = () => {

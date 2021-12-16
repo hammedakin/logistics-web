@@ -115,7 +115,7 @@ const FoodDetails = (props) => {
                 <div className="card h-100">
                   <div class="container mt-4 details">
                     <h6>Name:
-                      <span class="font-weight-bold"> {title} </span> </h6>
+                      <span class="font-weight-bold">{title} </span> </h6>
                     <hr />
                     <h6>Description:
                        <span class="font-weight-bold"> {des} </span>  </h6>

@@ -185,19 +185,18 @@ const FoodPayWithWallet = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <div class="ml-auto mr-auto text-center">
-            {props.amount > walletbalance ? (
+            {props.amount < walletbalance ? (
               <>
              <Link to="/dashboard/fund-wallet">
                 <button type="button" class="btn btn-danger  btn my-0">
                   Fund Wallet
                 </button>
-                </Link>
+                </Link>           
               </>
             ) : (
               <>
                 {issending ? (
                   <>
-                    <Link to="/">
                       <button
                         type="button"
                         class="btn btn-success btn my-0"
@@ -205,7 +204,6 @@ const FoodPayWithWallet = (props) => {
                       >
                         processing <Spinner color="light" />
                       </button>
-                    </Link>
                   </>
                 ) : (
                   <>

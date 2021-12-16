@@ -164,7 +164,7 @@ border-radius: 10px!important;
 
 .send-package {
   margin-left: 200px !important;
-  margin-top: 2rem !important;
+  margin-top: 1rem !important;
 }
 
 .send-package .sendshowcase {
@@ -485,6 +485,24 @@ border-radius: 2rem !important;
 /* Food */
 /* Food */
 
+
+/* Profile  */
+/* Profile  */
+
+.settings #togglePassword, #togglePassword2 {
+  font-size: 22px;
+}
+.settings .toggle-eye {
+  right: 5%;
+  top: 25%;
+  position: absolute;
+  cursor: pointer;
+  font-weight: bolder;
+  display: block;
+}
+
+/* Profile  */
+/* Profile  */
 
 
     /* Page Not Found */

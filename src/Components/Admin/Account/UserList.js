@@ -57,29 +57,7 @@ const UserList = () => {
         <td className="pt-3-half">{item.state}</td>
         <td className="pt-3-half">{item.town}</td>
         <td className="pt-3-half">{item.state}</td>
-        {/* <td className="pt-3-half">
-          <span className="table-up">
-            <Link to={`/admin/user-details`}>
-              <button
-                type="button"
-                className="btn btn-success btn-rounded btn-sm my-0"
-              >
-                Edit
-              </button>
-            </Link>{" "}
-          </span>
-        </td>
-        <td>
-          <span className="table-remove">
-            <button
-              type="button"
-              // onClick={(e) => workModal(item.propstoken)}
-              className="btn btn-danger btn-rounded btn-sm my-0"
-            >
-              Remove
-            </button>
-          </span>
-        </td> */}
+      
       </tr>
     );
   });

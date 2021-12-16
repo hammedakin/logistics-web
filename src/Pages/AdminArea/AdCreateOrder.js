@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import AdminNavbar from '../../Components/Navbar/AdminNavbar'
-import AdCreateLocal from "../../Components/Admin/AdminCreateOrder/AdCreateLocal";
-import AdCreateInt from "../../Components/Admin/AdminCreateOrder/AdCreateInt";
+import AdCreateLocal from "../../Components/Admin/Order/AdminCreateOrder/AdCreateLocal";
+import AdCreateInt from "../../Components/Admin/Order/AdminCreateOrder/AdCreateInt";
 
 const AdCreateOrder = () => {
  

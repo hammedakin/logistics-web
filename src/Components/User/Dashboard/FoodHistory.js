@@ -50,11 +50,11 @@ const FoodHistory = () => {
     .map((item, i) => {
       return (
         <>
- <a href={`https://test.eclipse.com.ng/food/invoice/${item.oid}`}>
+ <a href={`https://eclipse.com.ng/food/invoice/${item.oid}`} key={i}>
    <div className="first mt-3 black-text" key={item.fid}>
             <div className="row ">
               <div className="col-7 mr-auto ">
-                <p className="bold-text">{item.title}</p>
+                <p className="bold-text">{item.food_title}</p>
               </div>
               <div className="col-4 ml-auto">
                 <p className="bold-text" className="float-right">
@@ -70,21 +70,7 @@ const FoodHistory = () => {
                       <span className="black-text"> {item.oid}  </span>
                     </p>
                   </div>
-                  {/* <div className="col-7 mr-auto">
-                    <p>
-                      <small>
-                        {item.paidstatus == "paid" ? (
-                          <>
-                        <i className="green-text"> - {item.paidstatus} -</i>
-                          </>
-                        ) : (
-                          <>
-                        <i className="blue-text"> - {item.paidstatus} -</i>
-                          </>
-                        )}
-                      </small>
-                    </p>
-                  </div> */}
+
                 </div>
               </div>
 

@@ -188,7 +188,7 @@ const SendPackageInt = () => {
       apptoken: apptoken
     }
     axios
-      .get(`${endpoint}/v1/get-cities-fedex`, {params:data})
+      .get(`${endpoint}/v1/admin-list-town`, {params:data})
       .then((response) => {
         if (response.data.success === false) {
         console.log(response.data);
@@ -207,7 +207,7 @@ const SendPackageInt = () => {
 
   const cities = allcities.map((item, i) => {
    return (
-    <option value={`${item.CityCode}`}> {item.CityName} </option>
+    <option value={`${item.town}`}> {item.town} </option>
    );
  });
   // Function for to call all cities
@@ -601,7 +601,7 @@ if (type==='int') {
                 {/* Means Details  */}
 
                 <div className="col-md-6">
-                  <h5 className="text-center"> Means Info </h5>
+                  <h5 className="text-center"> Item Description </h5>
 
                   <div className="row justify-content-center">
 

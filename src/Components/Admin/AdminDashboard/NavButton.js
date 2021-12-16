@@ -10,6 +10,8 @@ import plus from "../img/plus.svg";
 import world from "../img/world.svg";
 import users from "../img/users.svg";
 import setting from "../img/setting.svg";
+import track from "../img/track.svg";
+import fran from "../img/fran.svg";
 
 const NavButton = () => {
   return (
@@ -28,6 +30,14 @@ const NavButton = () => {
             </Link>
           </div>
           <div className="col-md-4 ">
+            <Link to="/admin/track">
+              <div className="first navb shadow ">
+                <img src={track} width="30px" />
+                <h6> Track Orders </h6>
+              </div>
+            </Link>
+          </div>
+          <div className="col-md-4 ">
             <Link to="/admin/create-order">
             <div className="first navb shadow ">
               <img src={plus} width="30px" />
@@ -36,28 +46,28 @@ const NavButton = () => {
             </Link>
           </div>
           <div className="col-md-4 ">
-            {/* <Link to="/admin"> */}
+            <Link to="/admin/countries">
             <div className="first navb shadow ">
               <img src={world} width="30px" />
               <h6> Manage Countries </h6>
             </div>
-            {/* </Link> */}
+            </Link>
           </div>
           <div className="col-md-4 ">
-            {/* <Link to="/admin"> */}
+            <Link to="/admin/states">
             <div className="first navb shadow ">
               <img src={world} width="30px" />
               <h6> Manage States </h6>
             </div>
-            {/* </Link> */}
+            </Link>
           </div>
           <div className="col-md-4 ">
-            {/* <Link to="/admin"> */}
+            <Link to="/admin/town">
             <div className="first navb shadow ">
               <img src={world} width="30px" />
               <h6> Manage Towns </h6>
             </div>
-            {/* </Link> */}
+            </Link>
           </div>
         </div>
         <hr />
@@ -65,6 +75,14 @@ const NavButton = () => {
           <h5> Food </h5>
         </div>
         <div className="row">
+        <div className="col-md-4 ">
+            <Link to="/admin/food-order">
+            <div className="first navb shadow ">
+              <img src={cart} width="30px" />
+              <h6> All Food Orders </h6>
+            </div>
+            </Link>
+          </div>
           <div className="col-md-4 ">
             <Link to="/admin/food">
               <div className="first navb shadow ">
@@ -81,14 +99,7 @@ const NavButton = () => {
               </div>
             </Link>
           </div>
-          <div className="col-md-4 ">
-            {/* <Link to="/admin/order"> */}
-            <div className="first navb shadow ">
-              <img src={cart} width="30px" />
-              <h6> All Food Orders </h6>
-            </div>
-            {/* </Link> */}
-          </div>
+          
         </div>
         <hr />
         <div className="my-4">
@@ -104,6 +115,14 @@ const NavButton = () => {
             </Link>
           </div>
           <div className="col-md-4 ">
+            <Link to="/admin/franchise">
+              <div className="first navb shadow ">
+                <img src={fran} width="30px" />
+                <h6> Franchise </h6>
+              </div>
+            </Link>
+          </div>
+          <div className="col-md-4 ">
             <Link to="/admin/transactions">
               <div className="first navb shadow ">
                 <img src={history} width="30px" />
@@ -112,15 +131,15 @@ const NavButton = () => {
             </Link>
           </div>
           <div className="col-md-4 ">
-            {/* <Link to="/admin/restaurant"> */}
+            <Link to="/admin/setting">
             <div className="first navb shadow ">
               <img src={setting} width="30px" />
               <h6> Update Setting</h6>
             </div>
-            {/* </Link> */}
+            </Link>
           </div>
           <div className="col-md-4 ">
-            <Link to="/admin/setting">
+            <Link to="/admin/account">
             <div className="first navb shadow ">
               <img src={admin} width="30px" />
               <h6> Account Setting</h6>
