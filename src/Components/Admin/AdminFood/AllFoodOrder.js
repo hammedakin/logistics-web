@@ -91,7 +91,7 @@ const AllFoodOrder = () => {
                   <tbody>
                     {load ? (
                       <div className="my-5 justify-content-center">
-                      <Spinner color="dark"/> Loading users
+                      <Spinner color="dark"/> Loading orders...
                       </div>
                     ) : (
                       <>

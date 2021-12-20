@@ -71,10 +71,10 @@ const DelFranchise = (props) => {
               <div class="text-center mb-5">
                 <h4>
                   {" "}
-                  Are you sure you want to delete this Blog Post -{" "}
+                  Are you sure you want to delete this Franchise-{" "}
                   <span class=" h4 font-weight-bold red-text">
                     {" "}
-                    {props.token}{" "}
+                    {props.usertoken}{" "}
                   </span>
                 </h4>
               </div>
@@ -107,8 +107,7 @@ const DelFranchise = (props) => {
                   class="btn btn-danger  btn my-0"
                   onClick={(e) => DelFran(e)}
                 >
-                  Delete Blog Post
-                </button>
+                  Delete Franchise                </button>
               </>
             )}
           </div>

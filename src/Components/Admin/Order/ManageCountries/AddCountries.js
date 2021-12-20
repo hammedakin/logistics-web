@@ -90,7 +90,7 @@ const AddCountries = () => {
   }, [count]);
 
   const zones = allzones.map((item, i) => {
-    return <option value={`${item.zoneid}`}> {item.zone} </option>;
+    return <option value={`${item.name}`}> {item.name} </option>;
   });
   // Function for to call all states
   return (

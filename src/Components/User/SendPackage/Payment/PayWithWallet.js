@@ -9,10 +9,10 @@ const PayWithWallet = (props) => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
-  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
+  const [usertoken, setusertoken] = useState(
+    localStorage.getItem("eclusertoken")
+  );
   const [trackid, settrackid] = useState(props.trackid);
-  const [type, settype] = useState(props.type);
-  const [amount, setamount] = useState(props.price);
   const [walletbalance_th, setwalletbalance_th] = useState("");
   const [walletbalance, setwalletbalance] = useState("");
 
@@ -20,7 +20,6 @@ const PayWithWallet = (props) => {
   const [showalert, setshowalert] = useState(false);
   const [alertt, setalertt] = useState("");
   let history = useHistory();
-
 
   const WalletPayment = (e) => {
     if ((usertoken, props.trackid, props.amount, props.type)) {
@@ -34,47 +33,43 @@ const PayWithWallet = (props) => {
       data.append("apptoken", apptoken);
 
       axios
-      .post(`${endpoint}/v1/pay-order-wallet`, data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        if (response.data.success === true) {
-          settrackid(response.data.trackid);
-          setamount(response.data.amount);
-          settype(response.data.type);
-          setshowalert(true);
-          setalertt(response.data.message);
-          setissending(false);
-          console.log(response.data);
-          history.push({
-        pathname: `/send-package/invoice/${response.data.trackid}`,
-        state: response.data,
-          });
-          window.location.reload(true);
-          alert(response.data.message);
-
-        } else {
-          setshowalert(true);
-          setalertt(response.data.message);
-          setissending(false);
-          console.log(response.data);
+        .post(`${endpoint}/v1/pay-order-wallet`, data, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          if (response.data.success === true) {
+            setshowalert(true);
+            setalertt(response.data.message);
+            setissending(false);
+            console.log(response.data);
+            history.push({
+              pathname: `/send-package/invoice/${response.data.trackid}`,
+              state: response.data,
+            });
+            window.location.reload(true);
+            alert(response.data.message);
+          } else {
+            setshowalert(true);
+            setalertt(response.data.message);
+            setissending(false);
+            console.log(response.data);
           }
-      })
-      .catch((error) => {
-        console.log(error);
-        setshowalert(true);
-        setalertt(error.name, "Check your Network Connection!!!");
-        setissending(false);
-      });
-  } else {
-    setshowalert(true);
-    // setalertt("Try Again!!!");
-    setissending(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setshowalert(true);
+          setalertt(error.name, "Check your Network Connection!!!");
+          setissending(false);
+        });
+    } else {
+      setshowalert(true);
+      // setalertt("Try Again!!!");
+      setissending(false);
     }
     e.preventDefault();
-  }
+  };
 
   const fetchBal = () => {
     const data = {
@@ -106,7 +101,6 @@ const PayWithWallet = (props) => {
     fetchBal();
   }, 0);
 
-
   return (
     <>
       <Modal
@@ -116,8 +110,8 @@ const PayWithWallet = (props) => {
         keyboard={false}
         centered
       >
-        <Modal.Body style={{ backgroundColor: "transparent!important" }} >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body style={{ backgroundColor: "transparent!important" }}>
+          <Modal.Header closeButton></Modal.Header>
 
           <section class=" ">
             <div class="container">
@@ -158,23 +152,23 @@ const PayWithWallet = (props) => {
           <div class="ml-auto mr-auto text-center">
             {props.amount < walletbalance ? (
               <>
-              <Link to="/dashboard/fund-wallet">
-                <button type="button" class="btn btn-danger  btn my-0">
-                  Fund Wallet
-                </button>
+                <Link to="/dashboard/fund-wallet">
+                  <button type="button" class="btn btn-danger  btn my-0">
+                    Fund Wallet
+                  </button>
                 </Link>
               </>
             ) : (
               <>
                 {issending ? (
                   <>
-                      <button
-                        type="button"
-                        class="btn btn-success btn my-0"
-                        disabled
-                      >
-                        processing <Spinner color="light" />
-                      </button>
+                    <button
+                      type="button"
+                      class="btn btn-success btn my-0"
+                      disabled
+                    >
+                      processing <Spinner color="light" />
+                    </button>
                   </>
                 ) : (
                   <>
@@ -185,7 +179,10 @@ const PayWithWallet = (props) => {
                     >
                       pay ₦ {props.amountth}
                     </button>
-                    <button onClick={props.onHide} class="btn btn-red"> Close</button>
+                    <button onClick={props.onHide} class="btn btn-red">
+                      {" "}
+                      Close
+                    </button>
                   </>
                 )}
               </>

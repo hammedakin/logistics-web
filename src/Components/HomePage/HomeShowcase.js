@@ -9,7 +9,7 @@ const HomeShowcase = () => {
           <div class="showcase-content ">
             <div class=" animated fadeInUp content col-md-8 ml-auto mr-auto ">
               <h1 class="text-center ">
-                DELIVERY, SIMPLIFIED.
+                DELIVERIES, SIMPLIFIED.
                 {/* SIMPLIFYING DELIVERIES FOR AFRICAN MERCHANTS   */}
               </h1>
             </div>

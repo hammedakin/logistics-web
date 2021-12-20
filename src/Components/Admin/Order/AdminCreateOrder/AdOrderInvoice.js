@@ -41,6 +41,7 @@ const AdOrderInvoice = (props) => {
   const [worth, setworth] = useState("");
   const [price, setprice] = useState("");
   const [priceth, setpriceth] = useState("");
+  const [express_type, setexpress_type] = useState("");
   const [express, setexpress] = useState("");
   const [expressth, setexpressth] = useState("");
 
@@ -88,6 +89,7 @@ const AdOrderInvoice = (props) => {
           setworth(response.data.worth);
           setpriceth(response.data.price_thousand);
           setprice(response.data.Price);
+          setexpress_type(response.data.express);
           setexpress(response.data.price_express);
           setexpressth(response.data.price_express_th);
           setalert(response.data.message);
@@ -135,19 +137,19 @@ const AdOrderInvoice = (props) => {
   // Shipment Type
 
   // Copy to Clipboard Function
-  function Copy() {
-    var content = document.getElementById("textArea").innerHTML;
+  // function Copy() {
+  //   var content = document.getElementById("textArea").innerHTML;
 
-    navigator.clipboard
-      .writeText(content)
-      .then(() => {
-        console.log("Text copied to clipboard...");
-        alert( `${trackid} Copied!`);
-      })
-      .catch((err) => {
-        console.log("Something went wrong", err);
-      });
-  }
+  //   navigator.clipboard
+  //     .writeText(content)
+  //     .then(() => {
+  //       console.log("Text copied to clipboard...");
+  //       alert( `${trackid} Copied!`);
+  //     })
+  //     .catch((err) => {
+  //       console.log("Something went wrong", err);
+  //     });
+  // }
   // Copy to Clipboard Function
 
   return (
@@ -160,10 +162,10 @@ const AdOrderInvoice = (props) => {
               <h5>
                 <span className="font-weight-light"> Tracking ID: </span>
                 <span id="textArea"> {trackid}</span>{" "}
-                <a onClick={Copy}>
+                {/* <a>
                   {" "}
                   <box-icon name="copy" size="1.2rem" color="grey"></box-icon>
-                </a>
+                </a> */}
               </h5>
               <h5 className="">
                 <span className="font-weight-light"> Type: </span>
@@ -173,7 +175,7 @@ const AdOrderInvoice = (props) => {
                 <> </>
               ) : (
                 <>
-                  {express === 1 ? (
+                  {express_type === "1" ? (
                     <>
                       <h5 className="">
                         <span class="font-weight-light">Mode:</span> Express
@@ -348,7 +350,7 @@ const AdOrderInvoice = (props) => {
                     <hr />
                     <div className="text-left ml-2 invoice-btn">
                     <Link to="/admin/track">
-                      <button class="btn w-75 " onClick={Copy}>UPDATE TRACK</button>
+                      <button class="btn w-75 ">UPDATE TRACK</button>
                     </Link>
                   </div>
                   </div>
@@ -366,7 +368,7 @@ const AdOrderInvoice = (props) => {
                       <span className="bolder-text h6">Amount: </span>
                     </h4>
                     <h1 className="bolder-text green-text">
-                      ₦{express === 1 ? <>{expressth}</> : <>{priceth} </>}
+                      ₦{express_type === "1" ? <>{expressth} <br/> <span className="h5">Express Payment</span></> : <>{priceth} </>}
                     </h1>
                   </div>
                   <div className="mx-3 text-center">

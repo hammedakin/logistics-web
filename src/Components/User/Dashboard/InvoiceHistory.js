@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const InvoiceHistory = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
-  
+
   const [allinvoice, setallinvoice] = useState([]);
   const [usertoken, setusertoken] = useState("");
   const [count, setcount] = useState(0);
@@ -46,15 +46,14 @@ const InvoiceHistory = () => {
     fetchinvoice();
   }, [count]);
 
-  const invoice = allinvoice
-    .map((item, i) => {
-      return (
-        <>
- <a href={`https://eclipse.com.ng/send-package/invoice/${item.trackid}`}>
-   <div className="first mt-3 black-text">
+  const invoice = allinvoice.map((item, i) => {
+    return (
+      <>
+        <a href={`https://eclipse.com.ng/send-package/invoice/${item.trackid}`}>
+          <div className="first mt-3 black-text">
             <div className="row ">
               <div className="col-7 mr-auto ">
-                <p className="bold-text">{item.packagename}</p>
+                <p className="">{item.packagename}</p>
               </div>
               <div className="col-4 ml-auto">
                 <p className="bold-text" className="float-right">
@@ -67,7 +66,7 @@ const InvoiceHistory = () => {
                 <div className="row mt-0 float-left">
                   <div className="col-5 mr-auto">
                     <p className="">
-                      <small> {item.trackid}  </small>
+                      <small> {item.trackid} </small>
                     </p>
                   </div>
                   <div className="col-7 mr-auto">
@@ -75,11 +74,11 @@ const InvoiceHistory = () => {
                       <small>
                         {item.paidstatus == "paid" ? (
                           <>
-                        <i className="green-text"> - {item.paidstatus} -</i>
+                            <i className="green-text"> - {item.paidstatus} -</i>
                           </>
                         ) : (
                           <>
-                        <i className="blue-text"> - {item.paidstatus} -</i>
+                            <i className="blue-text"> - {item.paidstatus} -</i>
                           </>
                         )}
                       </small>
@@ -98,18 +97,16 @@ const InvoiceHistory = () => {
             </div>
           </div>
           <hr className="p-0 m-0" />
-          </a>
-        </>
-      );
-    });
+        </a>
+      </>
+    );
+  });
 
   return (
     <>
       <div className="history">
         <div className=" row justify-content-center">
           <div className="col-md-10">
-            
-
             {isloading ? (
               <div className="text-center my-5">
                 <Spinner color="success" />

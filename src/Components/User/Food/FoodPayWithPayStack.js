@@ -27,44 +27,7 @@ const FoodPayWithPayStack = (props) => {
 
   // you can call this function anything
   const onSuccess = (reference) => {
-    if ((usertoken, props.id, props.amount, props.phone, props.address)) {
-      setload(true);
-
-      const data = new FormData();
-      data.append("usertoken", usertoken);
-      data.append("fid", props.id);
-      data.append("price", props.amount);
-      data.append("phone", props.phone);
-      data.append("location", props.address);
-
-      data.append("apptoken", apptoken);
-
-      axios
-        .post(`${endpoint}/v1/order-food`, data, {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.message === 'Your food has been ordered') {
-            setload(false);
-            history.push({
-              pathname: `/food/invoice/${res.data.orderid}`,
-              state: res.data,
-            });
-            alert(res.data.message);
-          } else {
-            setload(false);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          setload(false);
-        });
-    } else {
-      setload(false);
-    }
+    PaystackPayment();
     console.log(reference);
   };
   // you can call this function anything
@@ -88,6 +51,46 @@ const FoodPayWithPayStack = (props) => {
     );
   };
 
+  const PaystackPayment = () => {
+    if ((usertoken, props.id, props.amount, props.phone, props.address)) {
+      setload(true);
+
+      const data = new FormData();
+      data.append("usertoken", usertoken);
+      data.append("fid", props.id);
+      data.append("price", props.amount);
+      data.append("phone", props.phone);
+      data.append("location", props.address);
+
+      data.append("apptoken", apptoken);
+
+      axios
+        .post(`${endpoint}/v1/order-food`, data, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message === "Your food has been ordered") {
+            setload(false);
+            history.push({
+              pathname: `/food/invoice/${res.data.orderid}`,
+              state: res.data,
+            });
+            alert(res.data.message);
+          } else {
+            setload(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setload(false);
+        });
+    } else {
+      setload(false);
+    }
+  };
   return (
     <>
       <Modal
@@ -97,22 +100,24 @@ const FoodPayWithPayStack = (props) => {
         keyboard={false}
         centered
       >
-        <Modal.Body style={{ backgroundColor: "transparent!important" }}>
-          <Modal.Header closeButton></Modal.Header>
+        {load ? (
+          <div className="container text-center py-5">
+            <Modal.Body style={{ backgroundColor: "transparent!important" }}>
+              <Spinner color="success" />
+              <h5 className="font-weight-light">
+                Please wait for your transaction is processing{" "}
+              </h5>
+              <h6> Do not refresh page!!! </h6>
+            </Modal.Body>
+          </div>
+        ) : (
+          <>
+            <Modal.Body style={{ backgroundColor: "transparent!important" }}>
+              <Modal.Header closeButton></Modal.Header>
 
-          <section class=" ">
-            <div class="container">
-              <div class="text-center">
-                {load ? (
-                  <>
-                    <Spinner color="success" />
-                    <h5 className="font-weight-light">
-                      Please wait for your transaction is processing{" "}
-                    </h5>
-                    <h6> Do not refresh page!!! </h6>
-                  </>
-                ) : (
-                  <>
+              <section class=" ">
+                <div class="container">
+                  <div class="text-center">
                     <h6 className="font-weight-light">
                       Please, Confirm your food order before making payment.
                     </h6>
@@ -155,22 +160,21 @@ const FoodPayWithPayStack = (props) => {
                     <h1 className="font-weight-bold green-text">
                       ₦ {props.amount}
                     </h1>
-                    <hr />
-                  </>
-                )}
+                  </div>
+                </div>
+              </section>
+            </Modal.Body>
+            <Modal.Footer>
+              <div class="ml-auto mr-auto text-center">
+                <PaystackHookExample />
+                <button onClick={props.onHide} class="btn btn-red">
+                  {" "}
+                  Close
+                </button>
               </div>
-            </div>
-          </section>
-        </Modal.Body>
-        <Modal.Footer>
-          <div class="ml-auto mr-auto text-center">
-            <PaystackHookExample />
-            <button onClick={props.onHide} class="btn btn-red">
-              {" "}
-              Close
-            </button>
-          </div>
-        </Modal.Footer>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
     </>
   );

@@ -54,7 +54,7 @@ const FoodHistory = () => {
    <div className="first mt-3 black-text" key={item.fid}>
             <div className="row ">
               <div className="col-7 mr-auto ">
-                <p className="bold-text">{item.food_title}</p>
+                <p className="">{item.food_title}</p>
               </div>
               <div className="col-4 ml-auto">
                 <p className="bold-text" className="float-right">

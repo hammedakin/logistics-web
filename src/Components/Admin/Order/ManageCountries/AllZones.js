@@ -58,10 +58,12 @@ const AllZones = () => {
     return (
       <tr key={i}>
         <td className="pt-3-half">{item.id}</td>
-        <td className="pt-3-half">{item.zone}</td>
-        <td className="pt-3-half">{item.price}</td>
+        <td className="pt-3-half">{item.name}</td>
+        <td className="pt-3-half">{item.details}</td>
+        <td className="pt-3-half">{item.timestamp}</td>
+        {/* <td className="pt-3-half">{item.price}</td>
         <td className="pt-3-half">{item.price_kg}</td>
-        <td className="pt-3-half">{item.price_express}</td>
+        <td className="pt-3-half">{item.price_express}</td> */}
         <td className="pt-3-half">
           <span className="table-up">
             {/* <Link to={`/admin/zones-details`}> */}
@@ -109,9 +111,11 @@ const AllZones = () => {
                     <tr>
                       <th className="text-center">ID</th>
                       <th className="text-center">Zone</th>
-                      <th className="text-center">Price (2kg and less)</th>
+                      <th className="text-center">Details</th>
+                      <th className="text-center">Time Created</th>
+                      {/* <th className="text-center">Price (2kg and less)</th>
                       <th className="text-center">Price (per kg above 2kg)</th>
-                      <th className="text-center">Price (express delivery)</th>
+                      <th className="text-center">Price (express delivery)</th> */}
                       <th className="text-center">Edit</th>
                       <th className="text-center">Remove</th>
                     </tr>

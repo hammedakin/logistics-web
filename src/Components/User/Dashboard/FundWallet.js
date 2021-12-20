@@ -28,6 +28,33 @@ const FundWallet = () => {
 
   // you can call this function anything
   const onSuccess = (reference) => {
+    PaystackPayment();
+    console.log(reference);
+  };
+  // you can call this function anything
+  const onClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("closed");
+    window.location.reload(true);
+  };
+
+  const PaystackHookExample = () => {
+    const initializePayment = usePaystackPayment(config);
+    return (
+      <div>
+        <button
+          class="btn btn-green"
+          onClick={() => {
+            initializePayment(onSuccess, onClose);
+          }}
+        >
+          Pay with Paystack{" "}
+        </button>
+      </div>
+    );
+  };
+
+  const PaystackPayment = () => {
     if ((usertoken, amount)) {
       setload(true);
 
@@ -62,29 +89,6 @@ const FundWallet = () => {
       setshowalert(true);
       setload(false);
     }
-    console.log(reference);
-  };
-  // you can call this function anything
-  const onClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log("closed");
-    window.location.reload(true);
-  };
-
-  const PaystackHookExample = () => {
-    const initializePayment = usePaystackPayment(config);
-    return (
-      <div>
-        <button
-          class="btn btn-green"
-          onClick={() => {
-            initializePayment(onSuccess, onClose);
-          }}
-        >
-          Pay with Paystack{" "}
-        </button>
-      </div>
-    );
   };
 
   return (

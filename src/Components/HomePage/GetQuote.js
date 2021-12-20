@@ -64,7 +64,7 @@ const GetQuote = (props) => {
         .catch((error) => {
           console.log(error);
           setshowalert(true);
-          setalert(error.name);
+          setalert(`Check Network Connection or ${error.name}`);
           setissending(false);
         });
     } else {

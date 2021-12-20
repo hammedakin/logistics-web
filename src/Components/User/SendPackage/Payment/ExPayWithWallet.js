@@ -9,20 +9,19 @@ const ExPayWithWallet = (props) => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
-  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
+  const [usertoken, setusertoken] = useState(
+    localStorage.getItem("eclusertoken")
+  );
   const [trackid, settrackid] = useState(props.trackid);
-  const [type, settype] = useState(props.type);
-  const [amount, setamount] = useState(props.price);
   const [walletbalance_th, setwalletbalance_th] = useState("");
   const [walletbalance, setwalletbalance] = useState("");
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
-  const [alert, setalert] = useState("");
+  const [alertt, setalert] = useState("");
   let history = useHistory();
 
-
-  const WalletPayment = (e) => {
+  const ExWalletPayment = (e) => {
     if ((usertoken, props.trackid, props.amount, props.type)) {
       setissending(true);
 
@@ -34,52 +33,48 @@ const ExPayWithWallet = (props) => {
       data.append("apptoken", apptoken);
 
       axios
-      .post(`${endpoint}/v1/pay-order-wallet-express`, data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        if (response.data.success === true) {
-          settrackid(response.data.trackid);
-          setamount(response.data.amount);
-          settype(response.data.type);
-          setshowalert(true);
-          setalert(response.data.message);
-          setissending(false);
-          console.log(response.data);
-          history.push({
-        pathname: `/send-package/invoice/${trackid}`,
-        state: response.data,
-          });
-          window.location.reload(true);
-          alert(response.data.message);
-
-        } else {
-          setshowalert(true);
-          setalert(response.data.message);
-          setissending(false);
-          console.log(response.data);
+        .post(`${endpoint}/v1/pay-order-wallet-express`, data, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          if (response.data.success === true) {
+            setshowalert(true);
+            setalert(response.data.message);
+            setissending(false);
+            console.log(response.data);
+            history.push({
+              pathname: `/send-package/invoice/${response.data.trackid}`,
+              state: response.data,
+            });
+            window.location.reload(true);
+            alert(response.data.message);
+          } else {
+            setshowalert(true);
+            setalert(response.data.message);
+            setissending(false);
+            console.log(response.data);
           }
-      })
-      .catch((error) => {
-        console.log(error);
-        setshowalert(true);
-        setalert(error.name, "Check your Network Connection!!!");
-        setissending(false);
-      });
-  } else {
-    setshowalert(true);
-    // setalert("Try Again!!!");
-    setissending(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setshowalert(true);
+          setalert(`${error.name} or Network Issue!!!`);
+          setissending(false);
+        });
+    } else {
+      setshowalert(true);
+      // setalert("Try Again!!!");
+      setissending(false);
     }
     e.preventDefault();
-  }
+  };
 
   const fetchBal = () => {
     const data = {
       apptoken: apptoken,
-      usertoken: localStorage.getItem("eclusertoken"),
+      usertoken: usertoken,
     };
     axios
       .get(`${endpoint}/v1/get-wallet-balance`, {
@@ -106,7 +101,6 @@ const ExPayWithWallet = (props) => {
     fetchBal();
   }, 0);
 
-
   return (
     <>
       <Modal
@@ -116,8 +110,8 @@ const ExPayWithWallet = (props) => {
         keyboard={false}
         centered
       >
-        <Modal.Body style={{ backgroundColor: "transparent!important" }} >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body style={{ backgroundColor: "transparent!important" }}>
+          <Modal.Header closeButton></Modal.Header>
 
           <section class=" ">
             <div class="container">
@@ -145,7 +139,7 @@ const ExPayWithWallet = (props) => {
               <div class="text-center h5">
                 {showalert ? (
                   <>
-                    <Alert color="success">{alert}</Alert>
+                    <Alert color="success">{alertt}</Alert>
                   </>
                 ) : (
                   <></>
@@ -158,34 +152,37 @@ const ExPayWithWallet = (props) => {
           <div class="ml-auto mr-auto text-center">
             {props.amount < walletbalance ? (
               <>
-              <Link to="/dashboard/fund-wallet">
-                <button type="button" class="btn btn-danger  btn my-0">
-                  Fund Wallet
-                </button>
+                <Link to="/dashboard/fund-wallet">
+                  <button type="button" class="btn btn-danger  btn my-0">
+                    Fund Wallet
+                  </button>
                 </Link>
               </>
             ) : (
               <>
                 {issending ? (
                   <>
-                      <button
-                        type="button"
-                        class="btn btn-success btn my-0"
-                        disabled
-                      >
-                        processing <Spinner color="light" />
-                      </button>
+                    <button
+                      type="button"
+                      class="btn btn-success btn my-0"
+                      disabled
+                    >
+                      processing <Spinner color="light" />
+                    </button>
                   </>
                 ) : (
                   <>
                     <button
                       type="button"
                       class="btn btn-success my-0"
-                      onClick={(e) => WalletPayment(e)}
+                      onClick={(e) => ExWalletPayment(e)}
                     >
                       pay ₦ {props.amountth}
                     </button>
-                    <button onClick={props.onHide} class="btn btn-red"> Close</button>
+                    <button onClick={props.onHide} class="btn btn-red">
+                      {" "}
+                      Close
+                    </button>
                   </>
                 )}
               </>

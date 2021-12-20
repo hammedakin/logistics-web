@@ -1,7 +1,8 @@
 import React from "react";
 import img1 from "./img/Rectangle1.png";
 import img2 from "./img/Rectangle2.png";
-import img3 from "./img/Rectangle3.png";
+import img3 from "./img/food.jpg";
+import img4 from "./img/package.jpg";
 
 const HowItWorks = () => {
   return (
@@ -20,7 +21,7 @@ const HowItWorks = () => {
           <div class="card1">
             <div class="row">
               <div class="col-md-6 ">
-                <img src={img1} alt="" class="shadow" width="100%" />
+                <img src={img4} alt="" class="shadow" width="100%" />
               </div>
               <div class="col-md-4 align-self-center ml-auto mr-auto text-center p-5 ">
                 <h5>Mail Distribution </h5>
@@ -54,7 +55,7 @@ const HowItWorks = () => {
                 ></div>
               </div>
               <div class="col-md-6 ">
-                <img src={img2} alt="" class="shadow" width="100%" />
+                <img src={img3} alt="" class="shadow" width="100%" />
               </div>
             </div>
           </div>
@@ -67,7 +68,7 @@ const HowItWorks = () => {
              <div class="card1">
             <div class="row">
               <div class="col-md-6 ">
-                <img src={img3} alt="" class="shadow" width="100%" />
+                <img src={img1} alt="" class="shadow" width="100%" />
               </div>
               <div class="col-md-4 align-self-center ml-auto mr-auto text-center p-5 ">
                 <h5>Air / Sea Freight / Food Export. </h5>
