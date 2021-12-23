@@ -10,6 +10,7 @@ const UploadFood = () => {
   const [des, setdes] = useState("");
   const [resid, setresid] = useState("");
   const [price, setprice] = useState("");
+  const [avatar, setavatar] = useState("");
 
   const [allres, setallres] = useState([]);
   const [count, setcount] = useState(0);
@@ -19,7 +20,7 @@ const UploadFood = () => {
   const [alertt, setalert] = useState("");
 
   function FoodUpload(e) {
-    if ((title, des, resid, price)) {
+    if ((title, des, resid, price, avatar)) {
       setissending(true);
 
       const data = new FormData();
@@ -27,6 +28,7 @@ const UploadFood = () => {
       data.append("description", des);
       data.append("resid", resid);
       data.append("price", price);
+      data.append("img", avatar);
       data.append("apptoken", apptoken);
 
       axios
@@ -110,8 +112,22 @@ const UploadFood = () => {
             </div>
             <hr />
             <div className="form">
-              <form>
+              <form enctype="multipart/form-data">
                 <div className="row justify-content-center">
+                  <div class="col-md-10">
+                    <label>
+                      {" "}
+                      Cover Image<sup class="red-text h6">*</sup>{" "}
+                    </label>
+                    <div class="input-group mb-4">
+                      <input
+                        type="file"
+                        className=" input-style"
+                        onChange={(e) => setavatar(e.target.files[0])}
+                        required
+                      />
+                    </div>
+                  </div>
                   <div className="col-md-10 ">
                     {/* <label> Name </label> */}
 
@@ -125,7 +141,7 @@ const UploadFood = () => {
                       />
                     </div>
                   </div>
-                 
+
                   <div className="col-md-10 ">
                     {/* <label> Name </label> */}
 
@@ -144,15 +160,13 @@ const UploadFood = () => {
                     {/* <label> Name </label> */}
 
                     <div className="input-group">
-                  
-                        <textarea
+                      <textarea
                         type="text"
                         className="input-style textarea-style"
                         placeholder="Description *"
                         onChange={(e) => setdes(e.target.value)}
                         value={des}
                       ></textarea>
-                      
                     </div>
                   </div>
                   <div className="col-md-10 ">
@@ -165,7 +179,7 @@ const UploadFood = () => {
                       <option value="" selected>
                         Select Restaurant *
                       </option>
-                        {res}
+                      {res}
                     </select>
                   </div>
 

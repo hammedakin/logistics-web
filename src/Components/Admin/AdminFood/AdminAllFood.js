@@ -60,6 +60,9 @@ const AdminAllFood = () => {
     return (
       <tr>
         <td class="pt-3-half">{item.title}</td>
+        <td class="pt-3-half" >
+              <img src={item.imgurl} alt={item.title} width="20%" />
+            </td>
         <td class="pt-3-half">₦ {item.priceth}</td>
         <td class="pt-3-half">{item.resname}</td>
         <td class="pt-3-half">₦ {item.deliveryfee}</td>
@@ -110,6 +113,7 @@ const AdminAllFood = () => {
                   <thead>
                     <tr>
                       <th class="text-center">Title</th>
+            <th class="text-center">Image</th>
                       <th class="text-center">Price</th>
                       <th class="text-center">Restaurant</th>
                       <th class="text-center">Delivery</th>

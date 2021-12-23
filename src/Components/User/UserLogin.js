@@ -6,6 +6,7 @@ import img from "./img/bicycle.png";
 import eye from "./img/eye2.svg";
 import { Link } from "react-router-dom";
 import Navbar from '../Navbar/Navbar'
+import { ToastContainer, toast } from 'react-toastify';
 
 const UserLogin = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
@@ -17,11 +18,14 @@ const UserLogin = () => {
   const [usertoken, setusertoken] = useState("");
   const [email, setemail] = useState("");
   const [phone, setphone] = useState("");
+  const [refcode, setrefcode] = useState("");
 
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
   const [alert, setalert] = useState("");
+
+  const notify = () => toast(`${alert}`);
 
   let history = useHistory() 
 
@@ -49,18 +53,23 @@ const UserLogin = () => {
           localStorage.setItem("eclemail", res.data.email)
           localStorage.setItem("eclfullname", res.data.fullname)
           localStorage.setItem("eclphone", res.data.phone)
+          localStorage.setItem("eclrefcode", res.data.ref)
           setshowalert(true);
           setemail(res.data.email)
           setfullname(res.data.fullname)
           setusertoken(res.data.usertoken)
           setphone(res.data.phone)
+          setrefcode(res.data.refcode)
           setalert(res.data.message);
           setissending(false);
           history.push("/dashboard")
+          notify();
+
         } else {
           setshowalert(true);
           setalert(res.data.message, 'error');
           setissending(false);
+          notify();
         }
       })
       .catch((error) => {
@@ -68,12 +77,16 @@ const UserLogin = () => {
         setshowalert(true);
         setalert("Check your Network Connection!!!");
         setissending(false);
+        notify();
+
       });
       
     }else{
        setshowalert(true)
        setalert('Empty fields, Check form again!')
        setissending(false)
+       notify();
+
      }
     e.preventDefault();
   }
@@ -204,6 +217,7 @@ function myInput() {
           </div>
         </div>
       </main>
+      <ToastContainer />
     </>
   );
 };

@@ -436,18 +436,30 @@ border-radius: .2rem .2rem 1rem 1rem !important;
   font-size: smaller !important;
 }
 
+.food .card-body {
+  padding: 0.25rem !important;
+
+}
+
 .food .card p.price {
   font-size: large !important;
 font-weight: 600 !important;
 color: #f86801 !important;
 }
 
-.food button {
-  background-color: #096b00;
-  border-radius: 5px;
-  color: #fff;
+.food button{
+  background-color: #096b00 !important;
+  border-radius: 5px !important;
+  color: #fff !important;
   padding: 0.5rem 2rem !important;
-  margin-top: 1rem !important;
+  /* margin-top: 1rem !important; */
+}
+.food .btn-cart{
+  background-color: #fff !important;
+  border-radius: 5px;
+  color: #096b00;
+  padding: 0.1rem 2rem !important;
+  /* margin-top: 1rem !important; */
 }
 
 /* Food Details */

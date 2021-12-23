@@ -77,6 +77,8 @@ function App() {
 
         <Route exact path="/register" component={UserRegister} />
 
+        <Route exact path="/ref/:id" component={UserRegister} />
+
         <Route exact path="/auth" component={UserAuth} />
 
         <Route exact path="/login" component={UserLogin} />

@@ -4,7 +4,6 @@ import { Spinner, Alert } from "reactstrap";
 import { useHistory } from "react-router";
 import img from "./img/bicycle.png";
 import Navbar from '../Navbar/Navbar'
-// import { Link } from "react-router-dom";
 
 const UserAuth = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
@@ -108,6 +107,7 @@ const UserAuth = () => {
                                 type="button"
                                 class="btn shadow waves-effect"
                                 action="submit"
+                                disabled
                               >
                                 {" "}
                                 <strong>

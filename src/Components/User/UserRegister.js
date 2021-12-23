@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Navbar from '../Navbar/Navbar'
 import img from "./img/truck.png";
 
-const UserRegister = () => {
+const UserRegister = (props) => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
   const [endpoint, setendpoint] = useState(process.env.REACT_APP_ENDPOINT);
 
@@ -17,7 +17,7 @@ const UserRegister = () => {
   const [state, setstate] = useState("");
   const [town, settown] = useState("");
   const [area, setarea] = useState("");
-
+  const [refcode, setrefcode] = useState(props.match.params.id);
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
   const [alert, setalert] = useState("");
@@ -36,6 +36,7 @@ const UserRegister = () => {
       data.append("state", state);
       data.append("town", town);
       data.append("area", area);
+      data.append("sponsor", refcode);
       data.append("apptoken", apptoken);
 
       axios
@@ -81,7 +82,6 @@ function myInput() {
     x.type = "password"
   }
 }
-
 
   return (
     <>
@@ -182,7 +182,22 @@ function myInput() {
                           />
                         </div>
                       </div>
-                      
+
+                      <div className="col-md-12 ">
+                        <label> Referral Code (Optional)</label>
+
+                        <div className="input-group">
+                          <input
+                            type="text"
+                            className=" input-style"
+                            placeholder="Enter Ref Code"
+                            onChange={(e) => setrefcode(e.target.value)}
+                            value={refcode}
+                            required
+                            disabled
+                          />
+                        </div>
+                      </div>
 
                       <div className="col-md-12 ">
                         <label> E-mail </label>
@@ -258,7 +273,7 @@ function myInput() {
                         </div>
                       </div>
 
-                      <div className="text-center">
+                      <div className="text-center mb-5">
                         <h6>
                           {" "}
                           Already have an account?{" "}

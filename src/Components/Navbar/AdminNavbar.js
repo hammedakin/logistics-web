@@ -17,6 +17,7 @@ const [name, setname] = useState(localStorage.getItem('ecladminname'));
     localStorage.removeItem("eclusertoken");
     localStorage.removeItem("eclfullname");
     localStorage.removeItem("eclemail");
+    localStorage.removeItem("eclrefcode");
     localStorage.removeItem("eclphone");
     localStorage.removeItem("results");
     localStorage.removeItem("trackid");

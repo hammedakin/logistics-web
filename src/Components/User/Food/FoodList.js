@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Spinner } from "reactstrap";
 import axios from "axios";
 import img from "./img/icons.png";
+import img2 from "./img/food.png";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const FoodList = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
@@ -12,7 +14,17 @@ const FoodList = () => {
   const [count, setcount] = useState(0);
 
   const [isloading, setisloading] = useState(true);
+  const [isadding, setisadding] = useState(false);
 
+  const [usertoken, setusertoken] = useState(
+    localStorage.getItem("eclusertoken")
+  );
+
+  const [alert, setalert] = useState("Added");
+  const [showalert, setshowalert] = useState(false);
+  const notify = () => toast(`${alert}`);
+
+  // Fetch Food
   const fetchfood = () => {
     const data = new FormData();
     data.append("apptoken", apptoken);
@@ -45,28 +57,119 @@ const FoodList = () => {
   }, [count]);
 
   const food = allfood.map((item, i) => {
+    // Add to Cart
+    function AddCart(e) {
+      if ((item.id, item.price, usertoken)) {
+        setisadding(true);
+
+        const data = new FormData();
+        data.append("usertoken", usertoken);
+        data.append("fid", item.id);
+        data.append("price", item.price);
+        data.append("apptoken", apptoken);
+
+        axios
+          .post(`${endpoint}/v1/add-to-cart`, data, {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+
+            if (res.data.success === true) {
+              setshowalert(true);
+              setalert(res.data.message);
+              setisadding(false);
+              notify();
+            } else {
+              setshowalert(true);
+              setalert(res.data.message, "error");
+              setisadding(false);
+              notify();
+            }
+          })
+          .catch((error) => {
+            console.log(error.name);
+            setshowalert(true);
+            setalert("Check your Network Connection!!!");
+            setisadding(false);
+            notify();
+          });
+      } else {
+        setshowalert(true);
+        setalert("Select a Food!");
+        setisadding(false);
+        notify();
+      }
+      e.preventDefault();
+    }
+
+    // Add to Cart
+
     return (
       <>
-        <div className="col-md-3 col-6 mb-3" key={item.id}>
+        <div className="col-md-4 col-6 mb-3" key={item.id}>
           <div className="card h-100">
             <div class="view overlay">
-              <img
-                src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80"
-                alt={item.title}
-                class="card-img-top img-fluid"
-                width="100%"
-              />
+              {item.imgurl === "0" ? (
+                <>
+                  <img
+                    src={img2}
+                    alt={item.title}
+                    class="card-img-top img-fluid"
+                    width="50%"
+                  />
+                </>
+              ) : (
+                <>
+                  <img
+                    src={item.imgurl}
+                    alt={item.title}
+                    class="card-img-top img-fluid"
+                    width="100%"
+                  />
+                </>
+              )}
             </div>
             <div className="card-body text-center">
               <p> {item.title}</p>
               <p class="price ">₦ {item.priceth} </p>
-            <Link to={`food/${item.id}`} >  <button className="btn"> BUY</button> </Link> 
+            </div>
+            <div className="text-center">
+              <Link to={`food/${item.id}`}>
+                {" "}
+                <button className="btn"> BUY</button>{" "}
+              </Link>
+
+              {isadding ? (
+                <>
+                  <button className="btn btn-cart" disabled>
+                    {" "}
+                    <Spinner color="light" size="0.1rem" />{" "}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className="btn btn-cart" onClick={(e) => AddCart(e)}>
+                    {" "}
+                    <box-icon
+                      type="solid"
+                      name="cart-add"
+                      size="1.5rem"
+                      color="#096b00"
+                      action="submit"
+                    ></box-icon>{" "}
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
       </>
     );
   });
+  // Fetch Food
 
   return (
     <>
@@ -105,6 +208,7 @@ const FoodList = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

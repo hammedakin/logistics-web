@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import UserNavLinks from "./UserNavLinks";
 
@@ -9,28 +9,23 @@ const UserSideNav = () => {
   };
 
   return (
-      <>
+    <>
       <nav class="">
- <div id="mySidenav" class="sidenav">
-      <a
-        href="javascript:void(0)"
-        class="closebtn white-text"
-        onClick={(e) => closeNav(e)}
-        
-      >
-<box-icon name='x-circle' color="white" size="1.5rem"></box-icon>      </a>
+        <div id="mySidenav" class="sidenav">
+          <a
+            href="javascript:void(0)"
+            class="closebtn white-text"
+            onClick={(e) => closeNav(e)}
+          >
+            <box-icon name="x-circle" color="white" size="1.5rem"></box-icon>{" "}
+          </a>
 
-      <UserNavLinks />
+          <UserNavLinks />
 
-<hr style={{ backgroundColor: "whitesmoke"}} class="m-3" />
-
-    </div>
+          <hr style={{ backgroundColor: "whitesmoke" }} class="m-3" />
+        </div>
       </nav>
-
-      
-   
-
-      </>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import UserNavbar from "../../Navbar/UserNavbar";
 import FoodPayWithPayStack from "../Food/FoodPayWithPayStack";
 import FoodPayWithWallet from "../Food/FoodPayWithWallet";
 import { Alert } from "reactstrap";
+import img2 from "./img/food.png";
 
 const FoodDetails = (props) => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
@@ -18,6 +19,7 @@ const FoodDetails = (props) => {
   const [price, setprice] = useState("");
   const [priceth, setpriceth] = useState("");
   const [amount, setamount] = useState("");
+  const [avatar, setavatar] = useState("");
   const [fill, setfill] = useState(false);
 
   const [phone, setphone] = useState(localStorage.getItem('eclphone'));
@@ -48,6 +50,7 @@ const FoodDetails = (props) => {
           setpriceth(response.data.price_th);
           setprice(response.data.price);
           setamount(response.data.amount);
+          setavatar(response.data.imgurl);
 
           console.log(response.data);
         }
@@ -101,11 +104,25 @@ const FoodDetails = (props) => {
               {/* Image */}
               <div className="col-md-6 curve mb-4 align-self-center">
                 <div className="card h-100">
+                {avatar === "0" ? (
+                <>
                   <img
-                    src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80"
-                    width="100%"
-                    alt="food"
+                    src={img2}
+                    alt={title}
+                    class="card-img-top img-fluid"
+                    width="50%"
                   />
+                </>
+              ) : (
+                <>
+                  <img
+                    src={avatar}
+                    width="100%"
+                    alt={title}
+                  />
+                </>
+              )}
+                 
                 </div>
               </div>
               {/* Image */}
@@ -250,7 +267,7 @@ const FoodDetails = (props) => {
         </div>
       </div>
 
-      {/* Pay With Wallet Modal */}
+      {/* Pay With Paystack Modal */}
       <FoodPayWithPayStack
         show={showremove1}
         onHide={handleCloseremove1}
@@ -264,7 +281,7 @@ const FoodDetails = (props) => {
         resname={resname}
         dfee={dfee}
       />
-      {/* Pay With Wallet Modal */}
+      {/* Pay With Paystack Modal */}
 
       {/* Pay With Wallet Modal */}
       <FoodPayWithWallet

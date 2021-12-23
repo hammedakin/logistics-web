@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Spinner, Alert } from "reactstrap";
-import UserNavbar from '../../Components/Navbar/UserNavbar'
+import UserNavbar from "../../Components/Navbar/UserNavbar";
+import { Link } from "react-router-dom";
 
 const UserSettings = () => {
   const [apptoken, setapptoken] = useState(process.env.REACT_APP_APPTOKEN);
@@ -13,7 +14,10 @@ const UserSettings = () => {
   const [username, setusername] = useState(localStorage.getItem("eclfullname"));
   const [usermail, setusermail] = useState(localStorage.getItem("eclemail"));
   const [userphone, setuserphone] = useState(localStorage.getItem("eclphone"));
-  const [usertoken, setusertoken] = useState(localStorage.getItem("eclusertoken"));
+  const [usertoken, setusertoken] = useState(
+    localStorage.getItem("eclusertoken")
+  );
+  const [refcode, setrefcode] = useState(localStorage.getItem("eclrefcode"));
 
   const [issending, setissending] = useState(false);
   const [showalert, setshowalert] = useState(false);
@@ -78,7 +82,7 @@ const UserSettings = () => {
     if (x.type === "password") {
       x.type = "text";
     } else {
-      x.type = "password"
+      x.type = "password";
     }
   }
   function myInput1() {
@@ -86,7 +90,7 @@ const UserSettings = () => {
     if (x.type === "password") {
       x.type = "text";
     } else {
-      x.type = "password"
+      x.type = "password";
     }
   }
   function myInput2() {
@@ -94,177 +98,205 @@ const UserSettings = () => {
     if (x.type === "password") {
       x.type = "text";
     } else {
-      x.type = "password"
+      x.type = "password";
     }
   }
-  
+
   return (
     <>
       <UserNavbar />
       <div className="send-package">
-
-      <section className="add-food settings">
-        <div className="container">
-          <div className="text-center">
-            <h5> ACCOUNT SETTING</h5>
-          </div>
-          
-          <div className="send">
+        <section className="add-food settings">
+          <div className="container">
             <div className="text-center">
-              <h5> Account Details </h5>
+              <h5> ACCOUNT SETTING</h5>
             </div>
-            <hr />
-            <div className="form">
-              <form>
-                <div className="row justify-content-center">
-                  <div className="col-md-10 ">
-                  <label> Name: </label>
+            <div className="send">
+              <div className="text-center">
+                <h5> Account Details </h5>
+              </div>
+              <hr />
+              <div className="form">
+                <Alert color="warning" className="text-center">
+                  Referral Link:{" "}
+                  <Link to={`/ref/${refcode}`} target="_blank">
+                    eclipse.com.ng/ref/{refcode}
+                  </Link>
+                </Alert>
+                <form>
+                  <div className="row justify-content-center">
+                    <div className="col-md-10 ">
+                      <label> Name: </label>
 
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className=" input-style"
-                        placeholder="Name *"
-                        value={username}
-                        disabled
-                      />
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className=" input-style"
+                          placeholder="Name *"
+                          value={username}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-10 ">
+                      <label> Phone: </label>
+
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className=" input-style"
+                          placeholder="Name *"
+                          value={userphone}
+                          disabled
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-md-10 ">
+                      <label> Email: </label>
+
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className="input-style"
+                          placeholder="Email *"
+                          value={usermail}
+                          disabled
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="col-md-10 ">
-                  <label> Phone: </label>
-
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className=" input-style"
-                        placeholder="Name *"
-                        value={userphone}
-                        disabled
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-md-10 ">
-                    <label> Email: </label>
-
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="input-style"
-                        placeholder="Email *"
-                        value={usermail}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
-          <div className="send mt-1">
-            <div className="text-center">
-              <h5> Change Password </h5>
-            </div>
-            <hr />
-            <div className="form">
-              <form>
-                <div className="row justify-content-center">
-                  <div className="col-md-10 ">
-                    {/* <label> Name </label> */}
+            <div className="send mt-1">
+              <div className="text-center">
+                <h5> Change Password </h5>
+              </div>
+              <hr />
+              <div className="form">
+                <form>
+                  <div className="row justify-content-center">
+                    <div className="col-md-10 ">
+                      {/* <label> Name </label> */}
 
-                    <div className="input-group">
-                      <input
-                        type="password"
-                        className=" input-style"
-                        id="security"
-                        placeholder="Old Password *"
-                        onChange={(e) => setpword(e.target.value)}
-                        value={pword}
-                      />
-                        <a class="bi bi-eye-slash bi-eye toggle-eye" id="togglePassword" onClick={myInput}>
-                            <box-icon type='solid' name='show' id="eye"></box-icon>
-                            </a>
+                      <div className="input-group">
+                        <input
+                          type="password"
+                          className=" input-style"
+                          id="security"
+                          placeholder="Old Password *"
+                          onChange={(e) => setpword(e.target.value)}
+                          value={pword}
+                        />
+                        <a
+                          class="bi bi-eye-slash bi-eye toggle-eye"
+                          id="togglePassword"
+                          onClick={myInput}
+                        >
+                          <box-icon
+                            type="solid"
+                            name="show"
+                            id="eye"
+                          ></box-icon>
+                        </a>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="col-md-10 ">
-                    {/* <label> Name </label> */}
+                    <div className="col-md-10 ">
+                      {/* <label> Name </label> */}
 
-                    <div className="input-group">
-                      <input
-                        type="password"
-                        className="input-style"
-                        id="security1"
-                        placeholder="New Password *"
-                        onChange={(e) => setnpword(e.target.value)}
-                        value={npword}
-                      />
-                        <a class="bi bi-eye-slash bi-eye toggle-eye" id="togglePassword" onClick={myInput1}>
-                            <box-icon type='solid' name='show' id="eye"></box-icon>
-                            </a>
+                      <div className="input-group">
+                        <input
+                          type="password"
+                          className="input-style"
+                          id="security1"
+                          placeholder="New Password *"
+                          onChange={(e) => setnpword(e.target.value)}
+                          value={npword}
+                        />
+                        <a
+                          class="bi bi-eye-slash bi-eye toggle-eye"
+                          id="togglePassword"
+                          onClick={myInput1}
+                        >
+                          <box-icon
+                            type="solid"
+                            name="show"
+                            id="eye"
+                          ></box-icon>
+                        </a>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="col-md-10 ">
-                    {/* <label> Name </label> */}
+                    <div className="col-md-10 ">
+                      {/* <label> Name </label> */}
 
-                    <div className="input-group">
-                      <input
-                        type="password"
-                        className=" input-style"
-                        id="security2"
-                        placeholder="Confirm New Password *"
-                        onChange={(e) => setcnpword(e.target.value)}
-                        value={cnpword}
-                      />
-                        <a class="bi bi-eye-slash bi-eye toggle-eye" id="togglePassword" onClick={myInput2}>
-                            <box-icon type='solid' name='show' id="eye"></box-icon>
-                            </a>
+                      <div className="input-group">
+                        <input
+                          type="password"
+                          className=" input-style"
+                          id="security2"
+                          placeholder="Confirm New Password *"
+                          onChange={(e) => setcnpword(e.target.value)}
+                          value={cnpword}
+                        />
+                        <a
+                          class="bi bi-eye-slash bi-eye toggle-eye"
+                          id="togglePassword"
+                          onClick={myInput2}
+                        >
+                          <box-icon
+                            type="solid"
+                            name="show"
+                            id="eye"
+                          ></box-icon>
+                        </a>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="col-md-10  mx-auto text-center">
-                    {showalert ? (
-                      <>
-                        <Alert color="success">{alertt}</Alert>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <div class="user-btn mb-4 mr-auto text-center">
-                      {issending ? (
+                    <div class="col-md-10  mx-auto text-center">
+                      {showalert ? (
                         <>
-                          <button
-                            type="button"
-                            class="btn shadow waves-effect"
-                            action="submit"
-                          >
-                            <strong>
-                              sending <Spinner color="light" />
-                            </strong>
-                          </button>
+                          <Alert color="success">{alertt}</Alert>
                         </>
                       ) : (
-                        <>
-                          <button
-                            type="button"
-                            class="btn  shadow waves-effect"
-                            action="submit"
-                            onClick={(e) => ChangePword(e)}
-                          >
-                            <strong> submit </strong>
-                          </button>
-                        </>
+                        <></>
                       )}
+                      <div class="user-btn mb-4 mr-auto text-center">
+                        {issending ? (
+                          <>
+                            <button
+                              type="button"
+                              class="btn shadow waves-effect"
+                              action="submit"
+                            >
+                              <strong>
+                                sending <Spinner color="light" />
+                              </strong>
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              type="button"
+                              class="btn  shadow waves-effect"
+                              action="submit"
+                              onClick={(e) => ChangePword(e)}
+                            >
+                              <strong> submit </strong>
+                            </button>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
+              <hr />
             </div>
-            <hr />
           </div>
-        </div>
-      </section>
+        </section>
       </div>
     </>
   );
