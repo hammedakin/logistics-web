@@ -5,10 +5,11 @@ import "./Nav.css";
 import UserNavLinks from "./UserNavLinks";
 import UserSideNav from "./UserSideNav";
 import cart from "./img/cart.png";
-import FoodCart from "../User/Food/FoodCart";
+import FoodCart from "../User/Food/FoodCart/FoodCart";
 
 const UserNavbar = () => {
   const [name, setname] = useState(localStorage.getItem("eclfullname"));
+  const [isloading, setisloading] = useState(true);
 
   let history = useHistory();
 

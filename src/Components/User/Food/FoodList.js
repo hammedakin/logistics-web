@@ -20,9 +20,14 @@ const FoodList = () => {
     localStorage.getItem("eclusertoken")
   );
 
-  const [alert, setalert] = useState("Added");
+  // const [alert, setalert] = useState("Added");
+  // const notify = () => toast(`${alert}`);
+
   const [showalert, setshowalert] = useState(false);
-  const notify = () => toast(`${alert}`);
+
+  const [notifyy, setnotifyy] = useState("Added");
+
+  const notify = () => toast(`${notifyy}`);
 
   // Fetch Food
   const fetchfood = () => {
@@ -79,12 +84,12 @@ const FoodList = () => {
 
             if (res.data.success === true) {
               setshowalert(true);
-              setalert(res.data.message);
+              setnotifyy(res.data.message);
               setisadding(false);
               notify();
             } else {
               setshowalert(true);
-              setalert(res.data.message, "error");
+              setnotifyy(res.data.message, "error");
               setisadding(false);
               notify();
             }
@@ -92,19 +97,18 @@ const FoodList = () => {
           .catch((error) => {
             console.log(error.name);
             setshowalert(true);
-            setalert("Check your Network Connection!!!");
+            setnotifyy("Check your Network Connection!!!");
             setisadding(false);
             notify();
           });
       } else {
         setshowalert(true);
-        setalert("Select a Food!");
+        setnotifyy("Select a Food!");
         setisadding(false);
         notify();
       }
       e.preventDefault();
     }
-
     // Add to Cart
 
     return (
@@ -146,7 +150,7 @@ const FoodList = () => {
                 <>
                   <button className="btn btn-cart" disabled>
                     {" "}
-                    <Spinner color="light" size="0.1rem" />{" "}
+                    <Spinner color="success" size="sm" />{" "}
                   </button>
                 </>
               ) : (

@@ -49,6 +49,7 @@ import AdminTrack from './Components/Admin/Order/AdminTrack';
 import UserSettings from './Pages/UserArea/UserSettings';
 import EditStates from './Components/Admin/Order/ManageStates/EditStates';
 import EditTown from './Components/Admin/Order/ManageTown/EditTown';
+import CartCheckout from './Components/User/Food/FoodCart/CartCheckout';
 
 
 // Admin
@@ -112,6 +113,9 @@ function App() {
         <ProtectUser exact path="/food/:id" component={FoodDetails} />
 
         <ProtectUser exact path="/food/invoice/:orderid" component={FoodInvoice} />
+
+        <ProtectUser exact path="/food/cart/checkout" component={CartCheckout} />
+
 
         {/* Food */}
 
